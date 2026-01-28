@@ -31,83 +31,102 @@
     </div>
   </section>
 
-  <section>
+  <section class="manifesto-section">
     <div class="wrapper">
-      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-        <!-- Service 1 -->
-        <div class="service-preview">
-          <span class="font-mono">01</span>
-          <h3 style="margin-top: 1rem;">Interior Design</h3>
-          <p>Complete interior design services from concept to completion. We create spaces that reflect your
-            personality while maximizing functionality.</p>
-          <ul style="margin-top: 1.5rem; color: var(--text-secondary); padding-left: 1rem;">
-            <li>Space Planning & Layout</li>
-            <li>Color Schemes & Materials</li>
-            <li>Furniture & Lighting</li>
-          </ul>
-        </div>
-        <!-- Service 2 -->
-        <div class="service-preview">
-          <span class="font-mono">02</span>
-          <h3 style="margin-top: 1rem;">Residential</h3>
-          <p>Transform your home into a sanctuary that perfectly balances comfort, style, and functionality for modern
-            living.</p>
-          <ul style="margin-top: 1.5rem; color: var(--text-secondary); padding-left: 1rem;">
-            <li>Living & Bedrooms</li>
-            <li>Kitchen & Bath</li>
-            <li>Outdoor Living</li>
-          </ul>
-        </div>
-        <!-- Service 3 -->
-        <div class="service-preview">
-          <span class="font-mono">03</span>
-          <h3 style="margin-top: 1rem;">Commercial</h3>
-          <p>Create inspiring work environments that enhance productivity, reflect brand identity, and provide
-            exceptional experiences.</p>
-          <ul style="margin-top: 1.5rem; color: var(--text-secondary); padding-left: 1rem;">
-            <li>Office Planning</li>
-            <li>Retail Environments</li>
-            <li>Hospitality</li>
-          </ul>
-        </div>
-        <!-- Service 4 -->
-        <div class="service-preview">
-          <span class="font-mono">04</span>
-          <h3 style="margin-top: 1rem;">Consultation</h3>
-          <p>Expert guidance and professional advice to help you make informed design decisions for your space.</p>
-          <ul style="margin-top: 1.5rem; color: var(--text-secondary); padding-left: 1rem;">
-            <li>Design Strategy</li>
-            <li>Color Advice</li>
-            <li>Space Optimization</li>
-          </ul>
-        </div>
-        <!-- Service 5 -->
-        <div class="service-preview">
-          <span class="font-mono">05</span>
-          <h3 style="margin-top: 1rem;">Renovation</h3>
-          <p>Complete renovation services that breathe new life into existing spaces while preserving their unique
-            character.</p>
-          <ul style="margin-top: 1.5rem; color: var(--text-secondary); padding-left: 1rem;">
-            <li>Full Renovation</li>
-            <li>Kitchen Remodels</li>
-            <li>Historic Preservation</li>
-          </ul>
-        </div>
-        <!-- Service 6 -->
-        <div class="service-preview">
-          <span class="font-mono">06</span>
-          <h3 style="margin-top: 1rem;">Styling</h3>
-          <p>Professional styling services to showcase your space at its absolute best, whether for living or selling.
-          </p>
-          <ul style="margin-top: 1.5rem; color: var(--text-secondary); padding-left: 1rem;">
-            <li>Home Staging</li>
-            <li>Interior Styling</li>
-            <li>Art Curation</li>
-          </ul>
-        </div>
-      </div>
+      <ul class="manifesto-list">
+        <li class="manifesto-item">
+          <a href="#" class="manifesto-link" data-img="./assets/projects/nakra-1.jpg">
+            <span class="service-number">01</span>
+            <span class="service-name">Interior Architecture</span>
+            <span class="service-arrow">→</span>
+          </a>
+          <div class="mobile-image">
+            <img src="./assets/projects/nakra-1.jpg" alt="Interior Architecture" loading="lazy">
+          </div>
+        </li>
+        <li class="manifesto-item">
+          <a href="#" class="manifesto-link" data-img="./assets/projects/shree-1.jpg">
+            <span class="service-number">02</span>
+            <span class="service-name">Residential Design</span>
+            <span class="service-arrow">→</span>
+          </a>
+          <div class="mobile-image">
+            <img src="./assets/projects/shree-1.jpg" alt="Residential Design" loading="lazy">
+          </div>
+        </li>
+        <li class="manifesto-item">
+          <a href="#" class="manifesto-link" data-img="./assets/projects/atcg-1.jpg">
+            <span class="service-number">03</span>
+            <span class="service-name">Commercial Environments</span>
+            <span class="service-arrow">→</span>
+          </a>
+          <div class="mobile-image">
+            <img src="./assets/projects/atcg-1.jpg" alt="Commercial Environments" loading="lazy">
+          </div>
+        </li>
+        <li class="manifesto-item">
+          <a href="#" class="manifesto-link" data-img="./assets/projects/mridul-1.jpg">
+            <span class="service-number">04</span>
+            <span class="service-name">Art Direction</span>
+            <span class="service-arrow">→</span>
+          </a>
+          <div class="mobile-image">
+            <img src="./assets/projects/mridul-1.jpg" alt="Art Direction" loading="lazy">
+          </div>
+        </li>
+        <li class="manifesto-item">
+          <a href="#" class="manifesto-link" data-img="./assets/projects/baxy-1.jpg">
+            <span class="service-number">05</span>
+            <span class="service-name">Bespoke Furniture</span>
+            <span class="service-arrow">→</span>
+          </a>
+          <div class="mobile-image">
+            <img src="./assets/projects/baxy-1.jpg" alt="Bespoke Furniture" loading="lazy">
+          </div>
+        </li>
+      </ul>
     </div>
+    <div class="manifesto-image-reveal"></div>
   </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".manifesto-link");
+      const revealContainer = document.querySelector(".manifesto-image-reveal");
+
+      // Only enable hover effect on desktop
+      if (window.innerWidth > 768) {
+        items.forEach(item => {
+          item.addEventListener("mouseenter", function () {
+            const imgUrl = this.getAttribute("data-img");
+            revealContainer.style.backgroundImage = `url(${imgUrl})`;
+            revealContainer.classList.add("active");
+
+            // Dim other items
+            items.forEach(i => {
+              if (i !== this) i.style.opacity = "0.3";
+            });
+          });
+
+          item.addEventListener("mouseleave", function () {
+            revealContainer.classList.remove("active");
+
+            // Restore opacity
+            items.forEach(i => {
+              i.style.opacity = "1";
+            });
+          });
+
+          // Move reveal with cursor (optional polish)
+          item.addEventListener("mousemove", function (e) {
+            // We can implement cursor following logic here if requested, 
+            // for now fixed background is cleaner for "Manifesto" style
+          });
+        });
+      }
+    });
+  </script>
 
   <footer class="site-footer">
     <div class="wrapper">

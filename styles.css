@@ -915,3 +915,138 @@ textarea {
     /* Single column reading */
   }
 }
+
+/* Services Manifesto - Redesign */
+.manifesto-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 8rem 2rem;
+  background-color: var(--bg-color);
+  z-index: 10;
+}
+
+.manifesto-list {
+  list-style: none;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.manifesto-item {
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 3rem 0;
+  transition: opacity 0.4s ease;
+}
+
+.manifesto-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: var(--text-main);
+  position: relative;
+  z-index: 20;
+}
+
+.service-number {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  width: 50px;
+}
+
+.service-name {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-family: "PP Neue Montreal", serif;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  flex: 1;
+  margin-left: 2rem;
+  transition: transform 0.4s ease;
+}
+
+.service-arrow {
+  font-size: 2rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.4s ease;
+}
+
+.manifesto-link:hover .service-name {
+  transform: translateX(10px);
+}
+
+.manifesto-link:hover .service-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mobile-image {
+  display: none;
+  margin-top: 2rem;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.mobile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Hover Reveal Container */
+.manifesto-image-reveal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.6s ease;
+  filter: grayscale(100%) brightness(0.7);
+}
+
+.manifesto-image-reveal.active {
+  opacity: 1;
+  z-index: 5;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .manifesto-section {
+    padding: 6rem 1.5rem;
+  }
+
+  .manifesto-link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .service-name {
+    margin-left: 0;
+    font-size: 2.5rem;
+  }
+
+  .service-arrow {
+    display: none;
+  }
+
+  .mobile-image {
+    display: block;
+  }
+
+  .manifesto-image-reveal {
+    display: none;
+  }
+
+  .manifesto-item {
+    padding: 2rem 0;
+    opacity: 1 !important;
+  }
+}
