@@ -607,19 +607,20 @@
 }
 
 /* Restored Desktop Hero Responsiveness */
+/* Safe Zone Scatter Layout for Mobile */
 @media (max-width: 768px) {
   .container {
-    height: auto;
-    min-height: 100dvh;
-    overflow-y: visible;
-    display: flex;
-    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    position: relative;
   }
 
   .nav {
     display: none;
   }
 
+  /* Fixed Logo & Footer - No overlap */
   .site-logo {
     position: absolute;
     top: 1rem;
@@ -627,91 +628,122 @@
     z-index: 200;
   }
 
-  .hero-content {
-    position: static;
-    /* Let children flow */
-    height: auto;
-    width: 100%;
-    padding-top: 0;
-    order: 3;
+  .site-logo h1 {
+    font-size: clamp(1.8rem, 6vw, 3rem);
   }
 
-  /* Images container - Ensure it flows */
-  .images,
-  .images.stacked-container {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    transform: none !important;
-    width: 100%;
-    height: 40vh;
-    /* Reduced height for mobile */
-    min-height: 300px;
-    margin-top: 80px;
-    /* Space for logo */
-    order: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    /* Just in case */
-    gap: 1rem;
-  }
-
-  .img,
-  .img.stacked {
-    position: absolute;
-    /* Keep stacked feel but centered in relative container */
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%) scale(1.1) !important;
-    width: 100%;
-    height: 100%;
-    max-width: 300px;
-    /* Limit width */
-    max-height: 200px;
-  }
-
-  /* Make sure main images visible */
-  .img img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Site Info - Text Content */
   .site-info {
-    position: relative;
-    top: auto;
-    left: auto;
-    bottom: auto;
+    position: absolute;
+    bottom: 2rem;
+    left: 1rem;
     width: 100%;
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
-    padding: 2rem 1rem;
-    margin-top: 0;
-    background: transparent;
+    padding: 0;
+    margin: 0;
+    z-index: 200;
   }
 
   .site-info .row {
-    flex-direction: column;
-    gap: 2rem;
+    margin-bottom: 1rem;
   }
 
-  .site-info .row .col {
+  .site-info h2 {
+    font-size: 1.2rem;
+    line-height: 1.3;
+  }
+
+  /* Images Container - Absolute center */
+  .images {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
+    height: 100%;
+    margin: 0;
   }
 
+  /* Individual Images - Safe Zone Scatter (Top 25% to Bottom 75%) */
+  .img {
+    position: absolute;
+    width: 250px;
+    height: 180px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.65);
+    opacity: 1 !important;
+    /* Force visible */
+  }
+
+  /* Manually Scatter 8 Images to avoid center clump */
+
+  /* 1. Top Left */
+  .img:nth-child(1) {
+    top: 30%;
+    left: 20%;
+    transform: translate(-50%, -50%) scale(0.6) rotate(-5deg);
+  }
+
+  /* 2. Top Right */
+  .img:nth-child(2) {
+    top: 35%;
+    left: 80%;
+    transform: translate(-50%, -50%) scale(0.55) rotate(5deg);
+  }
+
+  /* 3. Center Left */
+  .img:nth-child(3) {
+    top: 45%;
+    left: 15%;
+    transform: translate(-50%, -50%) scale(0.65) rotate(-2deg);
+  }
+
+  /* 4. Center Right */
+  .img:nth-child(4) {
+    top: 50%;
+    left: 85%;
+    transform: translate(-50%, -50%) scale(0.6) rotate(3deg);
+  }
+
+  /* 5. Bottom Right */
+  .img:nth-child(5) {
+    top: 60%;
+    left: 75%;
+    transform: translate(-50%, -50%) scale(0.6) rotate(-4deg);
+  }
+
+  /* 6. Main Center (Top) */
+  .img:nth-child(6) {
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    z-index: 5;
+  }
+
+  /* 7. Main Center (Bottom) */
+  .img:nth-child(7) {
+    top: 55%;
+    left: 40%;
+    transform: translate(-50%, -50%) scale(0.65) rotate(2deg);
+    z-index: 6;
+  }
+
+  /* 8. Extra Center */
+  .img:nth-child(8),
+  .img:last-child {
+    top: 65%;
+    left: 25%;
+    transform: translate(-50%, -50%) scale(0.55) rotate(-3deg);
+  }
+
+  /* Hide the team img on mobile hero to reduce clutter */
   .team-img {
-    position: relative;
-    width: 100%;
-    height: 250px;
-    margin: 2rem 0;
-    right: auto;
-    bottom: auto;
-    clip-path: none;
-    order: 4;
+    display: none;
+  }
+
+  /* Hide revealers on mobile to prevent white flash issues */
+  .revealers {
+    display: none;
   }
 }
