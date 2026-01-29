@@ -741,8 +741,9 @@
   .team-img {
     display: block;
     position: absolute;
-    bottom: 12%;
-    right: 5%;
+    bottom: 25%;
+    left: 5%;
+    right: auto;
     width: 140px;
     height: 100px;
     z-index: 8;
