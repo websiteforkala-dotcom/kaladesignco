@@ -208,8 +208,9 @@
 }
 
 .hero-detail-img {
-  width: 150px;
-  height: 100px;
+  width: 300px;
+  max-width: 100%;
+  height: 200px;
   margin-bottom: 2em;
   overflow: hidden;
 }
