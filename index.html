@@ -151,8 +151,171 @@
 
   <!-- Additional Sections -->
   <!-- Additional Sections -->
+  <link rel="stylesheet" href="sections.css">
 
+  <!-- 1. ABOUT SECTION (Sticky Split) -->
+  <section class="about-section" id="about">
+    <div class="wrapper">
+      <div class="about-grid">
+        <div class="about-text-col">
+          <h2 class="about-vision">We craft atmospheres that linger in the memory—where silence speaks and every detail
+            tells a story.</h2>
+          <p class="about-detail">Kala Design Co. is a multidisciplinary studio bridging the gap between architecture,
+            interiors, and emotion. We don't just fill spaces; we curate feelings.</p>
+        </div>
+        <div class="about-image-col">
+          <div class="about-img-wrapper"><img src="./assets/projects/nakra-1.jpg" class="about-img" loading="lazy"
+              alt="Atmosphere 1"></div>
+          <div class="about-img-wrapper"><img src="./assets/projects/shree-1.jpg" class="about-img" loading="lazy"
+              alt="Atmosphere 2"></div>
+          <div class="about-img-wrapper"><img src="./assets/projects/atcg-1.jpg" class="about-img" loading="lazy"
+              alt="Atmosphere 3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- 2. WORK SECTION (Horizontal Scroll) -->
+  <section class="work-section" id="work">
+    <div class="work-container">
+
+      <!-- Project 1 -->
+      <div class="work-item">
+        <div class="work-info">
+          <span class="work-num">01 / 04</span>
+          <h3 class="work-title">Nakra Residence</h3>
+          <span class="work-cat">Interior / Residential</span>
+        </div>
+        <div class="work-visual">
+          <img src="./assets/projects/nakra-4.jpg" loading="lazy" alt="Nakra Residence">
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="work-item">
+        <div class="work-info">
+          <span class="work-num">02 / 04</span>
+          <h3 class="work-title">Project Shree</h3>
+          <span class="work-cat">Architecture / Commercial</span>
+        </div>
+        <div class="work-visual">
+          <img src="./assets/projects/shree-4.jpg" loading="lazy" alt="Project Shree">
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="work-item">
+        <div class="work-info">
+          <span class="work-num">03 / 04</span>
+          <h3 class="work-title">ATCG Office</h3>
+          <span class="work-cat">Workspace / Strategy</span>
+        </div>
+        <div class="work-visual">
+          <img src="./assets/projects/atcg-2.jpg" loading="lazy" alt="ATCG Office">
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="work-item">
+        <div class="work-info">
+          <span class="work-num">04 / 04</span>
+          <h3 class="work-title">Baxy House</h3>
+          <span class="work-cat">Interior / Styling</span>
+        </div>
+        <div class="work-visual">
+          <img src="./assets/projects/baxy-2.jpg" loading="lazy" alt="Baxy House">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. SERVICES SECTION (Stacking Cards) -->
+  <section class="services-section" id="services">
+    <div class="wrapper">
+      <div class="service-stack-header">
+        <p class="font-mono">Capabilities</p>
+        <h2>Our Expertise</h2>
+      </div>
+
+      <div class="service-stack-container">
+        <!-- Card 1 -->
+        <div class="service-card-stack">
+          <div class="stack-content">
+            <h3 class="stack-title">Architecture</h3>
+            <ul class="stack-list">
+              <li>Site Analysis</li>
+              <li>Spatial Planning</li>
+              <li>Structural Design</li>
+              <li>Sustainability</li>
+            </ul>
+          </div>
+          <div class="stack-img">
+            <img src="./assets/projects/media-facade-2.jpg" loading="lazy" alt="Architecture">
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="service-card-stack">
+          <div class="stack-content">
+            <h3 class="stack-title">Interior Design</h3>
+            <ul class="stack-list">
+              <li>Concept Development</li>
+              <li>Material Selection</li>
+              <li>Furniture Layout</li>
+              <li>Lighting Design</li>
+            </ul>
+          </div>
+          <div class="stack-img">
+            <img src="./assets/projects/niraj-1.jpg" loading="lazy" alt="Interior Design">
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="service-card-stack">
+          <div class="stack-content">
+            <h3 class="stack-title">Art Direction</h3>
+            <ul class="stack-list">
+              <li>Curation</li>
+              <li>Installation</li>
+              <li>Styling</li>
+              <li>Brand Integration</li>
+            </ul>
+          </div>
+          <div class="stack-img">
+            <img src="./assets/projects/mridul-1.jpg" loading="lazy" alt="Art Direction">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. TESTIMONIALS (Minimal Slider) -->
+  <section class="testimonials-minimal">
+    <div class="tm-wrapper">
+      <div class="tm-card active">
+        <p class="tm-text">"They don't just design spaces; they design feelings."</p>
+        <div class="tm-author">ALEX & SARAH — LONDON</div>
+      </div>
+      <div class="tm-card">
+        <p class="tm-text">"Minimalism with soul. A masterclass in restraint."</p>
+        <div class="tm-author">MARCUS T. — COPENHAGEN</div>
+      </div>
+      <div class="tm-card">
+        <p class="tm-text">"Every corner tells a story. Absolutely timeless."</p>
+        <div class="tm-author">ELENA R. — BERLIN</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CTA SECTION (Dark Mode Trigger) -->
+  <section class="cta-dark-mode" id="contact">
+    <div class="wrapper">
+      <p class="font-mono" style="margin-bottom: 2rem;">Ready to begin?</p>
+      <a href="contact.html" class="cta-large-text">Start Your<br>Project</a>
+      <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </section>
   <footer class="site-footer">
     <div class="wrapper">
       <div class="footer-content">

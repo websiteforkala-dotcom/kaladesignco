@@ -188,41 +188,105 @@ document.addEventListener("DOMContentLoaded", () => {
   // Only init Bento on Desktop
   if (!isMobile) createBentoTween();
 
-  // Testimonial Horizontal Scroll
-  const testimonialSection = document.querySelector(".testimonials-section");
-  if (testimonialSection && !isMobile) {
-    const slider = document.querySelector(".testimonial-slider");
+  // ... (previous code)
 
-    // Calculate scroll amount
-    function getScrollAmount() {
-      let sliderWidth = slider.scrollWidth;
-      return -(sliderWidth - window.innerWidth);
-    }
+  // ===========================================
+  // 1. HORIZONTAL SCROLL (Work Section)
+  // ===========================================
+  const workSection = document.querySelector(".work-section");
+  if (workSection && !isMobile) {
+    const container = document.querySelector(".work-container");
+    
+    gsap.to(container, {
+      x: () => -(container.scrollWidth - window.innerWidth),
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".work-section",
+        pin: true,
+        scrub: 1,
+        end: () => "+=" + container.scrollWidth,
+        invalidateOnRefresh: true,
+      }
+    });
 
-    const tween = gsap.to(slider, {
-      x: getScrollAmount,
+    // Active State for Items
+    const workItems = document.querySelectorAll(".work-item");
+    workItems.forEach((item, i) => {
+      ScrollTrigger.create({
+        trigger: item,
+        containerAnimation: gsap.getTweensOf(container)[0],
+        start: "left center",
+        end: "right center",
+        toggleClass: { targets: item, className: "active" },
+      });
+    });
+  }
+
+  // ===========================================
+  // 2. STACKING CARDS (Services Section)
+  // ===========================================
+  const servicesSection = document.querySelector(".services-section");
+  if (servicesSection && !isMobile) {
+    const cards = document.querySelectorAll(".service-card-stack");
+    
+    cards.forEach((card, index) => {
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top top+=150", 
+        end: "bottom top",
+        pin: true, 
+        pinSpacing: false, 
+        id: `card-${index}`
+      });
+    });
+  }
+
+  // ===========================================
+  // 3. DARK MODE TRIGGER (CTA Section)
+  // ===========================================
+  const ctaDark = document.querySelector(".cta-dark-mode");
+  if (ctaDark) {
+    ScrollTrigger.create({
+      trigger: ".cta-dark-mode",
+      start: "top center",
+      end: "bottom center",
+      onEnter: () => document.body.classList.add("dark-mode-active"),
+      onLeaveBack: () => document.body.classList.remove("dark-mode-active"),
+    });
+  }
+
+  // ===========================================
+  // 4. TESTIMONIALS SLIDER (Re-using logic)
+  // ===========================================
+  const tmMinimal = document.querySelector(".testimonials-minimal");
+  if (tmMinimal && !isMobile) {
+    const wrapper = document.querySelector(".tm-wrapper");
+    const cards = document.querySelectorAll(".tm-card");
+
+    const tmTween = gsap.to(wrapper, {
+      x: () => -(wrapper.scrollWidth - window.innerWidth),
       duration: 3,
       ease: "none"
     });
 
     ScrollTrigger.create({
-      trigger: ".testimonials-section",
+      trigger: ".testimonials-minimal",
       start: "top top",
-      end: () => `+=${getScrollAmount() * -1}`, // Scroll based on content width
+      end: () => `+=${wrapper.scrollWidth}`, 
       pin: true,
-      animation: tween,
+      animation: tmTween,
       scrub: 1,
       invalidateOnRefresh: true
     });
 
-    // Active state for opacity
-    slider.querySelectorAll(".testimonial").forEach((testimonial) => {
+    // Opacity active state
+    cards.forEach((card) => {
       ScrollTrigger.create({
-        trigger: testimonial,
-        containerAnimation: tween,
+        trigger: card,
+        containerAnimation: tmTween,
         start: "left center",
         end: "right center",
-        toggleClass: { targets: testimonial, className: "active" }
+        toggleClass: { targets: card, className: "active" }
       });
     });
   }

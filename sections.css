@@ -1,0 +1,379 @@
+/* Award-Winning Sections - Premium Design System */
+
+:root {
+    --transition-slow: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    --section-padding: clamp(6rem, 15vw, 12rem) clamp(1rem, 4vw, 2rem);
+}
+
+/* =========================================
+   1. About Section - Split Sticky
+   ========================================= */
+.about-section {
+    padding: 0;
+    background-color: var(--bg-color);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+}
+
+.about-text-col {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem clamp(2rem, 5vw, 6rem);
+}
+
+.about-vision {
+    font-family: var(--font-main);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.about-detail {
+    font-size: 1.1rem;
+    max-width: 400px;
+    color: var(--text-secondary);
+}
+
+.about-image-col {
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.about-img-wrapper {
+    overflow: hidden;
+}
+
+.about-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-img:hover {
+    transform: scale(1.05);
+}
+
+/* =========================================
+   2. Work Section - Horizontal Scroll
+   ========================================= */
+.work-section {
+    background-color: var(--bg-color);
+    overflow: hidden;
+    /* Critical for pin */
+}
+
+.work-container {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    width: 400%;
+    /* 4 sections */
+}
+
+.work-item {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    align-items: center;
+    padding: 0 4rem;
+}
+
+.work-info {
+    padding-right: 4rem;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+}
+
+.work-item.active .work-info {
+    opacity: 1;
+}
+
+.work-num {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.work-title {
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.work-cat {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+}
+
+.work-visual {
+    height: 80vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.work-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================================
+   3. Services Section - Stacking Cards
+   ========================================= */
+.services-section {
+    padding-bottom: 10rem;
+    background-color: var(--bg-color);
+}
+
+.service-stack-header {
+    text-align: center;
+    margin-bottom: 8rem;
+    padding-top: 8rem;
+}
+
+.service-stack-header h2 {
+    font-size: clamp(3rem, 8vw, 6rem);
+}
+
+.service-stack-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.service-card-stack {
+    position: sticky;
+    top: 15vh;
+    /* Stack offset */
+    height: 70vh;
+    background-color: #f4f4f4;
+    /* Needs solid bg to cover prev card */
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.05);
+    margin-bottom: 4rem;
+    /* Spacer */
+}
+
+/* Alternate backgrounds for contrast */
+.service-card-stack:nth-child(1) {
+    background-color: #e8e8e8;
+}
+
+.service-card-stack:nth-child(2) {
+    background-color: #e0e0e0;
+}
+
+.service-card-stack:nth-child(3) {
+    background-color: #d8d8d8;
+}
+
+.service-card-stack:nth-child(4) {
+    background-color: #d0d0d0;
+}
+
+.stack-content {
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stack-title {
+    font-size: clamp(2rem, 4vw, 4rem);
+}
+
+.stack-list {
+    list-style: none;
+    font-family: var(--font-mono);
+    line-height: 2;
+    font-size: 1.1rem;
+}
+
+.stack-img {
+    height: 100%;
+    width: 100%;
+}
+
+.stack-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.service-card-stack:hover .stack-img img {
+    filter: grayscale(0%);
+}
+
+/* =========================================
+   4. Testimonials - Minimal Slider
+   ========================================= */
+.testimonials-minimal {
+    padding: 10rem 0;
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+.tm-wrapper {
+    display: flex;
+    gap: 4rem;
+    padding-left: 10vw;
+    /* Offset start */
+}
+
+.tm-card {
+    min-width: 60vw;
+    opacity: 0.3;
+    transition: opacity 0.5s ease;
+}
+
+.tm-card.active {
+    opacity: 1;
+}
+
+.tm-text {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+.tm-author {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+}
+
+/* =========================================
+   5. CTA - Dark Mode Transition
+   ========================================= */
+.cta-dark-mode {
+    padding: 15rem 2rem;
+    text-align: center;
+    background-color: var(--bg-color);
+    /* Initial bg, changes via JS */
+    color: var(--text-main);
+    transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+.cta-large-text {
+    font-size: clamp(4rem, 10vw, 12rem);
+    line-height: 0.9;
+    font-weight: 500;
+    margin-bottom: 4rem;
+    display: block;
+}
+
+/* Inverted State Class (Applied by JS) */
+body.dark-mode-active {
+    background-color: #050505 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode-active .cta-dark-mode {
+    background-color: #050505;
+    color: #ffffff;
+}
+
+body.dark-mode-active .btn-primary {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+}
+
+body.dark-mode-active .btn-primary:hover {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+/* =========================================
+   Mobile Adjustments
+   ========================================= */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .about-text-col {
+        position: relative;
+        height: auto;
+        padding: 6rem 1.5rem 2rem 1.5rem;
+    }
+
+    .about-image-col {
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+    }
+
+    /* Work Section Mobile: Vertical Stack */
+    .work-container {
+        flex-wrap: wrap;
+        width: 100%;
+        height: auto;
+    }
+
+    .work-item {
+        width: 100%;
+        height: auto;
+        grid-template-columns: 1fr;
+        padding: 4rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .work-visual {
+        height: 50vh;
+    }
+
+    .work-info {
+        opacity: 1;
+        padding-right: 0;
+    }
+
+    .work-title {
+        font-size: 3rem;
+    }
+
+    /* Services Mobile: Standard Stickies */
+    .service-card-stack {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 60vh;
+    }
+
+    .stack-img {
+        height: 300px;
+        order: -1;
+    }
+
+    .stack-content {
+        padding: 2rem;
+    }
+
+    /* Testimonial Mobile */
+    .tm-card {
+        min-width: 85vw;
+    }
+
+    .tm-text {
+        font-size: 1.8rem;
+    }
+}
