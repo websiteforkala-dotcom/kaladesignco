@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /database/
+Disallow: /scripts/
+
+Sitemap: https://kaladesignco.com/sitemap.xml
