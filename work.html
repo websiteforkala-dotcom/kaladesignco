@@ -402,6 +402,117 @@
         font-size: 0.55rem;
       }
     }
+
+    /* Editorial Redesign Styles */
+    :root {
+      --paper-bg: #f4f1ea;
+      --ink: #1a1a1a;
+      --font-serif: "Playfair Display", Times, serif;
+      --font-body: "Georgia", serif;
+      --font-mono: "Apercu Mono Pro", "Courier New", monospace;
+    }
+
+    .slide-content {
+      /* Reset basic slide positioning */
+      position: absolute;
+      top: 20%;
+      left: 5%;
+      width: 35%;
+      max-width: 500px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease-out;
+      pointer-events: none;
+      /* Pointer events handled by card */
+      z-index: 10;
+    }
+
+    .editorial-card {
+      background-color: var(--paper-bg);
+      color: var(--ink);
+      padding: 3rem;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      /* Soft shadow */
+      pointer-events: auto;
+      position: relative;
+    }
+
+    /* "Double Border" Effect on Top */
+    .editorial-card::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      height: 1px;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      height: 4px;
+      /* Space between lines */
+    }
+
+    .masthead-mini {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 0.5rem;
+      margin-top: 1.5rem;
+      /* Space for top border */
+      margin-bottom: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .editorial-title {
+      font-family: var(--font-serif);
+      font-size: 3.5rem;
+      /* Large and dramatic */
+      line-height: 0.9;
+      margin: 0 0 1.5rem 0;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .editorial-body {
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      color: #333;
+    }
+
+    .editorial-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      padding-top: 1.5rem;
+    }
+
+    .footer-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    .read-more-btn {
+      text-decoration: none;
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .read-more-btn:hover {
+      background: rgba(0, 0, 0, 0.05);
+      padding-left: 5px;
+      padding-right: 5px;
+    }
   </style>
 </head>
 
@@ -565,9 +676,13 @@
 
     async function initGallery() {
       try {
-        // Initialize Supabase
-        const { createClient } = supabase;
-        const _supabase = createClient(supabaseConfig.supabaseUrl, supabaseConfig.supabaseKey);
+        // Reuse shared Supabase instance
+        const _supabase = supabaseConfig.getClient();
+
+        if (!_supabase) {
+          console.error("Supabase client not initialized");
+          return;
+        }
 
         // Fetch works
         const { data: works, error } = await _supabase
@@ -597,21 +712,29 @@
           slideDiv.id = `slide-${i}`;
           if (i === 0) slideDiv.classList.add('active');
 
+
           slideDiv.innerHTML = `
-            <span class="catalogue-number">0${i + 1} / ${work.category || 'Project'}</span>
-            <h1 class="slide-title">${work.title}</h1>
-            <div class="description">${work.description}</div>
-            <div class="meta-grid">
-              <span class="meta-label">Location</span> <span class="meta-value">${work.location || 'N/A'}</span>
-              <span class="meta-label">Year</span> <span class="meta-value">${work.year || 'N/A'}</span>
-              <span class="meta-label">Role</span> <span class="meta-value">Interior Design</span>
+            <div class="editorial-card">
+              <div class="masthead-mini">
+                <span>0${i + 1} / ${work.category || 'PROJECT'}</span>
+                <span>${work.year || '2024'}</span>
+              </div>
+              
+              <h1 class="editorial-title">${work.title}</h1>
+              
+              <div class="editorial-body">
+                ${work.description}
+              </div>
+
+              <div class="editorial-footer">
+                <div class="footer-meta">
+                  ${work.location || 'Location N/A'}
+                </div>
+                <a href="work-detail.html?id=${work.id}" class="read-more-btn">
+                  View Case Study
+                </a>
+              </div>
             </div>
-            <a href="work-detail.html?id=${work.id}" class="project-button">
-              View Project
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
           `;
           uiLayer.appendChild(slideDiv);
 
