@@ -13,7 +13,7 @@ if %errorlevel% neq 0 (
 )
 
 REM Set up access token
-set SUPABASE_ACCESS_TOKEN=sbp_b87e6e8a9941a96e1b43c80d02eabf64586485d5
+set SUPABASE_ACCESS_TOKEN=YOUR_ACCESS_TOKEN
 
 REM Check if project is linked
 if not exist ".supabase\config.toml" (

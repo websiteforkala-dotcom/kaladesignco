@@ -4,19 +4,19 @@ class SupabaseConfig {
         // 🔧 CONFIGURATION REQUIRED
         // Replace these with your actual Supabase project credentials
         // Get them from: https://supabase.com/dashboard/project/YOUR_PROJECT/settings/api
-        
-        this.supabaseUrl = 'https://fiuiywerforvkhjbetpm.supabase.co';
-        this.supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpdWl5d2VyZm9ydmtoamJldHBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3NjU1ODYsImV4cCI6MjA4NTM0MTU4Nn0.L4l0qCXLBwG0aE74dfHcENVdbLvhE0oRL3r29IiZpn0';
-        
+
+        this.supabaseUrl = 'YOUR_SUPABASE_PROJECT_URL';
+        this.supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
+
         // ✅ CLI Access Token (already configured)
-        this.accessToken = 'sbp_b87e6e8a9941a96e1b43c80d02eabf64586485d5';
-        
+        this.accessToken = 'YOUR_SUPABASE_ACCESS_TOKEN';
+
         // 🚀 Quick Setup Instructions:
         // 1. Run: node scripts/get-project-info.js list
         // 2. Copy your project URL and anon key
         // 3. Replace the values above
         // 4. Open database/config-checker.html to test
-        
+
         this.supabase = null;
         this.init();
     }
@@ -24,7 +24,7 @@ class SupabaseConfig {
     async init() {
         try {
             // Check if we have real credentials
-            if (this.supabaseUrl.includes('your-project-ref') || 
+            if (this.supabaseUrl.includes('your-project-ref') ||
                 this.supabaseKey.includes('your-anon-key')) {
                 console.log('⚠️ Supabase not configured - using localStorage fallback');
                 console.log('📋 To configure: update database/supabase-config.js with your project credentials');
@@ -38,7 +38,7 @@ class SupabaseConfig {
                 const script = document.createElement('script');
                 script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
                 document.head.appendChild(script);
-                
+
                 await new Promise((resolve) => {
                     script.onload = resolve;
                 });
@@ -48,7 +48,7 @@ class SupabaseConfig {
             this.supabase = window.supabase.createClient(this.supabaseUrl, this.supabaseKey);
             console.log('✅ Supabase initialized successfully');
             console.log('🔗 Connected to:', this.supabaseUrl);
-            
+
             return this.supabase;
         } catch (error) {
             console.error('❌ Error initializing Supabase:', error);
@@ -72,7 +72,7 @@ class SupabaseConfig {
             const { data, error } = await this.supabase
                 .from('contact_forms')
                 .select('count', { count: 'exact', head: true });
-            
+
             if (error) throw error;
             console.log('✅ Supabase connection test successful');
             return true;
@@ -91,11 +91,11 @@ class SupabaseConfig {
                     'Content-Type': 'application/json'
                 }
             });
-            
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            
+
             const projects = await response.json();
             console.log('📊 Available projects:', projects);
             return projects;
@@ -107,9 +107,9 @@ class SupabaseConfig {
 
     // Helper method to check if properly configured
     isConfigured() {
-        return !this.supabaseUrl.includes('your-project-ref') && 
-               !this.supabaseKey.includes('your-anon-key') &&
-               this.supabase !== null;
+        return !this.supabaseUrl.includes('your-project-ref') &&
+            !this.supabaseKey.includes('your-anon-key') &&
+            this.supabase !== null;
     }
 
     // Get configuration status

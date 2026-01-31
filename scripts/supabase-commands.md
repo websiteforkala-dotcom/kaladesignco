@@ -14,7 +14,7 @@ curl -fsSL https://github.com/supabase/cli/releases/download/v1.123.4/supabase_l
 sudo mv supabase /usr/local/bin/
 
 # Set access token
-export SUPABASE_ACCESS_TOKEN="sbp_b87e6e8a9941a96e1b43c80d02eabf64586485d5"
+export SUPABASE_ACCESS_TOKEN="YOUR_ACCESS_TOKEN"
 
 # Initialize project
 supabase init

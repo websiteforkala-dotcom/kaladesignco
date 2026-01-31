@@ -9,7 +9,7 @@ const https = require('https');
 
 class SupabaseProjectInfo {
     constructor() {
-        this.accessToken = 'sbp_b87e6e8a9941a96e1b43c80d02eabf64586485d5';
+        this.accessToken = 'YOUR_ACCESS_TOKEN';
         this.baseUrl = 'https://api.supabase.com/v1';
     }
 
@@ -59,16 +59,16 @@ class SupabaseProjectInfo {
     async getProjects() {
         try {
             console.log('🔍 Fetching your Supabase projects...\n');
-            
+
             const projects = await this.makeRequest('/projects');
-            
+
             if (!projects || projects.length === 0) {
                 console.log('❌ No projects found. Please create a project first at https://supabase.com\n');
                 return;
             }
 
             console.log(`✅ Found ${projects.length} project(s):\n`);
-            
+
             projects.forEach((project, index) => {
                 console.log(`${index + 1}. ${project.name}`);
                 console.log(`   ID: ${project.id}`);
@@ -81,8 +81,8 @@ class SupabaseProjectInfo {
             });
 
             // Find the best project for Kala Design Co
-            const kalaProject = projects.find(p => 
-                p.name.toLowerCase().includes('kala') || 
+            const kalaProject = projects.find(p =>
+                p.name.toLowerCase().includes('kala') ||
                 p.name.toLowerCase().includes('design')
             );
 
@@ -99,7 +99,7 @@ class SupabaseProjectInfo {
             return projects;
         } catch (error) {
             console.error('❌ Error fetching projects:', error.message);
-            
+
             if (error.message.includes('401')) {
                 console.log('\n🔑 Authentication failed. Please check your access token.');
                 console.log('   Current token: sbp_b87e6e8a9941a96e1b43c80d02eabf64586485d5');
@@ -128,9 +128,9 @@ class SupabaseProjectInfo {
     async getProjectDetails(projectRef) {
         try {
             console.log(`🔍 Getting details for project: ${projectRef}\n`);
-            
+
             const project = await this.makeRequest(`/projects/${projectRef}`);
-            
+
             console.log('📊 Project Details:');
             console.log('─'.repeat(30));
             console.log(`Name: ${project.name}`);
@@ -138,9 +138,9 @@ class SupabaseProjectInfo {
             console.log(`Region: ${project.region}`);
             console.log(`Database Version: ${project.database?.version || 'Unknown'}`);
             console.log(`Created: ${new Date(project.created_at).toLocaleDateString()}`);
-            
+
             this.displayProjectConfig(project);
-            
+
             return project;
         } catch (error) {
             console.error('❌ Error fetching project details:', error.message);
@@ -150,7 +150,7 @@ class SupabaseProjectInfo {
     async createProject(name = 'kala-design-co') {
         try {
             console.log(`🚀 Creating new project: ${name}\n`);
-            
+
             const projectData = {
                 name: name,
                 organization_id: null, // Will use default organization
@@ -159,10 +159,10 @@ class SupabaseProjectInfo {
             };
 
             const project = await this.makeRequest('/projects', 'POST', projectData);
-            
+
             console.log('✅ Project created successfully!');
             this.displayProjectConfig(project);
-            
+
             return project;
         } catch (error) {
             console.error('❌ Error creating project:', error.message);
@@ -198,7 +198,7 @@ async function main() {
         case 'list':
             await tool.getProjects();
             break;
-        
+
         case 'details':
             const projectRef = args[1];
             if (!projectRef) {
@@ -208,18 +208,18 @@ async function main() {
             }
             await tool.getProjectDetails(projectRef);
             break;
-        
+
         case 'create':
             const projectName = args[1] || 'kala-design-co';
             await tool.createProject(projectName);
             break;
-        
+
         case 'help':
         case '--help':
         case '-h':
             tool.displayHelp();
             break;
-        
+
         default:
             console.log(`❌ Unknown command: ${command}`);
             tool.displayHelp();

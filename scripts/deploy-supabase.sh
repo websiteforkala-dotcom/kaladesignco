@@ -38,7 +38,7 @@ if ! command -v supabase &> /dev/null; then
 fi
 
 # Set up access token
-export SUPABASE_ACCESS_TOKEN="sbp_b87e6e8a9941a96e1b43c80d02eabf64586485d5"
+export SUPABASE_ACCESS_TOKEN="YOUR_ACCESS_TOKEN"
 
 # Check if project is linked
 if [ ! -f ".supabase/config.toml" ]; then

@@ -26,7 +26,7 @@ echo ℹ️  Supabase CLI version:
 supabase --version
 
 REM Set up access token
-set SUPABASE_ACCESS_TOKEN=sbp_b87e6e8a9941a96e1b43c80d02eabf64586485d5
+set SUPABASE_ACCESS_TOKEN=YOUR_ACCESS_TOKEN
 echo ✅ Access token configured
 
 REM Initialize Supabase project if not already initialized
