@@ -4,7 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work - Kala Design Co</title>
+    <title>Selected Works | Kala Design Co</title>
+    <meta name="description"
+        content="Explore our portfolio of curated interior design and architecture projects. From residential to commercial, each space tells a unique story.">
+    <meta name="keywords"
+        content="Portfolio, Interior Design Projects, Architecture Works, Kala Design Co, Selected Works">
+    <meta name="author" content="Kala Design Co">
+    <meta property="og:title" content="Selected Works | Kala Design Co">
+    <meta property="og:description"
+        content="Explore our portfolio of curated interior design and architecture projects.">
+    <meta property="og:image" content="./assets/projects/nakra-1.jpg">
+    <meta property="og:url" content="https://kaladesignco.com/work">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="stylesheet" href="styles.css" />
     <style>
         /* Specific Newspaper Styles (Ported from About Page) */
@@ -225,12 +236,14 @@
         <!-- Masthead -->
         <header class="masthead">
             <div class="top-folks">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="services.html">Services</a>
-                <a href="work.html" class="current-page">Work</a>
-                <a href="journal.html">Journal</a>
-                <a href="contact.html">Contact</a>
+                <div class="top-folks">
+                    <a href="./">Home</a>
+                    <a href="about">About</a>
+                    <a href="services">Services</a>
+                    <a href="work" class="current-page">Work</a>
+                    <a href="journal">Journal</a>
+                    <a href="contact">Contact</a>
+                </div>
             </div>
 
             <div class="masthead-meta">
@@ -316,7 +329,7 @@
 
                 // Render List
                 container.innerHTML = works.map(work => `
-                    <a href="work-detail.html?id=${work.id}" class="project-card">
+                    <a href="work-detail?id=${work.id}" class="project-card">
                         <div class="project-meta-top">
                             <span>${work.category}</span>
                             <span>${work.year}</span>
