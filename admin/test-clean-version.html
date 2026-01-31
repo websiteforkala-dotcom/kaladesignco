@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Clean AdminPanel</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>Clean AdminPanel Version Test</h1>
+    <div id="results"></div>
+
+    <script>
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = `<strong>[${new Date().toLocaleTimeString()}]</strong> ${message}`;
+            document.getElementById('results').appendChild(div);
+        }
+
+        addResult('Starting clean version test...', 'info');
+        
+        // Monitor for syntax errors
+        window.addEventListener('error', (e) => {
+            addResult(`❌ JavaScript Error: ${e.message} at line ${e.lineno}`, 'error');
+        });
+    </script>
+
+    <!-- Load clean admin script -->
+    <script src="admin-script-clean.js"></script>
+
+    <script>
+        // Test immediately after script load
+        setTimeout(() => {
+            if (window.AdminPanel) {
+                addResult('✅ Clean AdminPanel loaded successfully!', 'success');
+                
+                if (window.adminPanel) {
+                    addResult('✅ AdminPanel instance created successfully!', 'success');
+                } else {
+                    addResult('⚠️ AdminPanel class loaded but instance not created yet', 'info');
+                }
+            } else {
+                addResult('❌ Clean AdminPanel failed to load', 'error');
+            }
+        }, 100);
+
+        // Test after DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (window.adminPanel) {
+                    addResult('✅ AdminPanel instance available after DOM load', 'success');
+                } else {
+                    addResult('❌ AdminPanel instance not created after DOM load', 'error');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

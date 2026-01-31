@@ -1,0 +1,615 @@
+.services-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+.services-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: clamp(1em, 3vw, 2em);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.services-header .site-logo {
+  position: relative;
+  top: auto;
+  left: auto;
+}
+
+.services-header .nav {
+  position: relative;
+  right: auto;
+  width: auto;
+  padding: 0;
+}
+
+.services-hero {
+  padding: clamp(8em, 15vh, 12em) clamp(1em, 3vw, 2em) clamp(3em, 8vh, 6em) clamp(1em, 3vw, 2em);
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.services-hero .hero-text h2 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5em;
+  color: #000;
+}
+
+.services-hero .hero-text p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(2em, 5vw, 4em) clamp(1em, 3vw, 2em);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+  gap: clamp(2em, 5vw, 3em);
+}
+
+.service-card {
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: clamp(1.5em, 4vw, 2.5em);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #000, #666);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+.service-icon {
+  margin-bottom: 1.5em;
+}
+
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: "Apercu Mono Pro", "Courier New", monospace;
+}
+
+.service-content h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  margin-bottom: 1em;
+  color: #000;
+}
+
+.service-content p {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 1.5em;
+}
+
+.service-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-features li {
+  font-size: clamp(0.85rem, 1.8vw, 0.9rem);
+  color: #333;
+  padding: 0.5em 0;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.service-features li:last-child {
+  border-bottom: none;
+}
+
+.service-features li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #000;
+  font-weight: 600;
+}
+
+.process-section {
+  background: #f8f8f8;
+  padding: clamp(3em, 8vw, 6em) clamp(1em, 3vw, 2em);
+  margin-top: clamp(3em, 8vw, 6em);
+}
+
+.process-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto clamp(3em, 6vw, 4em) auto;
+}
+
+.process-header h2 {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  color: #000;
+}
+
+.process-header p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: #666;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: clamp(2em, 5vw, 3em);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.process-step {
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Apercu Mono Pro", "Courier New", monospace;
+  margin: 0 auto 1.5em auto;
+}
+
+.process-step h4 {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  margin-bottom: 1em;
+  color: #000;
+}
+
+.process-step p {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.6;
+  color: #666;
+}
+
+.services-footer {
+  background-color: #000;
+  color: #fff;
+  padding: clamp(3em, 6vw, 4em) clamp(1em, 3vw, 2em);
+}
+
+.services-footer .footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  gap: clamp(2em, 5vw, 4em);
+  flex-wrap: wrap;
+}
+
+.services-footer .footer-col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.services-footer .footer-label {
+  font-family: "Apercu Mono Pro", "Courier New", monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1em;
+  color: #fff;
+  font-weight: 600;
+}
+
+.services-footer .footer-col p {
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.services-footer .footer-col h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  margin-bottom: 1em;
+  color: #fff;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  padding: 1em 2em;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-top: 1em;
+}
+
+.cta-button:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+/* Mobile Navigation for Services Page */
+.services-mobile-nav-toggle {
+  display: none;
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 1001;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 8px;
+  padding: 0.8em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.services-mobile-nav-toggle:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.services-mobile-nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #000;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+.services-mobile-nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.services-mobile-nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.services-mobile-nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.services-mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  padding: 6em 2em 2em 2em;
+}
+
+.services-mobile-nav-overlay.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.services-mobile-nav-overlay .nav-item p {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.services-mobile-nav-overlay .nav-item a {
+  color: #000;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.services-mobile-nav-overlay .nav-item a:hover {
+  opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+
+  .process-steps {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .services-mobile-nav-toggle {
+    display: block;
+  }
+
+  .services-header .nav {
+    display: none;
+  }
+
+  .services-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    padding: 1.5em;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 2em;
+    padding: 2em 1.5em;
+  }
+
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+
+  .services-footer .footer-content {
+    flex-direction: column;
+    gap: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-header {
+    padding: 1em;
+  }
+
+  .services-hero {
+    padding: 6em 1em 2em 1em;
+  }
+
+  .services-grid {
+    padding: 1.5em 1em;
+    gap: 1.5em;
+  }
+
+  .service-card {
+    padding: 1.5em;
+  }
+
+  .process-section {
+    padding: 2em 1em;
+  }
+
+  .services-footer {
+    padding: 2em 1em;
+  }
+}
+
+@media (max-width: 320px) {
+  .services-hero .hero-text h2 {
+    font-size: 2rem;
+  }
+
+  .service-content h3 {
+    font-size: 1.3rem;
+  }
+
+  .process-header h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* =========================================
+   Mobile Header & Navigation (Ported from mobile.css)
+   ========================================= */
+
+/* 1. Mobile Header Container */
+.mobile-header {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  box-sizing: border-box;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .mobile-header {
+    display: flex;
+  }
+
+  /* Hide desktop site-nav */
+  .site-nav {
+    display: none !important;
+  }
+}
+
+.mobile-header .site-logo {
+  display: block;
+}
+
+.mobile-header .site-logo h1 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #000;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* 2. Mobile Nav Toggle */
+.mobile-nav-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  z-index: 1001;
+}
+
+.mobile-nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #000;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.mobile-nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-nav-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 3. Mobile Nav Overlay */
+.mobile-nav-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(17, 17, 17, 0.98) !important;
+  /* Dark background */
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 2rem !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  transform: scale(1.05) !important;
+}
+
+.mobile-nav-overlay.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: scale(1) !important;
+  pointer-events: all !important;
+}
+
+.mobile-nav-overlay .nav-item {
+  display: block !important;
+  transform: translateY(40px) rotateX(-10deg) !important;
+  opacity: 0 !important;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  position: relative !important;
+  visibility: visible !important;
+  z-index: 10000 !important;
+}
+
+.mobile-nav-overlay.active .nav-item {
+  transform: translateY(0) rotateX(0deg) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.mobile-nav-overlay.active .nav-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.mobile-nav-overlay.active .nav-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.mobile-nav-overlay.active .nav-item:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.mobile-nav-overlay.active .nav-item:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+.mobile-nav-overlay.active .nav-item:nth-child(5) {
+  transition-delay: 0.5s;
+}
+
+.mobile-nav-overlay .nav-item p {
+  font-size: 2.5rem !important;
+  font-weight: 300 !important;
+  transform: none !important;
+  margin: 0 !important;
+  letter-spacing: -0.02em !important;
+  text-align: center !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.mobile-nav-overlay .nav-item a {
+  color: #ffffff !important;
+  /* White text */
+  text-decoration: none !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  position: relative !important;
+  display: inline-block !important;
+  padding: 0.75rem 2rem !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10001 !important;
+}

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Status - Kala Design Co</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f4f4f4 0%, #e8e8e8 100%);
+            color: #111;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .status-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .status-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .status-card.success {
+            border-left-color: #28a745;
+        }
+
+        .status-card.warning {
+            border-left-color: #ffc107;
+        }
+
+        .status-card.error {
+            border-left-color: #dc3545;
+        }
+
+        .status-card.info {
+            border-left-color: #007bff;
+        }
+
+        .status-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .status-icon {
+            font-size: 1.5rem;
+        }
+
+        .status-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .status-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .status-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: #111;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .btn.secondary {
+            background: #6c757d;
+        }
+
+        .btn.success {
+            background: #28a745;
+        }
+
+        .btn.warning {
+            background: #ffc107;
+            color: #111;
+        }
+
+        .btn.small {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            transition: width 0.5s ease;
+        }
+
+        .quick-actions {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .quick-actions h3 {
+            margin-bottom: 20px;
+            color: #111;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #111;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .code-snippet {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Kala Design Co Setup Status</h1>
+            <p>Monitor your Supabase integration and admin panel setup</p>
+        </div>
+
+        <div class="status-grid">
+            <!-- Supabase Configuration -->
+            <div class="status-card" id="supabase-status">
+                <div class="status-header">
+                    <span class="status-icon">⚙️</span>
+                    <span class="status-title">Supabase Configuration</span>
+                </div>
+                <div class="status-description">
+                    <span class="loading"></span> Checking configuration...
+                </div>
+                <div class="status-actions" id="supabase-actions"></div>
+            </div>
+
+            <!-- Database Connection -->
+            <div class="status-card" id="database-status">
+                <div class="status-header">
+                    <span class="status-icon">🗄️</span>
+                    <span class="status-title">Database Connection</span>
+                </div>
+                <div class="status-description">
+                    <span class="loading"></span> Testing connection...
+                </div>
+                <div class="status-actions" id="database-actions"></div>
+            </div>
+
+            <!-- Admin Panel -->
+            <div class="status-card" id="admin-status">
+                <div class="status-header">
+                    <span class="status-icon">👤</span>
+                    <span class="status-title">Admin Panel</span>
+                </div>
+                <div class="status-description">
+                    <span class="loading"></span> Checking admin panel...
+                </div>
+                <div class="status-actions" id="admin-actions"></div>
+            </div>
+
+            <!-- Contact Forms -->
+            <div class="status-card" id="forms-status">
+                <div class="status-header">
+                    <span class="status-icon">📝</span>
+                    <span class="status-title">Contact Forms</span>
+                </div>
+                <div class="status-description">
+                    <span class="loading"></span> Testing form integration...
+                </div>
+                <div class="status-actions" id="forms-actions"></div>
+            </div>
+
+            <!-- Analytics -->
+            <div class="status-card" id="analytics-status">
+                <div class="status-header">
+                    <span class="status-icon">📊</span>
+                    <span class="status-title">Analytics Integration</span>
+                </div>
+                <div class="status-description">
+                    <span class="loading"></span> Checking analytics...
+                </div>
+                <div class="status-actions" id="analytics-actions"></div>
+            </div>
+
+            <!-- Overall Progress -->
+            <div class="status-card info">
+                <div class="status-header">
+                    <span class="status-icon">📈</span>
+                    <span class="status-title">Setup Progress</span>
+                </div>
+                <div class="status-description">
+                    Overall completion status
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="overall-progress" style="width: 0%"></div>
+                </div>
+                <div id="progress-text">0% Complete</div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <h3>🛠️ Quick Actions</h3>
+            <div class="action-grid">
+                <a href="config-checker.html" class="btn">🔧 Configuration Checker</a>
+                <a href="../admin/index.html" class="btn">👤 Open Admin Panel</a>
+                <a href="../index.html" class="btn">🏠 View Website</a>
+                <button class="btn secondary" onclick="runFullTest()">🧪 Run Full Test</button>
+                <button class="btn warning" onclick="showSetupGuide()">📚 Setup Guide</button>
+                <button class="btn success" onclick="refreshStatus()">🔄 Refresh Status</button>
+            </div>
+        </div>
+
+        <!-- Setup Guide Modal -->
+        <div id="setup-guide" class="hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: flex; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 30px; border-radius: 12px; max-width: 600px; max-height: 80vh; overflow-y: auto;">
+                <h3>📚 Quick Setup Guide</h3>
+                <div id="guide-content">
+                    <p><strong>Step 1:</strong> Get your Supabase project info</p>
+                    <div class="code-snippet">node scripts/get-project-info.js list</div>
+                    
+                    <p><strong>Step 2:</strong> Update configuration</p>
+                    <div class="code-snippet">Edit database/supabase-config.js with your project URL and anon key</div>
+                    
+                    <p><strong>Step 3:</strong> Deploy database schema</p>
+                    <div class="code-snippet">Copy database/schema.sql to Supabase SQL Editor and run</div>
+                    
+                    <p><strong>Step 4:</strong> Test everything</p>
+                    <div class="code-snippet">Open database/config-checker.html and verify all tests pass</div>
+                </div>
+                <button class="btn" onclick="hideSetupGuide()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include required scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="database-service.js"></script>
+
+    <script>
+        let statusChecks = {
+            supabase: false,
+            database: false,
+            admin: false,
+            forms: false,
+            analytics: false
+        };
+
+        // Initialize status checker
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkAllStatus();
+        });
+
+        async function checkAllStatus() {
+            await Promise.all([
+                checkSupabaseStatus(),
+                checkDatabaseStatus(),
+                checkAdminStatus(),
+                checkFormsStatus(),
+                checkAnalyticsStatus()
+            ]);
+            
+            updateOverallProgress();
+        }
+
+        async function checkSupabaseStatus() {
+            const card = document.getElementById('supabase-status');
+            const actions = document.getElementById('supabase-actions');
+            
+            try {
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for init
+                
+                if (window.supabaseConfig) {
+                    const status = window.supabaseConfig.getStatus();
+                    
+                    if (status.status === 'configured') {
+                        updateStatusCard(card, 'success', '✅ Configured and Connected', status.message);
+                        actions.innerHTML = `
+                            <button class="btn small success" onclick="testSupabaseConnection()">Test Connection</button>
+                        `;
+                        statusChecks.supabase = true;
+                    } else {
+                        updateStatusCard(card, 'warning', '⚠️ Configuration Required', status.message);
+                        actions.innerHTML = `
+                            <a href="config-checker.html" class="btn small">Configure Now</a>
+                            <button class="btn small secondary" onclick="showProjectInfo()">Get Project Info</button>
+                        `;
+                    }
+                } else {
+                    updateStatusCard(card, 'error', '❌ Not Loaded', 'Supabase configuration not loaded');
+                }
+            } catch (error) {
+                updateStatusCard(card, 'error', '❌ Error', error.message);
+            }
+        }
+
+        async function checkDatabaseStatus() {
+            const card = document.getElementById('database-status');
+            const actions = document.getElementById('database-actions');
+            
+            try {
+                if (window.databaseService) {
+                    if (window.databaseService.fallbackToLocalStorage) {
+                        updateStatusCard(card, 'warning', '⚠️ Using localStorage', 'Fallback mode active - Supabase not configured');
+                        actions.innerHTML = `
+                            <a href="config-checker.html" class="btn small">Setup Database</a>
+                        `;
+                    } else {
+                        const testResult = await window.supabaseConfig.testConnection();
+                        if (testResult) {
+                            updateStatusCard(card, 'success', '✅ Connected', 'Database connection active');
+                            actions.innerHTML = `
+                                <button class="btn small success" onclick="testDatabaseOperations()">Test Operations</button>
+                            `;
+                            statusChecks.database = true;
+                        } else {
+                            updateStatusCard(card, 'error', '❌ Connection Failed', 'Cannot connect to database');
+                        }
+                    }
+                } else {
+                    updateStatusCard(card, 'error', '❌ Service Not Loaded', 'Database service not initialized');
+                }
+            } catch (error) {
+                updateStatusCard(card, 'error', '❌ Error', error.message);
+            }
+        }
+
+        async function checkAdminStatus() {
+            const card = document.getElementById('admin-status');
+            const actions = document.getElementById('admin-actions');
+            
+            try {
+                // Check if admin files exist by trying to fetch
+                const response = await fetch('../admin/index.html', { method: 'HEAD' });
+                if (response.ok) {
+                    updateStatusCard(card, 'success', '✅ Available', 'Admin panel is accessible');
+                    actions.innerHTML = `
+                        <a href="../admin/index.html" class="btn small">Open Admin</a>
+                        <a href="../admin/login.html" class="btn small secondary">Login Page</a>
+                    `;
+                    statusChecks.admin = true;
+                } else {
+                    updateStatusCard(card, 'error', '❌ Not Found', 'Admin panel files not accessible');
+                }
+            } catch (error) {
+                updateStatusCard(card, 'warning', '⚠️ Check Required', 'Cannot verify admin panel status');
+            }
+        }
+
+        async function checkFormsStatus() {
+            const card = document.getElementById('forms-status');
+            const actions = document.getElementById('forms-actions');
+            
+            try {
+                // Check if contact form handler exists
+                const response = await fetch('../contact-form-handler.js', { method: 'HEAD' });
+                if (response.ok) {
+                    updateStatusCard(card, 'success', '✅ Integrated', 'Contact forms are configured');
+                    actions.innerHTML = `
+                        <a href="../contact.html" class="btn small">Test Form</a>
+                    `;
+                    statusChecks.forms = true;
+                } else {
+                    updateStatusCard(card, 'error', '❌ Not Found', 'Contact form handler missing');
+                }
+            } catch (error) {
+                updateStatusCard(card, 'warning', '⚠️ Check Required', 'Cannot verify form status');
+            }
+        }
+
+        async function checkAnalyticsStatus() {
+            const card = document.getElementById('analytics-status');
+            const actions = document.getElementById('analytics-actions');
+            
+            try {
+                // Check if analytics integration exists
+                const response = await fetch('../analytics-integration.js', { method: 'HEAD' });
+                if (response.ok) {
+                    updateStatusCard(card, 'success', '✅ Integrated', 'Analytics tracking is configured');
+                    actions.innerHTML = `
+                        <button class="btn small" onclick="testAnalytics()">Test Tracking</button>
+                    `;
+                    statusChecks.analytics = true;
+                } else {
+                    updateStatusCard(card, 'error', '❌ Not Found', 'Analytics integration missing');
+                }
+            } catch (error) {
+                updateStatusCard(card, 'warning', '⚠️ Check Required', 'Cannot verify analytics status');
+            }
+        }
+
+        function updateStatusCard(card, type, title, description) {
+            card.className = `status-card ${type}`;
+            const titleElement = card.querySelector('.status-title');
+            const descElement = card.querySelector('.status-description');
+            
+            titleElement.textContent = title;
+            descElement.textContent = description;
+        }
+
+        function updateOverallProgress() {
+            const completed = Object.values(statusChecks).filter(Boolean).length;
+            const total = Object.keys(statusChecks).length;
+            const percentage = Math.round((completed / total) * 100);
+            
+            document.getElementById('overall-progress').style.width = `${percentage}%`;
+            document.getElementById('progress-text').textContent = `${percentage}% Complete (${completed}/${total})`;
+        }
+
+        // Action functions
+        async function testSupabaseConnection() {
+            if (window.supabaseConfig) {
+                const result = await window.supabaseConfig.testConnection();
+                alert(result ? '✅ Connection successful!' : '❌ Connection failed!');
+            }
+        }
+
+        async function showProjectInfo() {
+            if (window.supabaseConfig) {
+                const projects = await window.supabaseConfig.getProjectInfo();
+                if (projects && projects.length > 0) {
+                    alert(`Found ${projects.length} project(s). Check console for details.`);
+                } else {
+                    alert('No projects found or error occurred. Check console for details.');
+                }
+            }
+        }
+
+        async function testDatabaseOperations() {
+            try {
+                const forms = await window.databaseService.getContactForms();
+                const settings = await window.databaseService.getSiteSettings();
+                alert(`✅ Database operations successful!\nContact forms: ${forms.length}\nSettings loaded: ${Object.keys(settings).length} keys`);
+            } catch (error) {
+                alert(`❌ Database operations failed: ${error.message}`);
+            }
+        }
+
+        function testAnalytics() {
+            if (window.databaseService) {
+                window.databaseService.logAnalyticsEvent({
+                    eventName: 'test_event',
+                    category: 'setup',
+                    label: 'status_dashboard',
+                    value: 1
+                });
+                alert('✅ Analytics test event logged!');
+            }
+        }
+
+        async function runFullTest() {
+            alert('🧪 Running full system test...');
+            await checkAllStatus();
+            alert('✅ Full test completed! Check the status cards for results.');
+        }
+
+        function showSetupGuide() {
+            document.getElementById('setup-guide').classList.remove('hidden');
+        }
+
+        function hideSetupGuide() {
+            document.getElementById('setup-guide').classList.add('hidden');
+        }
+
+        async function refreshStatus() {
+            // Reset all status checks
+            Object.keys(statusChecks).forEach(key => statusChecks[key] = false);
+            
+            // Show loading state
+            document.querySelectorAll('.status-card .status-description').forEach(desc => {
+                desc.innerHTML = '<span class="loading"></span> Checking...';
+            });
+            
+            // Re-run all checks
+            await checkAllStatus();
+        }
+    </script>
+</body>
+</html>

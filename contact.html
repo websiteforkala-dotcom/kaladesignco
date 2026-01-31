@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Kala Design Co</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Specific Newspaper Styles (Ported from About/Services Page) */
+    :root {
+      --paper-bg: #f4f1ea;
+      --ink: #1a1a1a;
+    }
+
+    body {
+      background-color: var(--paper-bg);
+      color: var(--ink);
+    }
+
+    /* Hide standard elements */
+    .site-nav,
+    .site-footer,
+    .mobile-header,
+    .mobile-nav-toggle {
+      display: none !important;
+    }
+
+    .paper-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 3rem 4rem;
+      border-left: 1px solid rgba(0, 0, 0, 0.05);
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+      min-height: 100vh;
+      background: #fffdf7;
+      box-shadow: 0 10px 60px rgba(0, 0, 0, 0.1);
+      position: relative;
+      transform-origin: top center;
+      opacity: 0;
+      transform: translateY(50px) scale(0.98);
+    }
+
+    /* Masthead */
+    .masthead {
+      text-align: center;
+      border-bottom: 4px double var(--ink);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .top-folks {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-align: right;
+      display: flex;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 0.5rem;
+      z-index: 100;
+    }
+
+    .top-folks a {
+      text-decoration: none;
+      color: var(--ink);
+      position: relative;
+      transition: all 0.3s ease;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .top-folks a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--ink);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .top-folks a:hover {
+      background: rgba(26, 26, 26, 0.05);
+    }
+
+    .top-folks a:hover::after {
+      width: 80%;
+    }
+
+    /* Current page highlighting */
+    .top-folks a.current-page {
+      background: var(--ink);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .top-folks a.current-page::after {
+      display: none;
+    }
+
+    .top-folks a.current-page:hover {
+      background: var(--ink);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(26, 26, 26, 0.2);
+    }
+
+    .masthead-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      border-top: 2px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 0.5rem 0;
+      margin-top: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .masthead h1 {
+      font-family: "Playfair Display", Times, serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      line-height: 0.85;
+      text-transform: uppercase;
+      margin: 2.5rem 0 1.5rem 0;
+      letter-spacing: -0.03em;
+    }
+
+    /* Headline */
+    .headline-section {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      padding: 0 1rem;
+    }
+
+    .main-headline {
+      font-family: "Playfair Display", Times, serif;
+      font-style: italic;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sub-headline {
+      font-family: var(--font-mono);
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1rem;
+      display: inline-block;
+    }
+
+    /* Layout Grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      border-top: 1px solid var(--ink);
+      padding-top: 2rem;
+    }
+
+    .main-col {
+      padding-right: 2rem;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .side-col {
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* Content Styling */
+    .article-text {
+      font-family: "Georgia", serif;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      text-align: justify;
+      margin-bottom: 2rem;
+    }
+
+    /* Form Styling for Newspaper Theme */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: "Georgia", serif;
+      font-size: 1.1rem;
+      padding: 0.8rem 0;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(26, 26, 26, 0.2);
+      border-radius: 0;
+      color: var(--ink);
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-bottom: 1px solid var(--ink);
+      background: rgba(26, 26, 26, 0.02);
+      padding-left: 0.5rem;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn-submit {
+      align-self: flex-start;
+      margin-top: 1rem;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      padding: 1rem 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Sidebar Elements */
+    .sidebar-box {
+      border: 2px solid var(--ink);
+      padding: 1.5rem;
+      background: #fff;
+    }
+
+    .sidebar-box.classifieds {
+      background: #fcfcfc;
+      border: 1px dashed var(--ink);
+    }
+
+    .sidebar-title {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-weight: bold;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+
+    .classified-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .classified-title {
+      font-weight: bold;
+      font-family: "Georgia", serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .classified-detail {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .classified-detail a {
+      color: var(--ink);
+      text-decoration: underline;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .paper-container {
+        padding: 1.5rem;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .main-col {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid var(--ink);
+        padding-bottom: 2rem;
+      }
+
+      .top-folks {
+        position: static;
+        justify-content: center;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .masthead h1 {
+        font-size: clamp(3rem, 12vw, 6rem);
+      }
+    }
+  </style>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="paper-container">
+    <!-- Masthead -->
+    <header class="masthead">
+      <div class="top-folks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="work.html">Work</a>
+        <a href="journal.html">Journal</a>
+        <a href="contact.html" class="current-page">Contact</a>
+      </div>
+
+      <div class="masthead-meta">
+        <span>RAJISTHAN, INDIA</span>
+      </div>
+
+      <h1>Get In Touch</h1>
+
+      <div class="masthead-meta"
+        style="margin-bottom: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);">
+        <span>Inquiries</span>
+        <span>Collaborations</span>
+        <span>Careers</span>
+        <span>Press</span>
+      </div>
+    </header>
+
+    <!-- Main Headline -->
+    <div class="headline-section">
+      <h2 class="main-headline">Start Your Next Chapter with Kala Design Co.</h2>
+      <span class="sub-headline">We are currently accepting new projects for 2024-2025. Tell us about your
+        vision.</span>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="news-grid">
+      <!-- Main Column (Contact Form) -->
+      <div class="main-col">
+        <div class="article-text">
+          <h3
+            style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; font-style: italic;">
+            Project Inquiry Form</h3>
+
+          <form class="contact-form" id="contactForm" data-contact-form>
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Who should we address?" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="How can we reach you?" required>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number (Optional)</label>
+              <input type="tel" id="phone" name="phone" placeholder="For quicker communication">
+            </div>
+
+            <div class="form-group">
+              <label for="service">Interest</label>
+              <select id="service" name="service">
+                <option value="Residential Design">Residential Design</option>
+                <option value="Commercial Design">Commercial Design</option>
+                <option value="Renovation">Renovation</option>
+                <option value="Consultation">Consultation</option>
+                <option value="Other">Other Inquiry</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Your Vision</label>
+              <textarea id="message" name="message"
+                placeholder="Tell us about the space, the scope, and what you hope to achieve..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Side Column (Details) -->
+      <div class="side-col">
+
+        <div class="sidebar-box">
+          <div class="sidebar-title">Studio Location</div>
+
+          <!-- Map Image Placeholder -->
+          <div
+            style="width: 100%; height: 200px; background-color: #eee; border: 1px solid rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.7rem; color: #999;">[MAP VISUALIZATION]</span>
+          </div>
+
+          <div class="classified-item">
+            <div class="classified-title">Address</div>
+            <div class="classified-detail">
+              Riverstone Building,<br>28 Orchard Lane,<br>London N1 4DX<br>United Kingdom
+            </div>
+          </div>
+
+          <div class="classified-item">
+            <div class="classified-title">Hours</div>
+            <div class="classified-detail">
+              Mon - Fri: 9am - 6pm<br>
+              Sat - Sun: By Appointment
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-box classifieds" style="margin-top:auto;">
+          <div class="sidebar-title">Direct Contact</div>
+
+          <div class="classified-item">
+            <div class="classified-title">Email</div>
+            <div class="classified-detail"><a href="mailto:hello@kaladesign.co">hello@kaladesign.co</a></div>
+          </div>
+
+          <div class="classified-item">
+            <div class="classified-title">Phone</div>
+            <div class="classified-detail">+44 20 7123 4567</div>
+          </div>
+
+          <div class="classified-item">
+            <div class="classified-title">Connect</div>
+            <div class="classified-detail">
+              <a href="#">Instagram</a> / <a href="#">LinkedIn</a>
+            </div>
+          </div>
+
+          <div
+            style="text-align: center; margin-top: 1rem; font-size: 0.7rem; font-family: var(--font-mono); opacity: 0.6;">
+            &copy; 2024 Kala Design Co.<br>All Rights Reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animation Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tl = gsap.timeline();
+
+      // Reveal Paper
+      tl.to(".paper-container", {
+        duration: 1.5,
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        ease: "power3.out"
+      })
+        // Reveal Masthead Text
+        .from(".masthead h1, .masthead-meta, .top-folks", {
+          duration: 1,
+          y: 20,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=1")
+        // Reveal Headline
+        .from(".main-headline, .sub-headline", {
+          duration: 1,
+          y: 30,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.5")
+        // Reveal Form & Sidebar
+        .from(".contact-form, .side-col > div", {
+          duration: 0.8,
+          y: 20,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.5");
+    });
+  </script>
+
+  <!-- Database Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="database/supabase-config.js"></script>
+  <script src="database/database-service.js"></script>
+
+  <!-- Admin Panel Integration Scripts -->
+  <script src="contact-form-handler.js"></script>
+  <script src="analytics-integration.js"></script>
+  <script src="seo-manager.js"></script>
+  <script src="frontend-sync.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+DATA FOR WEBSITE
+node_modules
+.vercel
+.gemini
+*.log
+.DS_Store

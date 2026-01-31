@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Database Setup Instructions</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .step { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .error { background-color: #ffebee; border-color: #f44336; }
+        .success { background-color: #e8f5e8; border-color: #4caf50; }
+        .warning { background-color: #fff3cd; border-color: #ff9800; }
+        .code { background-color: #f5f5f5; padding: 10px; border-radius: 3px; font-family: monospace; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Supabase Database Setup</h1>
+    
+    <div class="step error">
+        <h2>❌ Current Issue</h2>
+        <p><strong>Error:</strong> 406 (Not Acceptable) - Database tables don't exist</p>
+        <p><strong>Cause:</strong> The database schema hasn't been deployed to your Supabase project</p>
+    </div>
+
+    <div class="step warning">
+        <h2>⚠️ Quick Fix Required</h2>
+        <p>You need to create the database tables in your Supabase project. Follow the steps below:</p>
+    </div>
+
+    <div class="step">
+        <h2>📋 Step 1: Access Supabase Dashboard</h2>
+        <ol>
+            <li>Go to <a href="https://supabase.com/dashboard" target="_blank">Supabase Dashboard</a></li>
+            <li>Login to your account</li>
+            <li>Select your project: <strong>fiuiywerforvkhjbetpm</strong></li>
+            <li>Click on "SQL Editor" in the left sidebar</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h2>📝 Step 2: Run Database Setup SQL</h2>
+        <p>Copy the SQL code below and paste it into the SQL Editor, then click "Run":</p>
+        <button onclick="copySQL()">📋 Copy SQL Code</button>
+        <div class="code" id="sqlCode">
+-- Quick Setup SQL for Supabase Dashboard
+-- Copy and paste this into the Supabase SQL Editor
+
+-- Enable necessary extensions
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- Create contact_forms table
+CREATE TABLE IF NOT EXISTS contact_forms (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    service VARCHAR(100),
+    message TEXT NOT NULL,
+    ip_address INET,
+    user_agent TEXT,
+    status VARCHAR(20) DEFAULT 'new',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create site_settings table
+CREATE TABLE IF NOT EXISTS site_settings (
+    id INTEGER PRIMARY KEY DEFAULT 1,
+    phone VARCHAR(20),
+    email VARCHAR(255),
+    address TEXT,
+    facebook_url VARCHAR(255),
+    instagram_url VARCHAR(255),
+    linkedin_url VARCHAR(255),
+    twitter_url VARCHAR(255),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create seo_settings table
+CREATE TABLE IF NOT EXISTS seo_settings (
+    id INTEGER PRIMARY KEY DEFAULT 1,
+    site_title VARCHAR(255),
+    tagline VARCHAR(255),
+    meta_description TEXT,
+    meta_keywords TEXT,
+    google_analytics_id VARCHAR(50),
+    google_search_console VARCHAR(255),
+    facebook_pixel_id VARCHAR(50),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create page_content table
+CREATE TABLE IF NOT EXISTS page_content (
+    id BIGSERIAL PRIMARY KEY,
+    page_name VARCHAR(100) UNIQUE NOT NULL,
+    title VARCHAR(255),
+    description TEXT,
+    hero_text VARCHAR(500),
+    meta_title VARCHAR(255),
+    meta_description TEXT,
+    meta_keywords TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Insert default data
+INSERT INTO site_settings (id, phone, email, address, facebook_url, instagram_url, linkedin_url)
+VALUES (1, '+91 98765 43210', 'info@kaladesignco.com', 'Design District, New Delhi, India', 
+        'https://facebook.com/kaladesignco', 'https://instagram.com/kaladesignco', 
+        'https://linkedin.com/company/kaladesignco')
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO seo_settings (id, site_title, tagline, meta_description, meta_keywords)
+VALUES (1, 'Kala Design Co - Interior Design Excellence', 'Transforming Spaces, Creating Dreams',
+        'Professional interior design services in Delhi.',
+        'interior design, home design, office design, delhi')
+ON CONFLICT (id) DO NOTHING;
+
+-- Disable RLS for public access
+ALTER TABLE contact_forms DISABLE ROW LEVEL SECURITY;
+ALTER TABLE site_settings DISABLE ROW LEVEL SECURITY;
+ALTER TABLE seo_settings DISABLE ROW LEVEL SECURITY;
+ALTER TABLE page_content DISABLE ROW LEVEL SECURITY;
+        </div>
+    </div>
+
+    <div class="step">
+        <h2>✅ Step 3: Verify Setup</h2>
+        <p>After running the SQL:</p>
+        <ol>
+            <li>Check that no errors appeared in the SQL Editor</li>
+            <li>Go to "Table Editor" in the left sidebar</li>
+            <li>Verify these tables exist:
+                <ul>
+                    <li>contact_forms</li>
+                    <li>site_settings</li>
+                    <li>seo_settings</li>
+                    <li>page_content</li>
+                </ul>
+            </li>
+            <li>Refresh your admin panel page</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h2>🧪 Step 4: Test Connection</h2>
+        <button onclick="testConnection()">Test Database Connection</button>
+        <div id="testResult"></div>
+    </div>
+
+    <div class="step success" style="display: none;" id="successMessage">
+        <h2>🎉 Setup Complete!</h2>
+        <p>Your database is now properly configured. The admin panel should work without errors.</p>
+    </div>
+
+    <script>
+        function copySQL() {
+            const sqlCode = document.getElementById('sqlCode').textContent;
+            navigator.clipboard.writeText(sqlCode).then(() => {
+                alert('SQL code copied to clipboard! Paste it into the Supabase SQL Editor.');
+            });
+        }
+
+        async function testConnection() {
+            const resultDiv = document.getElementById('testResult');
+            resultDiv.innerHTML = '<p>Testing connection...</p>';
+
+            try {
+                // Test if we can access the database service
+                if (window.databaseService) {
+                    const settings = await window.databaseService.getSiteSettings();
+                    resultDiv.innerHTML = '<p style="color: green;">✅ Connection successful! Tables are working.</p>';
+                    document.getElementById('successMessage').style.display = 'block';
+                } else {
+                    resultDiv.innerHTML = '<p style="color: orange;">⚠️ Database service not loaded. Please refresh the page.</p>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p style="color: red;">❌ Connection failed: ${error.message}</p>`;
+            }
+        }
+
+        // Auto-load database service for testing
+        const script1 = document.createElement('script');
+        script1.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+        document.head.appendChild(script1);
+
+        script1.onload = () => {
+            const script2 = document.createElement('script');
+            script2.src = 'supabase-config.js';
+            document.head.appendChild(script2);
+
+            script2.onload = () => {
+                const script3 = document.createElement('script');
+                script3.src = 'database-service.js';
+                document.head.appendChild(script3);
+            };
+        };
+    </script>
+</body>
+</html>

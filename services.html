@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - Kala Design Co</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Specific Newspaper Styles (Ported from About Page) */
+    :root {
+      --paper-bg: #f4f1ea;
+      --ink: #1a1a1a;
+    }
+
+    body {
+      background-color: var(--paper-bg);
+      color: var(--ink);
+    }
+
+    /* Hide standard elements */
+    .site-nav,
+    .site-footer,
+    .mobile-header,
+    .mobile-nav-toggle {
+      display: none !important;
+    }
+
+    .paper-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 3rem 4rem;
+      border-left: 1px solid rgba(0, 0, 0, 0.05);
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+      min-height: 100vh;
+      background: #fffdf7;
+      box-shadow: 0 10px 60px rgba(0, 0, 0, 0.1);
+      position: relative;
+      transform-origin: top center;
+      opacity: 0;
+      transform: translateY(50px) scale(0.98);
+    }
+
+    /* Masthead */
+    .masthead {
+      text-align: center;
+      border-bottom: 4px double var(--ink);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .top-folks {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-align: right;
+      display: flex;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 0.5rem;
+      z-index: 100;
+    }
+
+    .top-folks a {
+      text-decoration: none;
+      color: var(--ink);
+      position: relative;
+      transition: all 0.3s ease;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .top-folks a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--ink);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .top-folks a:hover {
+      background: rgba(26, 26, 26, 0.05);
+    }
+
+    .top-folks a:hover::after {
+      width: 80%;
+    }
+
+    /* Current page highlighting */
+    .top-folks a.current-page {
+      background: var(--ink);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .top-folks a.current-page::after {
+      display: none;
+    }
+
+    .top-folks a.current-page:hover {
+      background: var(--ink);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(26, 26, 26, 0.2);
+    }
+
+    .masthead-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      border-top: 2px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 0.5rem 0;
+      margin-top: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .masthead h1 {
+      font-family: "Playfair Display", Times, serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      line-height: 0.85;
+      text-transform: uppercase;
+      margin: 2.5rem 0 1.5rem 0;
+      letter-spacing: -0.03em;
+    }
+
+    /* Headline */
+    .headline-section {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      padding: 0 1rem;
+    }
+
+    .main-headline {
+      font-family: "Playfair Display", Times, serif;
+      font-style: italic;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sub-headline {
+      font-family: var(--font-mono);
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1rem;
+      display: inline-block;
+    }
+
+    /* Layout Grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      border-top: 1px solid var(--ink);
+      padding-top: 2rem;
+    }
+
+    .main-col {
+      padding-right: 2rem;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .side-col {
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* Content Styling */
+    .drop-cap {
+      float: left;
+      font-size: 6.5rem;
+      line-height: 0.75;
+      margin-right: 1rem;
+      margin-top: 0.4rem;
+      font-family: "Playfair Display", Times, serif;
+      font-weight: 700;
+    }
+
+    .article-text {
+      font-family: "Georgia", serif;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      text-align: justify;
+      margin-bottom: 2rem;
+    }
+
+    .article-text h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.8rem;
+      margin-top: 4rem;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      display: block;
+      break-inside: avoid;
+    }
+
+    .article-text p {
+      margin-bottom: 1.5rem;
+      break-inside: avoid;
+    }
+
+    /* Service Image Containers */
+    .service-img-container {
+      width: 100%;
+      margin: 2.5rem 0;
+      border: 1px solid var(--ink);
+      padding: 6px;
+      background: #fff;
+      display: block;
+      opacity: 0;
+      /* Changed for scrolltrigger */
+      transform: translateY(30px);
+    }
+
+    .service-img-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: grayscale(100%) contrast(1.1);
+      transition: filter 0.8s ease;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
+    .service-img-container:hover img {
+      filter: grayscale(0%) contrast(1);
+    }
+
+    .service-caption {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      margin-top: 0.5rem;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-img-container {
+      width: 100%;
+      height: 450px;
+      margin-bottom: 1rem;
+      border: 1px solid var(--ink);
+      padding: 6px;
+      background: #fff;
+    }
+
+    .hero-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.1);
+      transition: filter 0.5s;
+    }
+
+    .hero-img-container:hover img {
+      filter: grayscale(0%) contrast(1);
+    }
+
+    .caption {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      margin-top: 0.5rem;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Sidebar Elements */
+    .sidebar-box {
+      border: 2px solid var(--ink);
+      padding: 1.5rem;
+      background: #fff;
+    }
+
+    .sidebar-box.classifieds {
+      background: #fcfcfc;
+      border: 1px dashed var(--ink);
+    }
+
+    .sidebar-title {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-weight: bold;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+
+    .value-list-item {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .value-list-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .value-list-item h4 {
+      font-family: "Playfair Display", Times, serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    .value-list-item p {
+      font-family: "Georgia", serif;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    /* Classifieds */
+    .classified-item {
+      margin-bottom: 1rem;
+    }
+
+    .classified-title {
+      font-weight: bold;
+      font-family: "Georgia", serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .classified-detail {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .paper-container {
+        padding: 1.5rem;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .main-col {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid var(--ink);
+        padding-bottom: 2rem;
+      }
+
+      /* On mobile, let images breathe */
+      .service-img-container {
+        margin: 2rem -1rem;
+        /* slight bleed */
+        width: calc(100% + 2rem);
+        border: none;
+        padding: 0;
+      }
+
+      .service-img-container img {
+        border: 1px solid var(--ink);
+      }
+
+      .top-folks {
+        position: static;
+        justify-content: center;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .top-folks a {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .masthead h1 {
+        font-size: clamp(3rem, 12vw, 6rem);
+      }
+
+      .main-headline {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+      }
+    }
+  </style>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="paper-container">
+    <!-- Masthead -->
+    <header class="masthead">
+      <div class="top-folks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html" class="current-page">Services</a>
+        <a href="work.html">Work</a>
+        <a href="journal.html">Journal</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="masthead-meta">
+        <span>RAJISTHAN, INDIA</span>
+      </div>
+
+      <h1>Design Services</h1>
+
+      <div class="masthead-meta"
+        style="margin-bottom: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);">
+        <span>Residential</span>
+        <span>Commercial</span>
+        <span>Curation</span>
+        <span>Consultation</span>
+      </div>
+    </header>
+
+    <!-- Main Headline -->
+    <div class="headline-section">
+      <h2 class="main-headline">Comprehensive Design Solutions Tailored to Transform Your Space.</h2>
+      <span class="sub-headline">From interior architecture to bespoke furniture, we cover every detail with precision
+        and care.</span>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="news-grid">
+      <!-- Main Column (Article) -->
+      <div class="main-col">
+        <div class="hero-img-container">
+          <img src="./assets/projects/nakra-1.jpg" alt="Interior Architecture Project">
+        </div>
+        <div class="caption">
+          <span>FIG 1. SIGNATURE AESTHETIC</span>
+          <span>PHOTO: KALA PRESS</span>
+        </div>
+
+        <div class="article-text">
+          <p><span class="drop-cap">A</span>t Kala Design Co, we believe that design is a holistic discipline. It is not
+            segmented into isolated tasks but is a fluid, continuous process of shaping environments. Our services are
+            designed to envelop every aspect of this process, ensuring a cohesive and immersive result.</p>
+
+          <h3>01. Interior Architecture</h3>
+          <p>We begin at the structural level. Our approach to interior architecture involves defining the very bones of
+            the space. We manipulate volume, light, and flow to create foundations that are as functional as they are
+            beautiful. This includes spatial planning, structural modifications, and the integration of architectural
+            details that set the tone for the entire project.</p>
+
+          <div class="service-img-container">
+            <img src="./assets/projects/nakra-3.jpg" alt="Interior Architecture Detail">
+          </div>
+          <div class="service-caption">
+            <span>FIG 1.1 SPATIAL PLANNING</span>
+            <span>PROJECT: NAKRA RESIDENCE</span>
+          </div>
+
+          <h3>02. Residential Design</h3>
+          <p>The home is a personal sanctuary. Our residential design service is deeply collaborative, focused on
+            translating individual lifestyles into physical form. We curate palettes, textures, and layouts that reflect
+            the inhabitants' unique narratives, creating spaces that offer comfort, warmth, and enduring style.</p>
+
+          <div class="service-img-container">
+            <img src="./assets/projects/shree-2.jpg" alt="Residential Design Detail">
+          </div>
+          <div class="service-caption">
+            <span>FIG 2. LIVING SPACES</span>
+            <span>PROJECT: SHREE RESIDENCE</span>
+          </div>
+
+          <h3>03. Commercial Environments</h3>
+          <p>For brands and businesses, space is a physical manifestation of identity. We design commercial
+            environments—from boutiques to offices—that communicate values and enhance user experience. Our designs are
+            strategic, optimizing flow and functionality while creating a memorable atmosphere that resonates with
+            clients and customers alike.</p>
+
+          <div class="service-img-container">
+            <img src="./assets/projects/atcg-1.jpg" alt="Commercial Design">
+          </div>
+          <div class="service-caption">
+            <span>FIG 3. RETAIL EXPERIENCE</span>
+            <span>PROJECT: ATCG STORE</span>
+          </div>
+
+          <h3>04. Art Direction & Curation</h3>
+          <p>A space is defined by what it holds. Our art direction service creates the visual language of a project. We
+            source and commission art, objects, and styling elements that add layers of meaning and history. It is the
+            final layer of storytelling that transforms a furnished room into a lived-in masterpiece.</p>
+
+          <div class="service-img-container">
+            <img src="./assets/projects/mridul-1.jpg" alt="Art Direction">
+          </div>
+          <div class="service-caption">
+            <span>FIG 4. CURATED OBJECTS</span>
+            <span>PROJECT: MRIDUL VILLA</span>
+          </div>
+
+          <h3>05. Bespoke Furniture</h3>
+          <p>When the market cannot provide the perfect piece, we create it. Our bespoke furniture design produces
+            custom tables, seating, and cabinetry tailored to the exact dimensions and aesthetic needs of a space.
+            Designed by us and crafted by master artisans, these pieces are future heirlooms.</p>
+
+          <div class="service-img-container">
+            <img src="./assets/projects/baxy-1.jpg" alt="Bespoke Design">
+          </div>
+          <div class="service-caption">
+            <span>FIG 5. CUSTOM CRAFTSMANSHIP</span>
+            <span>PROJECT: BAXY HOUSE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side Column (Values & Classifieds) -->
+      <div class="side-col">
+        <!-- Process -->
+        <div class="sidebar-box">
+          <div class="sidebar-title">Our Process</div>
+
+          <div class="value-list-item">
+            <h4>I. Discovery</h4>
+            <p>We listen. We observe. We understand the site, the light, and the people.</p>
+          </div>
+
+          <div class="value-list-item">
+            <h4>II. Concept</h4>
+            <p>We dream. We sketch. We develop a narrative direction that guides all decisions.</p>
+          </div>
+
+          <div class="value-list-item">
+            <h4>III. Execution</h4>
+            <p>We build. We oversee. We ensure every detail is realized to perfection.</p>
+          </div>
+        </div>
+
+        <!-- Ad Block equivalent -->
+        <div class="ad-block">
+          <h3>Start Your Project</h3>
+          <p style="font-family: 'Georgia', serif; font-size: 0.9rem; margin-bottom: 1.5rem;">Ready to transform your
+            space? Let's begin the conversation.</p>
+          <a href="contact.html">Inquire Now</a>
+        </div>
+
+        <!-- Classifieds (Footer Replacement) -->
+        <div class="sidebar-box classifieds" style="margin-top:auto;">
+          <div class="sidebar-title">Service Inquiries</div>
+
+          <div class="classified-item">
+            <div class="classified-title">Consultations</div>
+            <div class="classified-detail">Available Mon-Fri<br>10:00 AM - 4:00 PM</div>
+          </div>
+
+          <div class="classified-item">
+            <div class="classified-title">Direct Line</div>
+            <div class="classified-detail"><a href="mailto:hello@kaladesign.co">hello@kaladesign.co</a></div>
+          </div>
+
+          <div
+            style="text-align: center; margin-top: 1rem; font-size: 0.7rem; font-family: var(--font-mono); opacity: 0.6;">
+            &copy; 2024 Kala Design Co.<br>All Rights Reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animation Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      gsap.registerPlugin(ScrollTrigger);
+      const tl = gsap.timeline();
+
+      // Reveal Paper
+      tl.to(".paper-container", {
+        duration: 1.5,
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        ease: "power3.out"
+      })
+        // Reveal Masthead Text & Top Folks
+        .from(".masthead h1, .masthead-meta, .top-folks", {
+          duration: 1,
+          y: 20,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=1")
+        // Reveal Headline and Hero
+        .from(".main-headline, .sub-headline, .hero-img-container", {
+          duration: 1,
+          y: 30,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.5")
+        // Reveal Body Text paragraphs nicely
+        .from(".article-text p, .article-text h3", {
+          duration: 0.8,
+          y: 20,
+          opacity: 0,
+          stagger: 0.05,
+          ease: "power2.out"
+        }, "-=0.5")
+        // Reveal Sidebar items
+        .from(".side-col > div", {
+          duration: 0.8,
+          x: 20,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=1");
+
+      // Scroll Trigger Animations for new images
+      // Animate images as they enter viewport
+      const serviceImages = document.querySelectorAll(".service-img-container");
+      serviceImages.forEach(img => {
+        gsap.to(img, {
+          scrollTrigger: {
+            trigger: img,
+            start: "top 80%", // when top of image hits 80% of viewport
+            toggleActions: "play none none reverse"
+          },
+          duration: 1,
+          y: 0,
+          opacity: 1,
+          ease: "power3.out"
+        });
+      });
+    });
+  </script>
+
+  <!-- Database Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="database/supabase-config.js"></script>
+  <script src="database/database-service.js"></script>
+
+  <!-- Admin Panel Integration Scripts -->
+  <script src="contact-form-handler.js"></script>
+  <script src="analytics-integration.js"></script>
+  <script src="seo-manager.js"></script>
+  <script src="frontend-sync.js"></script>
+</body>
+
+</html>

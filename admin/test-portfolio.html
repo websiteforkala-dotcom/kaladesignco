@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Portfolio Admin</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        .success { background-color: #e8f5e8; }
+        .error { background-color: #ffebee; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Admin Portfolio Test</h1>
+    
+    <div class="test-section">
+        <h2>Database Connection Test</h2>
+        <button onclick="testDatabase()">Test Database</button>
+        <div id="db-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Work Projects Test</h2>
+        <button onclick="testWorkProjects()">Load Work Projects</button>
+        <div id="work-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Admin Panel Test</h2>
+        <button onclick="testAdminPanel()">Test Admin Panel Class</button>
+        <div id="admin-result"></div>
+    </div>
+
+    <!-- Load Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database/supabase-config.js"></script>
+    <script src="../database/database-service.js"></script>
+    <script src="admin-script.js"></script>
+
+    <script>
+        async function testDatabase() {
+            const resultDiv = document.getElementById('db-result');
+            resultDiv.innerHTML = '<p>Testing database connection...</p>';
+
+            try {
+                if (window.databaseService) {
+                    const settings = await window.databaseService.getSiteSettings();
+                    const seoSettings = await window.databaseService.getSEOSettings();
+                    
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Database Connection Successful</h4>
+                            <p><strong>Site Settings:</strong> ${JSON.stringify(settings, null, 2)}</p>
+                            <p><strong>SEO Settings:</strong> ${JSON.stringify(seoSettings, null, 2)}</p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ Database service not available</div>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Database Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testWorkProjects() {
+            const resultDiv = document.getElementById('work-result');
+            resultDiv.innerHTML = '<p>Loading work projects...</p>';
+
+            try {
+                // Test static work projects
+                const workProjects = [
+                    {
+                        id: 1,
+                        title: 'Nakra Residence',
+                        category: 'Residential',
+                        description: 'Modern sanctuary blending minimalist aesthetics with warm, natural materials.',
+                        location: 'India',
+                        year: '2024',
+                        image: '../assets/projects/nakra-1.jpg',
+                        featured: true
+                    },
+                    {
+                        id: 2,
+                        title: 'Project Shree',
+                        category: 'Residential',
+                        description: 'Contemporary luxury residence featuring open floor plans.',
+                        location: 'India',
+                        year: '2024',
+                        image: '../assets/projects/shree-1.jpg',
+                        featured: true
+                    }
+                ];
+
+                resultDiv.innerHTML = `
+                    <div class="success">
+                        <h4>✅ Work Projects Loaded</h4>
+                        <p><strong>Projects Count:</strong> ${workProjects.length}</p>
+                        <pre>${JSON.stringify(workProjects, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Work Projects Error: ${error.message}</div>`;
+            }
+        }
+
+        async function testAdminPanel() {
+            const resultDiv = document.getElementById('admin-result');
+            resultDiv.innerHTML = '<p>Testing admin panel class...</p>';
+
+            try {
+                if (window.AdminPanel) {
+                    // Test creating admin panel instance
+                    const adminPanel = new window.AdminPanel();
+                    
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h4>✅ Admin Panel Class Available</h4>
+                            <p><strong>Current Section:</strong> ${adminPanel.currentSection}</p>
+                            <p><strong>Database Initialized:</strong> ${adminPanel.db ? 'Yes' : 'No'}</p>
+                            <p><strong>Work Projects:</strong> ${adminPanel.workProjects ? adminPanel.workProjects.length : 0}</p>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ AdminPanel class not available</div>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Admin Panel Error: ${error.message}</div>`;
+            }
+        }
+
+        // Auto-run tests when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                testDatabase();
+                testWorkProjects();
+                testAdminPanel();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

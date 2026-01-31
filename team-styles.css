@@ -1,0 +1,451 @@
+.team-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+.team-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: clamp(1em, 3vw, 2em);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.team-header .site-logo {
+  position: relative;
+  top: auto;
+  left: auto;
+}
+
+.team-header .nav {
+  position: relative;
+  right: auto;
+  width: auto;
+  padding: 0;
+}
+
+.team-hero {
+  padding: clamp(8em, 15vh, 12em) clamp(1em, 3vw, 2em) clamp(3em, 8vh, 6em) clamp(1em, 3vw, 2em);
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.team-hero .hero-text h2 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5em;
+  color: #000;
+}
+
+.team-hero .hero-text p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.team-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(2em, 5vw, 4em) clamp(1em, 3vw, 2em);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+  gap: clamp(2em, 5vw, 4em) clamp(1.5em, 4vw, 3em);
+}
+
+.team-member {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.member-image {
+  width: 100%;
+  height: clamp(300px, 40vw, 400px);
+  overflow: hidden;
+  position: relative;
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  filter: saturate(0.8);
+}
+
+.team-member:hover .member-image img {
+  transform: scale(1.05);
+  filter: saturate(1);
+}
+
+.member-info {
+  padding: clamp(1.5em, 3vw, 2em);
+}
+
+.member-info h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  color: #000;
+}
+
+.member-role {
+  font-family: "Apercu Mono Pro", "Courier New", monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #999;
+  margin-bottom: 1em;
+  font-weight: 600;
+}
+
+.member-bio {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 1.5em;
+}
+
+.member-expertise {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.member-expertise span {
+  background: #f0f0f0;
+  color: #333;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.team-member:hover .member-expertise span {
+  background: #000;
+  color: #fff;
+}
+
+.values-section {
+  background: #f8f8f8;
+  padding: clamp(3em, 8vw, 6em) clamp(1em, 3vw, 2em);
+  margin-top: clamp(3em, 8vw, 6em);
+}
+
+.values-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto clamp(3em, 6vw, 4em) auto;
+}
+
+.values-header h2 {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  color: #000;
+}
+
+.values-header p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: #666;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: clamp(2em, 5vw, 3em);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.value-card {
+  background: #fff;
+  padding: clamp(1.5em, 4vw, 2em);
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #000, #666);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.value-card:hover::before {
+  transform: scaleX(1);
+}
+
+.value-card h4 {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  margin-bottom: 1em;
+  color: #000;
+}
+
+.value-card p {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.6;
+  color: #666;
+}
+
+.team-footer {
+  background-color: #000;
+  color: #fff;
+  padding: clamp(3em, 6vw, 4em) clamp(1em, 3vw, 2em);
+}
+
+.team-footer .footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  gap: clamp(2em, 5vw, 4em);
+  flex-wrap: wrap;
+}
+
+.team-footer .footer-col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.team-footer .footer-label {
+  font-family: "Apercu Mono Pro", "Courier New", monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1em;
+  color: #fff;
+  font-weight: 600;
+}
+
+.team-footer .footer-col p {
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.team-footer .footer-col h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  margin-bottom: 1em;
+  color: #fff;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  padding: 1em 2em;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-top: 1em;
+}
+
+.cta-button:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+/* Mobile Navigation for Team Page */
+.team-mobile-nav-toggle {
+  display: none;
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 1001;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 8px;
+  padding: 0.8em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.team-mobile-nav-toggle:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.team-mobile-nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #000;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+.team-mobile-nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.team-mobile-nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.team-mobile-nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.team-mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  padding: 6em 2em 2em 2em;
+}
+
+.team-mobile-nav-overlay.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.team-mobile-nav-overlay .nav-item p {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.team-mobile-nav-overlay .nav-item a {
+  color: #000;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.team-mobile-nav-overlay .nav-item a:hover {
+  opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3em 2em;
+  }
+  
+  .values-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .team-mobile-nav-toggle {
+    display: block;
+  }
+  
+  .team-header .nav {
+    display: none;
+  }
+  
+  .team-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    padding: 1.5em;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5em;
+    padding: 2em 1.5em;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+
+  .team-footer .footer-content {
+    flex-direction: column;
+    gap: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-header {
+    padding: 1em;
+  }
+  
+  .team-hero {
+    padding: 6em 1em 2em 1em;
+  }
+  
+  .team-grid {
+    padding: 1.5em 1em;
+    gap: 2em;
+  }
+  
+  .member-info {
+    padding: 1.5em;
+  }
+  
+  .values-section {
+    padding: 2em 1em;
+  }
+  
+  .team-footer {
+    padding: 2em 1em;
+  }
+}
+
+@media (max-width: 320px) {
+  .team-hero .hero-text h2 {
+    font-size: 2rem;
+  }
+  
+  .member-info h3 {
+    font-size: 1.3rem;
+  }
+  
+  .values-header h2 {
+    font-size: 1.8rem;
+  }
+}

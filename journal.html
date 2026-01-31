@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal - Kala Design Co</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Specific Newspaper Styles (Ported from About/Services Page) */
+    :root {
+      --paper-bg: #f4f1ea;
+      --ink: #1a1a1a;
+    }
+
+    body {
+      background-color: var(--paper-bg);
+      color: var(--ink);
+    }
+
+    /* Hide standard elements */
+    .site-nav,
+    .site-footer,
+    .mobile-header,
+    .mobile-nav-toggle {
+      display: none !important;
+    }
+
+    .paper-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 3rem 4rem;
+      border-left: 1px solid rgba(0, 0, 0, 0.05);
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+      min-height: 100vh;
+      background: #fffdf7;
+      box-shadow: 0 10px 60px rgba(0, 0, 0, 0.1);
+      position: relative;
+      transform-origin: top center;
+      opacity: 0;
+      transform: translateY(50px) scale(0.98);
+    }
+
+    /* Masthead */
+    .masthead {
+      text-align: center;
+      border-bottom: 4px double var(--ink);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .top-folks {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-align: right;
+      display: flex;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 0.5rem;
+      z-index: 100;
+    }
+
+    .top-folks a {
+      text-decoration: none;
+      color: var(--ink);
+      position: relative;
+      transition: all 0.3s ease;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .top-folks a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--ink);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .top-folks a:hover {
+      background: rgba(26, 26, 26, 0.05);
+    }
+
+    .top-folks a:hover::after {
+      width: 80%;
+    }
+
+    /* Current page highlighting */
+    .top-folks a.current-page {
+      background: var(--ink);
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .top-folks a.current-page::after {
+      display: none;
+    }
+
+    .top-folks a.current-page:hover {
+      background: var(--ink);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(26, 26, 26, 0.2);
+    }
+
+    .masthead-meta {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      border-top: 2px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 0.5rem 0;
+      margin-top: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .masthead h1 {
+      font-family: "Playfair Display", Times, serif;
+      font-size: clamp(4rem, 12vw, 9rem);
+      line-height: 0.85;
+      text-transform: uppercase;
+      margin: 2.5rem 0 1.5rem 0;
+      letter-spacing: -0.03em;
+    }
+
+    /* Headline */
+    .headline-section {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      padding: 0 1rem;
+    }
+
+    .main-headline {
+      font-family: "Playfair Display", Times, serif;
+      font-style: italic;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sub-headline {
+      font-family: var(--font-mono);
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 1rem;
+      display: inline-block;
+    }
+
+    /* Layout Grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      border-top: 1px solid var(--ink);
+      padding-top: 2rem;
+    }
+
+    .main-col {
+      padding-right: 2rem;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .side-col {
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* Featured Article Styling */
+    .featured-article {
+      margin-bottom: 4rem;
+    }
+
+    .article-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-header h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+    }
+
+    .article-meta {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .article-img-container {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--ink);
+      padding: 6px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .article-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.1);
+      transition: filter 0.5s;
+    }
+
+    .article-img-container:hover img {
+      filter: grayscale(0%) contrast(1);
+    }
+
+    .article-excerpt {
+      font-family: "Georgia", serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+
+    .read-more {
+      font-family: var(--font-mono);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: all 0.3s;
+    }
+
+    .read-more:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    /* Sidebar Elements */
+    .sidebar-box {
+      border: 2px solid var(--ink);
+      padding: 1.5rem;
+      background: #fff;
+    }
+
+    .sidebar-box.no-border {
+      border: none;
+      padding: 0;
+      background: transparent;
+    }
+
+    .sidebar-box.classifieds {
+      background: #fcfcfc;
+      border: 1px dashed var(--ink);
+    }
+
+    .sidebar-title {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-weight: bold;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* Recent/Compact Article List */
+    .compact-article {
+      margin-bottom: 2rem;
+      border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+      padding-bottom: 1.5rem;
+    }
+
+    .compact-article:last-child {
+      border-bottom: none;
+    }
+
+    .compact-article h4 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    .compact-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .compact-excerpt {
+      font-family: "Georgia", serif;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    /* Classifieds */
+    .classified-item {
+      margin-bottom: 1rem;
+    }
+
+    .classified-title {
+      font-weight: bold;
+      font-family: "Georgia", serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .classified-detail {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #555;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      border: 1px solid var(--ink);
+      padding: 0.3rem 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.2s;
+    }
+
+    .tag:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .paper-container {
+        padding: 1.5rem;
+        margin: 0;
+        border: none;
+        box-shadow: none;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .main-col {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid var(--ink);
+        padding-bottom: 2rem;
+      }
+
+      .top-folks {
+        position: static;
+        justify-content: center;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .top-folks a {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .masthead h1 {
+        font-size: clamp(3rem, 12vw, 6rem);
+      }
+
+      .main-headline {
+        font-size: clamp(1.8rem, 5vw, 3rem);
+      }
+    }
+  </style>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="paper-container">
+    <!-- Masthead -->
+    <header class="masthead">
+      <div class="top-folks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="work.html">Work</a>
+        <a href="journal.html" class="current-page">Journal</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="masthead-meta">
+        <span>RAJISTHAN, INDIA</span>
+      </div>
+
+      <h1>The Design Journal</h1>
+
+      <div class="masthead-meta"
+        style="margin-bottom: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);">
+        <span>Thoughts</span>
+        <span>Insights</span>
+        <span>Culture</span>
+        <span>Process</span>
+      </div>
+    </header>
+
+    <!-- Main Headline -->
+    <div class="headline-section">
+      <h2 class="main-headline">Exploring the Intersection of Architecture, Life, and Sustainable Future.</h2>
+      <span class="sub-headline">Curated stories from the studio and beyond.</span>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="news-grid">
+      <!-- Main Column (Articles) -->
+      <div class="main-col">
+
+        <!-- Featured Article 1 -->
+        <article class="featured-article">
+          <div class="article-header">
+            <div class="article-meta">
+              <span>Jan 15, 2025</span>
+              <span>•</span>
+              <span>Sustainability</span>
+            </div>
+            <h3>The Future of Sustainable Interior Design</h3>
+          </div>
+
+          <div class="article-img-container">
+            <img src="./assets/projects/nakra-2.jpg" alt="Sustainable Design">
+          </div>
+
+          <div class="article-excerpt">
+            <p><span class="drop-cap">S</span>ustainable design is no longer a choice; it is an imperative. In this
+              in-depth exploration, we discuss how locally sourced materials, passive cooling techniques, and mindful
+              consumption are reshaping the way we build our homes. We believe that true luxury lies in longevity and
+              respect for our environment.</p>
+          </div>
+
+          <a href="#" class="read-more">Continue Reading →</a>
+        </article>
+
+        <!-- Featured Article 2 -->
+        <article class="featured-article" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 3rem;">
+          <div class="article-header">
+            <div class="article-meta">
+              <span>Jan 10, 2025</span>
+              <span>•</span>
+              <span>Philosophy</span>
+            </div>
+            <h3>Embracing Minimalism in a Chaotic World</h3>
+          </div>
+
+          <div class="article-img-container">
+            <img src="./assets/projects/shree-2.jpg" alt="Minimalist Interior">
+          </div>
+
+          <div class="article-excerpt">
+            <p>Minimalism is often misunderstood as improved emptiness. At Kala Design Co, we see it as the intentional
+              promotion of the things we most value and the removal of everything that distracts us from them. It is a
+              tool to rid yourself of life's excess in favor of focusing on what's important.</p>
+          </div>
+
+          <a href="#" class="read-more">Continue Reading →</a>
+        </article>
+
+      </div>
+
+      <!-- Side Column (Archive & Categories) -->
+      <div class="side-col">
+
+        <!-- Editor's Pick -->
+        <div class="sidebar-box no-border">
+          <div class="sidebar-title">Editor's Pick</div>
+
+          <div class="compact-article">
+            <h4>The Psychology of Color</h4>
+            <div class="compact-meta">Jan 05, 2025 • Theory</div>
+            <p class="compact-excerpt">How hues influence mood and behavior in residential spaces.</p>
+            <a href="#" class="read-more" style="font-size: 0.7rem;">Read →</a>
+          </div>
+
+          <div class="compact-article">
+            <h4>Materiality & Touch</h4>
+            <div class="compact-meta">Dec 20, 2024 • Materials</div>
+            <p class="compact-excerpt">Why texture matters more than ever in the digital age.</p>
+            <a href="#" class="read-more" style="font-size: 0.7rem;">Read →</a>
+          </div>
+        </div>
+
+        <!-- Topics -->
+        <div class="sidebar-box">
+          <div class="sidebar-title">Topics</div>
+          <div class="tags">
+            <a href="#" class="tag">Interiors</a>
+            <a href="#" class="tag">Architecture</a>
+            <a href="#" class="tag">Sustainability</a>
+            <a href="#" class="tag">Art</a>
+            <a href="#" class="tag">Culture</a>
+            <a href="#" class="tag">Studio Life</a>
+          </div>
+        </div>
+
+        <!-- Newsletter / Classifieds -->
+        <div class="sidebar-box classifieds" style="margin-top:auto;">
+          <div class="sidebar-title">Newsletter</div>
+
+          <div class="classified-item">
+            <div class="classified-title">The Daily Kala</div>
+            <div class="classified-detail">Join 5,000+ readers receiving our monthly digest on design and culture.</div>
+          </div>
+
+          <form style="margin-top: 1rem;">
+            <input type="email" placeholder="Your Email"
+              style="width: 100%; border: none; border-bottom: 1px solid var(--ink); background: transparent; padding: 0.5rem 0; font-family: 'Georgia', serif; font-size: 0.9rem; margin-bottom: 0.5rem;">
+            <button type="submit"
+              style="background: var(--ink); color: #fff; border: none; padding: 0.5rem 1rem; font-family: var(--font-mono); text-transform: uppercase; font-size: 0.7rem; cursor: pointer;">Subscribe</button>
+          </form>
+
+          <div
+            style="text-align: center; margin-top: 2rem; font-size: 0.7rem; font-family: var(--font-mono); opacity: 0.6;">
+            &copy; 2024 Kala Design Co.<br>All Rights Reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animation Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      gsap.registerPlugin(ScrollTrigger);
+      const tl = gsap.timeline();
+
+      // Reveal Paper
+      tl.to(".paper-container", {
+        duration: 1.5,
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        ease: "power3.out"
+      })
+        // Reveal Masthead Text
+        .from(".masthead h1, .masthead-meta, .top-folks", {
+          duration: 1,
+          y: 20,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=1")
+        // Reveal Headline
+        .from(".main-headline, .sub-headline", {
+          duration: 1,
+          y: 30,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.5")
+        // Reveal Articles & Sidebar
+        .from(".featured-article, .side-col > div", {
+          duration: 0.8,
+          y: 20,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "power2.out"
+        }, "-=0.5");
+
+      // Scroll Trigger for images
+      const articleImages = document.querySelectorAll(".article-img-container img");
+      articleImages.forEach(img => {
+        gsap.from(img, {
+          scrollTrigger: {
+            trigger: img,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          },
+          scale: 1.1,
+          filter: "grayscale(100%)",
+          duration: 1.5,
+          ease: "power2.out"
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

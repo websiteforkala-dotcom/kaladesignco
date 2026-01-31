@@ -1,0 +1,125 @@
+/* Savoirfaire Footer Styles (Scoped) */
+
+.savoirfaire-footer {
+    position: relative;
+    width: 100%;
+    /* Replicate the full screen feel but as a footer section */
+    min-height: 100vh;
+    background: #000;
+    color: #fff;
+    font-family: "PP Neue Montreal", sans-serif;
+    overflow: hidden;
+    /* Ensure contained elements don't spill out */
+    z-index: 10;
+}
+
+.savoirfaire-footer .wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* Fill the footer container */
+    z-index: 1;
+}
+
+.savoirfaire-footer nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    padding: 2em;
+    z-index: 2;
+}
+
+.savoirfaire-footer .nav-item:nth-child(1) {
+    flex: 3;
+}
+
+.savoirfaire-footer .nav-item:nth-child(2) {
+    flex: 2;
+    display: flex;
+}
+
+.savoirfaire-footer .nav-item:nth-child(2) p {
+    flex: 1;
+}
+
+.savoirfaire-footer p {
+    font-weight: 500;
+    color: #fff;
+    opacity: 0.5;
+    letter-spacing: 0;
+    margin: 0;
+    /* Reset */
+    line-height: 1.4;
+}
+
+.savoirfaire-footer .header {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.savoirfaire-footer .header h1 {
+    text-transform: uppercase;
+    font-family: "PP Editorial Old", serif;
+    /* Ensure serif fallback or font load */
+    font-size: 14vw;
+    font-weight: 300;
+    color: #fff;
+    text-align: center;
+    line-height: 100%;
+    margin: 0;
+}
+
+.savoirfaire-footer video,
+.savoirfaire-footer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* Fix inline spacing */
+}
+
+/* Floating containers - scoped to footer */
+.savoirfaire-footer .items-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Let clicks pass through if needed, but JS handles logic */
+    z-index: 10;
+}
+
+.savoirfaire-footer .video-container,
+.savoirfaire-footer .img-container {
+    position: absolute;
+    width: 700px;
+    height: 500px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.savoirfaire-footer .cursor {
+    position: fixed;
+    /* Keep fixed relative to viewport for custom cursor feel? Or absolute to footer? */
+    /* If fixed, it shows always. If absolute, it stays in footer. */
+    /* Let's try absolute within footer so it's only "active" there, or use JS to hide/show */
+    pointer-events: none;
+    width: 150px;
+    height: 150px;
+    background: #fff;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    z-index: 20;
+    mix-blend-mode: difference;
+    /* Often looks cool, optional */
+    opacity: 0;
+    /* Hidden by default, shown via JS when entering footer */
+}

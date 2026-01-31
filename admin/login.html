@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Kala Design Co</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .login-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .login-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .demo-credentials {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .demo-credentials h4 {
+            color: #0369a1;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-credentials p {
+            color: #0c4a6e;
+            margin-bottom: 0.25rem;
+        }
+
+        .back-to-site {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .back-to-site a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-to-site a:hover {
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Admin Panel</h1>
+            <p>Kala Design Co</p>
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            Invalid username or password. Please try again.
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                Sign In
+            </button>
+        </form>
+
+        <div class="demo-credentials">
+            <h4>Demo Credentials</h4>
+            <p><strong>Username:</strong> admin</p>
+            <p><strong>Password:</strong> kala2024</p>
+        </div>
+
+        <div class="back-to-site">
+            <a href="../index.html">← Back to Website</a>
+        </div>
+    </div>
+
+    <script>
+        class AdminLogin {
+            constructor() {
+                this.form = document.getElementById('loginForm');
+                this.errorMessage = document.getElementById('errorMessage');
+                this.loginBtn = document.getElementById('loginBtn');
+                this.init();
+            }
+
+            init() {
+                this.form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.handleLogin();
+                });
+
+                // Check if already logged in
+                if (this.isLoggedIn()) {
+                    window.location.href = 'index.html';
+                }
+            }
+
+            handleLogin() {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                // Show loading state
+                this.loginBtn.textContent = 'Signing In...';
+                this.loginBtn.disabled = true;
+                this.hideError();
+
+                // Simulate API call delay
+                setTimeout(() => {
+                    if (this.validateCredentials(username, password)) {
+                        this.setLoggedIn();
+                        window.location.href = 'index.html';
+                    } else {
+                        this.showError();
+                        this.loginBtn.textContent = 'Sign In';
+                        this.loginBtn.disabled = false;
+                    }
+                }, 1000);
+            }
+
+            validateCredentials(username, password) {
+                // In a real application, this would be handled server-side
+                const validCredentials = [
+                    { username: 'admin', password: 'kala2024' },
+                    { username: 'kala', password: 'design2024' },
+                    { username: 'demo', password: 'demo123' }
+                ];
+
+                return validCredentials.some(cred => 
+                    cred.username === username && cred.password === password
+                );
+            }
+
+            setLoggedIn() {
+                localStorage.setItem('kala_admin_logged_in', 'true');
+                localStorage.setItem('kala_admin_login_time', Date.now().toString());
+            }
+
+            isLoggedIn() {
+                const loggedIn = localStorage.getItem('kala_admin_logged_in');
+                const loginTime = localStorage.getItem('kala_admin_login_time');
+                
+                if (!loggedIn || !loginTime) {
+                    return false;
+                }
+
+                // Check if login is still valid (24 hours)
+                const twentyFourHours = 24 * 60 * 60 * 1000;
+                const now = Date.now();
+                const loginTimestamp = parseInt(loginTime);
+
+                if (now - loginTimestamp > twentyFourHours) {
+                    this.logout();
+                    return false;
+                }
+
+                return true;
+            }
+
+            logout() {
+                localStorage.removeItem('kala_admin_logged_in');
+                localStorage.removeItem('kala_admin_login_time');
+            }
+
+            showError() {
+                this.errorMessage.style.display = 'block';
+            }
+
+            hideError() {
+                this.errorMessage.style.display = 'none';
+            }
+        }
+
+        // Initialize login system
+        new AdminLogin();
+    </script>
+</body>
+</html>

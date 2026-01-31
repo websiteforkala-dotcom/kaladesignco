@@ -1,0 +1,396 @@
+.contact-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+.contact-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: clamp(1em, 3vw, 2em);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.contact-header .site-logo {
+  position: relative;
+  top: auto;
+  left: auto;
+}
+
+.contact-header .nav {
+  position: relative;
+  right: auto;
+  width: auto;
+  padding: 0;
+}
+
+.contact-hero {
+  padding: clamp(8em, 15vh, 12em) clamp(1em, 3vw, 2em) clamp(3em, 8vh, 6em) clamp(1em, 3vw, 2em);
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-hero .hero-text h2 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5em;
+  color: #000;
+}
+
+.contact-hero .hero-text p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(2em, 5vw, 4em) clamp(1em, 3vw, 2em);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3em, 8vw, 6em);
+}
+
+.contact-form-section {
+  background: #f8f8f8;
+  padding: clamp(2em, 4vw, 3em);
+  border-radius: 12px;
+}
+
+.contact-form-section h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  margin-bottom: 1em;
+  color: #000;
+}
+
+.contact-form-section p {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 2em;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+.form-group label {
+  font-size: clamp(0.85rem, 1.8vw, 0.9rem);
+  font-weight: 500;
+  color: #333;
+  font-family: "Apercu Mono Pro", "Courier New", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 1em 1.2em;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-family: inherit;
+  background: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-button {
+  background: #000;
+  color: #fff;
+  padding: 1.2em 2em;
+  border: none;
+  border-radius: 8px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1em;
+}
+
+.submit-button:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+.contact-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.contact-info-card {
+  background: #fff;
+  padding: clamp(1.5em, 3vw, 2em);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info-card h4 {
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  font-weight: 500;
+  margin-bottom: 1em;
+  color: #000;
+}
+
+.contact-info-card p {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 0.5em;
+}
+
+.contact-info-card a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.contact-info-card a:hover {
+  opacity: 0.6;
+}
+
+.office-hours {
+  background: #000;
+  color: #fff;
+  padding: clamp(1.5em, 3vw, 2em);
+  border-radius: 12px;
+  margin-top: 1em;
+}
+
+.office-hours h4 {
+  color: #fff;
+  margin-bottom: 1em;
+}
+
+.office-hours p {
+  color: #ccc;
+}
+
+.map-section {
+  grid-column: 1 / -1;
+  margin-top: clamp(2em, 5vw, 4em);
+  background: #f8f8f8;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.map-placeholder {
+  text-align: center;
+  color: #666;
+}
+
+.map-placeholder h4 {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  margin-bottom: 0.5em;
+  color: #333;
+}
+
+/* Mobile Navigation for Contact Page */
+.contact-mobile-nav-toggle {
+  display: none;
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 1001;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 8px;
+  padding: 0.8em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-mobile-nav-toggle:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.contact-mobile-nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #000;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+.contact-mobile-nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.contact-mobile-nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.contact-mobile-nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.contact-mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  padding: 6em 2em 2em 2em;
+}
+
+.contact-mobile-nav-overlay.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.contact-mobile-nav-overlay .nav-item p {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.contact-mobile-nav-overlay .nav-item a {
+  color: #000;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.contact-mobile-nav-overlay .nav-item a:hover {
+  opacity: 0.6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .contact-content {
+    gap: 3em;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-mobile-nav-toggle {
+    display: block;
+  }
+  
+  .contact-header .nav {
+    display: none;
+  }
+  
+  .contact-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    padding: 1.5em;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 2em;
+    padding: 2em 1.5em;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-header {
+    padding: 1em;
+  }
+  
+  .contact-hero {
+    padding: 6em 1em 2em 1em;
+  }
+  
+  .contact-content {
+    padding: 1.5em 1em;
+    gap: 1.5em;
+  }
+  
+  .contact-form-section {
+    padding: 1.5em;
+  }
+  
+  .contact-info-card {
+    padding: 1.5em;
+  }
+  
+  .map-section {
+    height: 300px;
+    margin-top: 2em;
+  }
+}
+
+@media (max-width: 320px) {
+  .contact-hero .hero-text h2 {
+    font-size: 2rem;
+  }
+  
+  .contact-form-section h3 {
+    font-size: 1.3rem;
+  }
+  
+  .contact-info-card h4 {
+    font-size: 1.1rem;
+  }
+}

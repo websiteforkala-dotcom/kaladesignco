@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel Functionality Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 3px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        .info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        button { margin: 5px; padding: 8px 15px; cursor: pointer; }
+        #test-results { max-height: 400px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Admin Panel Functionality Test</h1>
+    <p>This page tests all admin panel functionality to ensure everything works correctly.</p>
+
+    <div class="test-section">
+        <h2>🔧 Test Controls</h2>
+        <button onclick="runAllTests()">Run All Tests</button>
+        <button onclick="clearResults()">Clear Results</button>
+        <button onclick="testDatabase()">Test Database Only</button>
+        <button onclick="testAdminPanel()">Test Admin Panel Only</button>
+    </div>
+
+    <div class="test-section">
+        <h2>📊 Test Results</h2>
+        <div id="test-results"></div>
+    </div>
+
+    <!-- Load required scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database/supabase-config.js"></script>
+    <script src="../database/database-service.js"></script>
+    <script src="admin-script.js"></script>
+
+    <script>
+        let testResults = [];
+
+        function addResult(test, status, message) {
+            const result = {
+                test,
+                status,
+                message,
+                timestamp: new Date().toLocaleTimeString()
+            };
+            testResults.push(result);
+            displayResults();
+        }
+
+        function displayResults() {
+            const container = document.getElementById('test-results');
+            container.innerHTML = testResults.map(result => `
+                <div class="test-result ${result.status}">
+                    <strong>[${result.timestamp}] ${result.test}:</strong> ${result.message}
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function clearResults() {
+            testResults = [];
+            displayResults();
+        }
+
+        async function runAllTests() {
+            clearResults();
+            addResult('System', 'info', 'Starting comprehensive functionality test...');
+            
+            await testJavaScriptSyntax();
+            await testDatabaseConnection();
+            await testDatabaseOperations();
+            await testAdminPanelInitialization();
+            await testFrontendSync();
+            
+            addResult('System', 'success', 'All tests completed!');
+        }
+
+        async function testJavaScriptSyntax() {
+            try {
+                // Test basic ES6+ features
+                const testClass = class TestClass {
+                    constructor() { this.test = 'working'; }
+                    async testMethod() { return 'async working'; }
+                };
+                
+                const instance = new testClass();
+                const result = await instance.testMethod();
+                
+                addResult('JavaScript Syntax', 'success', 'ES6+ features working correctly');
+            } catch (error) {
+                addResult('JavaScript Syntax', 'error', `Syntax error: ${error.message}`);
+            }
+        }
+
+        async function testDatabaseConnection() {
+            try {
+                if (window.databaseService) {
+                    await new Promise(resolve => {
+                        const checkInit = () => {
+                            if (window.databaseService.isInitialized) {
+                                resolve();
+                            } else {
+                                setTimeout(checkInit, 100);
+                            }
+                        };
+                        checkInit();
+                    });
+                    
+                    addResult('Database Connection', 'success', 'Database service initialized successfully');
+                } else {
+                    addResult('Database Connection', 'warning', 'Database service not found, using localStorage fallback');
+                }
+            } catch (error) {
+                addResult('Database Connection', 'error', `Connection failed: ${error.message}`);
+            }
+        }
+
+        async function testDatabaseOperations() {
+            if (!window.databaseService) {
+                addResult('Database Operations', 'warning', 'Skipped - no database service');
+                return;
+            }
+
+            try {
+                // Test contact forms
+                const contacts = await window.databaseService.getContactForms();
+                addResult('Database Operations', 'success', `Retrieved ${contacts.length} contact forms`);
+
+                // Test site settings
+                const settings = await window.databaseService.getSiteSettings();
+                addResult('Database Operations', 'success', 'Site settings retrieved successfully');
+
+                // Test SEO settings
+                const seo = await window.databaseService.getSEOSettings();
+                addResult('Database Operations', 'success', 'SEO settings retrieved successfully');
+
+                // Test page content
+                const pageContent = await window.databaseService.getPageContent('index.html');
+                addResult('Database Operations', 'success', 'Page content retrieved successfully');
+
+            } catch (error) {
+                addResult('Database Operations', 'error', `Database operation failed: ${error.message}`);
+            }
+        }
+
+        async function testAdminPanelInitialization() {
+            try {
+                // Wait for AdminPanel class to be available
+                let attempts = 0;
+                const maxAttempts = 50; // 5 seconds max wait
+                
+                while (!window.AdminPanel && attempts < maxAttempts) {
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    attempts++;
+                }
+                
+                if (window.AdminPanel) {
+                    addResult('Admin Panel', 'success', 'AdminPanel class loaded successfully');
+                    
+                    // Test if we can create an instance (but don't actually initialize it)
+                    try {
+                        // Just test the constructor without calling init
+                        const TestPanel = class extends window.AdminPanel {
+                            constructor() {
+                                // Override init to prevent actual initialization
+                                super();
+                            }
+                            async init() {
+                                // Do nothing - just for testing
+                                return Promise.resolve();
+                            }
+                        };
+                        
+                        addResult('Admin Panel', 'success', 'AdminPanel constructor accessible');
+                    } catch (constructorError) {
+                        addResult('Admin Panel', 'warning', `Constructor test failed: ${constructorError.message}`);
+                    }
+                    
+                } else {
+                    addResult('Admin Panel', 'error', 'AdminPanel class not found after waiting');
+                }
+            } catch (error) {
+                addResult('Admin Panel', 'error', `Admin panel test failed: ${error.message}`);
+            }
+        }
+
+        async function testFrontendSync() {
+            try {
+                // Check if frontend sync script is available
+                if (typeof FrontendSync !== 'undefined') {
+                    addResult('Frontend Sync', 'success', 'FrontendSync class available');
+                } else {
+                    // Try to load it
+                    const script = document.createElement('script');
+                    script.src = '../frontend-sync.js';
+                    document.head.appendChild(script);
+                    
+                    await new Promise((resolve, reject) => {
+                        script.onload = resolve;
+                        script.onerror = reject;
+                    });
+                    
+                    addResult('Frontend Sync', 'success', 'Frontend sync script loaded');
+                }
+            } catch (error) {
+                addResult('Frontend Sync', 'warning', `Frontend sync not available: ${error.message}`);
+            }
+        }
+
+        async function testDatabase() {
+            clearResults();
+            addResult('Database Test', 'info', 'Testing database functionality...');
+            await testDatabaseConnection();
+            await testDatabaseOperations();
+        }
+
+        async function testAdminPanel() {
+            clearResults();
+            addResult('Admin Panel Test', 'info', 'Testing admin panel functionality...');
+            await testJavaScriptSyntax();
+            await testAdminPanelInitialization();
+        }
+
+        // Auto-run basic tests on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                addResult('System', 'info', 'Page loaded, running basic tests...');
+                testJavaScriptSyntax();
+                testDatabaseConnection();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

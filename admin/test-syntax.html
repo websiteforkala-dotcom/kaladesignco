@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syntax Test</title>
+</head>
+<body>
+    <h1>JavaScript Syntax Test</h1>
+    <div id="result"></div>
+
+    <script>
+        console.log('Testing JavaScript syntax...');
+        
+        // Test basic class syntax
+        try {
+            class TestClass {
+                constructor() {
+                    this.test = 'working';
+                }
+                
+                async testMethod() {
+                    return 'async working';
+                }
+            }
+            
+            const instance = new TestClass();
+            console.log('✅ Class syntax working:', instance.test);
+            
+            instance.testMethod().then(result => {
+                console.log('✅ Async method working:', result);
+                document.getElementById('result').innerHTML = '✅ All syntax tests passed!';
+            });
+            
+        } catch (error) {
+            console.error('❌ Syntax error:', error);
+            document.getElementById('result').innerHTML = '❌ Syntax error: ' + error.message;
+        }
+    </script>
+    
+    <!-- Test loading the actual admin script -->
+    <script>
+        console.log('Loading admin script...');
+    </script>
+    <script src="admin-script.js"></script>
+    <script>
+        console.log('Admin script loaded successfully');
+    </script>
+</body>
+</html>

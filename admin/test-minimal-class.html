@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal AdminPanel Test</title>
+</head>
+<body>
+    <h1>Minimal AdminPanel Class Test</h1>
+    <div id="status">Loading...</div>
+
+    <script>
+        // Simple test script
+        console.log('Test page loaded');
+        
+        function updateStatus(message) {
+            document.getElementById('status').textContent = message;
+            console.log(message);
+        }
+
+        updateStatus('Loading AdminPanel...');
+    </script>
+
+    <!-- Load only the admin script -->
+    <script src="admin-script.js"></script>
+
+    <script>
+        // Test immediately after script load
+        if (typeof AdminPanel !== 'undefined') {
+            updateStatus('✅ SUCCESS: AdminPanel class is available!');
+            console.log('AdminPanel methods:', Object.getOwnPropertyNames(AdminPanel.prototype));
+        } else if (window.AdminPanel) {
+            updateStatus('✅ SUCCESS: AdminPanel found on window object!');
+        } else {
+            updateStatus('❌ ERROR: AdminPanel class not found');
+        }
+
+        // Test after a short delay
+        setTimeout(() => {
+            if (window.AdminPanel) {
+                updateStatus('✅ CONFIRMED: AdminPanel available after delay');
+            } else {
+                updateStatus('❌ STILL NOT FOUND: AdminPanel missing after delay');
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

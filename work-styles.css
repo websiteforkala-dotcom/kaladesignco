@@ -1,0 +1,426 @@
+.work-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+.work-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: clamp(1em, 3vw, 2em);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.work-header .site-logo {
+  position: relative;
+  top: auto;
+  left: auto;
+}
+
+.work-header .nav {
+  position: relative;
+  right: auto;
+  width: auto;
+  padding: 0;
+}
+
+.work-hero {
+  padding: clamp(8em, 15vh, 12em) clamp(1em, 3vw, 2em) clamp(3em, 8vh, 6em) clamp(1em, 3vw, 2em);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.hero-text h2 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5em;
+  color: #000;
+}
+
+.hero-text p {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: #666;
+  max-width: 600px;
+}
+
+.projects-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: clamp(2em, 5vw, 4em) clamp(1em, 3vw, 2em);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr));
+  gap: clamp(2em, 5vw, 4em) clamp(1.5em, 4vw, 3em);
+}
+
+.project-card {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+}
+
+.project-image {
+  width: 100%;
+  height: clamp(300px, 50vw, 500px);
+  overflow: hidden;
+  margin-bottom: 1.5em;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  filter: saturate(0.8);
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+  filter: saturate(1);
+}
+
+.project-info h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  margin-bottom: 0.5em;
+  color: #000;
+}
+
+.project-category {
+  font-family: "Apercu Mono Pro", "Courier New", monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #999;
+  margin-bottom: 1em;
+}
+
+.project-description {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  line-height: 1.6;
+  color: #666;
+  max-width: 400px;
+}
+
+.work-footer {
+  background-color: #f8f8f8;
+  padding: clamp(2em, 5vw, 4em) clamp(1em, 3vw, 2em);
+  margin-top: clamp(3em, 8vw, 6em);
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  gap: clamp(2em, 5vw, 4em);
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-label {
+  font-family: "Apercu Mono Pro", "Courier New", monospace;
+  font-size: clamp(0.7rem, 1.5vw, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1em;
+  color: #000;
+  font-weight: 600;
+}
+
+.footer-col p {
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Responsive Design */
+
+/* Large tablets */
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3em 2em;
+  }
+  
+  .project-image {
+    height: clamp(280px, 45vw, 450px);
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .work-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    padding: 1.5em;
+  }
+
+  .work-header .nav {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.8em;
+  }
+
+  .hero-text h2 {
+    font-size: clamp(2rem, 10vw, 4rem);
+  }
+
+  .hero-text p {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 3em;
+    padding: 3em 1.5em;
+  }
+
+  .project-image {
+    height: clamp(250px, 60vw, 400px);
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 2em;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .work-header {
+    padding: 1em;
+  }
+  
+  .work-header .site-logo {
+    gap: 0.5em;
+  }
+  
+  .work-header .site-logo h1 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+  
+  .work-header .nav {
+    gap: 0.5em;
+    flex-wrap: wrap;
+  }
+  
+  .work-header .nav .nav-item p {
+    font-size: 14px;
+  }
+  
+  .work-hero {
+    padding: 6em 1em 2em 1em;
+  }
+  
+  .hero-text h2 {
+    font-size: clamp(1.8rem, 12vw, 3rem);
+    margin-bottom: 0.8em;
+  }
+  
+  .hero-text p {
+    font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+  }
+  
+  .projects-grid {
+    padding: 2em 1em;
+    gap: 2.5em;
+  }
+  
+  .project-image {
+    height: clamp(200px, 70vw, 300px);
+  }
+  
+  .project-info h3 {
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
+  }
+  
+  .project-description {
+    font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  }
+  
+  .work-footer {
+    padding: 2em 1em;
+    margin-top: 3em;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 320px) {
+  .work-header {
+    padding: 0.8em;
+  }
+  
+  .work-header .site-logo h1 {
+    font-size: 1.3rem;
+  }
+  
+  .work-header .nav .nav-item p {
+    font-size: 12px;
+  }
+  
+  .work-hero {
+    padding: 5em 0.8em 1.5em 0.8em;
+  }
+  
+  .hero-text h2 {
+    font-size: 1.6rem;
+  }
+  
+  .hero-text p {
+    font-size: 0.85rem;
+  }
+  
+  .projects-grid {
+    padding: 1.5em 0.8em;
+    gap: 2em;
+  }
+  
+  .project-image {
+    height: 180px;
+  }
+  
+  .project-info h3 {
+    font-size: 1.2rem;
+  }
+  
+  .project-description {
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape orientation for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .work-header {
+    position: relative;
+    padding: 1em;
+  }
+  
+  .work-hero {
+    padding: 2em 1em;
+  }
+  
+  .hero-text h2 {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+    margin-bottom: 0.5em;
+  }
+  
+  .hero-text p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+  }
+  
+  .projects-grid {
+    padding: 1em;
+    gap: 2em;
+  }
+  
+  .project-image {
+    height: 200px;
+  }
+}
+/* Mobile Navigation for Work Page */
+.work-mobile-nav-toggle {
+  display: none;
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 1001;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 8px;
+  padding: 0.8em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.work-mobile-nav-toggle:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.work-mobile-nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: #000;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+.work-mobile-nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.work-mobile-nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.work-mobile-nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.work-mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  padding: 6em 2em 2em 2em;
+}
+
+.work-mobile-nav-overlay.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.work-mobile-nav-overlay .nav-item p {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.work-mobile-nav-overlay .nav-item a {
+  color: #000;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.work-mobile-nav-overlay .nav-item a:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .work-mobile-nav-toggle {
+    display: block;
+  }
+  
+  .work-header .nav {
+    display: none;
+  }
+}

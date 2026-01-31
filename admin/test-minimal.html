@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Admin Test</title>
+</head>
+<body>
+    <h1>Minimal Admin Panel Test</h1>
+    <div id="result">Loading...</div>
+    
+    <nav>
+        <a href="#dashboard" class="nav-link" data-section="dashboard">Dashboard</a>
+        <a href="#settings" class="nav-link" data-section="settings">Settings</a>
+    </nav>
+
+    <script src="admin-script-minimal.js"></script>
+    
+    <script>
+        // Additional test
+        setTimeout(() => {
+            if (window.adminPanel) {
+                document.getElementById('result').innerHTML = '✅ Minimal admin panel loaded successfully!';
+            } else {
+                document.getElementById('result').innerHTML = '❌ Failed to load admin panel';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

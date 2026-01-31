@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nakra Residence - Kala Design Co</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* Specific Newspaper Styles (Ported from About/Services/Journal Page) */
+        :root {
+            --paper-bg: #f4f1ea;
+            --ink: #1a1a1a;
+        }
+
+        body {
+            background-color: var(--paper-bg);
+            color: var(--ink);
+        }
+
+        /* Hide standard elements */
+        .site-nav,
+        .site-footer,
+        .mobile-header,
+        .mobile-nav-toggle {
+            display: none !important;
+        }
+
+        .paper-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 3rem 4rem;
+            border-left: 1px solid rgba(0, 0, 0, 0.05);
+            border-right: 1px solid rgba(0, 0, 0, 0.05);
+            min-height: 100vh;
+            background: #fffdf7;
+            box-shadow: 0 10px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transform-origin: top center;
+            opacity: 0;
+            transform: translateY(50px) scale(0.98);
+        }
+
+        /* Masthead */
+        .masthead {
+            text-align: center;
+            border-bottom: 4px double var(--ink);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .top-folks {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-align: right;
+            display: flex;
+            gap: 1.5rem;
+            border-bottom: 1px solid var(--ink);
+            padding-bottom: 0.5rem;
+            z-index: 100;
+        }
+
+        .top-folks a {
+            text-decoration: none;
+            color: var(--ink);
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        .top-folks a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--ink);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .top-folks a:hover {
+            background: rgba(26, 26, 26, 0.05);
+        }
+
+        .top-folks a:hover::after {
+            width: 80%;
+        }
+
+        /* Current page highlighting */
+        .top-folks a.current-page {
+            background: var(--ink);
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .top-folks a.current-page::after {
+            display: none;
+        }
+
+        .top-folks a.current-page:hover {
+            background: var(--ink);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(26, 26, 26, 0.2);
+        }
+
+        .masthead-meta {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            border-top: 2px solid var(--ink);
+            border-bottom: 1px solid var(--ink);
+            padding: 0.5rem 0;
+            margin-top: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .masthead h1 {
+            font-family: "Playfair Display", Times, serif;
+            font-size: clamp(4rem, 12vw, 9rem);
+            line-height: 0.85;
+            text-transform: uppercase;
+            margin: 2.5rem 0 1.5rem 0;
+            letter-spacing: -0.03em;
+        }
+
+        /* Headline */
+        .headline-section {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            padding: 0 1rem;
+        }
+
+        .main-headline {
+            font-family: "Playfair Display", Times, serif;
+            font-style: italic;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sub-headline {
+            font-family: var(--font-mono);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--ink);
+            padding-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Layout Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            border-top: 1px solid var(--ink);
+            padding-top: 2rem;
+        }
+
+        .main-col {
+            padding-right: 2rem;
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .side-col {
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Content Styling */
+        .drop-cap {
+            float: left;
+            font-size: 6.5rem;
+            line-height: 0.75;
+            margin-right: 1rem;
+            margin-top: 0.4rem;
+            font-family: "Playfair Display", Times, serif;
+            font-weight: 700;
+        }
+
+        .article-text {
+            font-family: "Georgia", serif;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 2rem;
+        }
+
+        .article-text h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 0.5rem;
+            display: block;
+            break-inside: avoid;
+        }
+
+        .article-text p {
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+        }
+
+        .project-img-container {
+            width: 100%;
+            margin: 2.5rem 0;
+            border: 1px solid var(--ink);
+            padding: 6px;
+            background: #fff;
+        }
+
+        .project-img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%) contrast(1.1);
+            transition: filter 0.5s;
+        }
+
+        .project-img-container:hover img {
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .caption {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Sidebar Elements */
+        .sidebar-box {
+            border: 2px solid var(--ink);
+            padding: 1.5rem;
+            background: #fff;
+        }
+
+        .sidebar-box.classifieds {
+            background: #fcfcfc;
+            border: 1px dashed var(--ink);
+        }
+
+        .sidebar-title {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-weight: bold;
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Project Stats */
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            border-bottom: 1px dotted rgba(0, 0, 0, 0.2);
+            padding-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .stat-value {
+            font-family: "Georgia", serif;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        /* Classifieds */
+        .classified-item {
+            margin-bottom: 1rem;
+        }
+
+        .classified-title {
+            font-weight: bold;
+            font-family: "Georgia", serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .classified-detail {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .paper-container {
+                padding: 1.5rem;
+                margin: 0;
+                border: none;
+                box-shadow: none;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .main-col {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid var(--ink);
+                padding-bottom: 2rem;
+            }
+
+            .top-folks {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .top-folks a {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .masthead h1 {
+                font-size: clamp(3rem, 12vw, 6rem);
+            }
+
+            .main-headline {
+                font-size: clamp(1.8rem, 5vw, 3rem);
+            }
+        }
+    </style>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="paper-container">
+        <!-- Masthead -->
+        <header class="masthead">
+            <div class="top-folks">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="work.html" class="current-page">Work</a>
+                <a href="journal.html">Journal</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="masthead-meta">
+                <span>RAJISTHAN, INDIA</span>
+            </div>
+
+            <h1>Project Archive</h1>
+
+            <div class="masthead-meta"
+                style="margin-bottom: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);">
+                <span>Residential</span>
+                <span>2024</span>
+                <span>New Delhi</span>
+                <span>Completed</span>
+            </div>
+        </header>
+
+        <!-- Main Headline -->
+        <div class="headline-section">
+            <h2 class="main-headline">Nakra Residence: A Sanctuary of Warmth and Modern Minimalism.</h2>
+            <span class="sub-headline">A contemporary interior design project located in the heart of New Delhi.</span>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="news-grid">
+            <!-- Main Column (Project Narrative) -->
+            <div class="main-col">
+                <div class="project-img-container">
+                    <img src="./assets/projects/nakra-1.jpg" alt="Nakra Residence Main View">
+                </div>
+                <div class="caption">
+                    <span>FIG 1. LIVING AREA OVERVIEW</span>
+                    <span>PHOTO: KALA PRESS</span>
+                </div>
+
+                <div class="article-text">
+                    <p><span class="drop-cap">T</span>he Nakra Residence stands as a testament to modern luxury living,
+                        where minimalist design meets the innate warmth of natural materials. Every element has been
+                        carefully curated to create a space that feels both sophisticated and deeply inviting. Located
+                        in the bustling urban landscape of New Delhi, this home serves as a quiet retreat for its
+                        inhabitants.</p>
+
+                    <p>Working closely with the client family, we developed a design language that reflects their
+                        appreciation for contemporary aesthetics while maintaining the comfort and functionality
+                        essential for a family home. The result is a harmonious blend of clean lines, textured surfaces,
+                        and carefully considered lighting that transforms the space throughout the day.</p>
+
+                    <div class="project-img-container">
+                        <img src="./assets/projects/nakra-2.jpg" alt="Dining Area">
+                    </div>
+                    <div class="caption">
+                        <span>FIG 2. DINING & CIRCULATION</span>
+                        <span>PHOTO: KALA PRESS</span>
+                    </div>
+
+                    <h3>Materiality & Texture</h3>
+                    <p>We chose a palette grounded in earth tones. Premium Italian marble provides a cool, sleek
+                        foundation, contrasting beautifully with the warmth of walnut wood paneling that wraps the
+                        central core of the home. Hand-tufted rugs and linen drapery add softness, absorbing sound and
+                        softening the architectural rigidity.</p>
+
+                    <div class="project-img-container">
+                        <img src="./assets/projects/nakra-3.jpg" alt="Bedroom Detail">
+                    </div>
+                    <div class="caption">
+                        <span>FIG 3. MASTER SUITE</span>
+                        <span>PHOTO: KALA PRESS</span>
+                    </div>
+
+                    <p>The lighting strategy was pivotal. Rather than relying solely on overhead downlights, we layered
+                        ambient, task, and accent lighting. Custom-fabricated brass fixtures act as jewelry for the
+                        home, adding a touch of metallic brilliance to the muted color scheme.</p>
+
+                    <div class="project-img-container">
+                        <img src="./assets/projects/nakra-4.jpg" alt="Detail Shot">
+                    </div>
+                    <div class="caption">
+                        <span>FIG 4. MATERIAL DETAILS</span>
+                        <span>PHOTO: KALA PRESS</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Side Column (Stats & Highlights) -->
+            <div class="side-col">
+
+                <!-- Project Stats -->
+                <div class="sidebar-box">
+                    <div class="sidebar-title">Project Stats</div>
+
+                    <div class="stat-row">
+                        <span class="stat-label">Client</span>
+                        <span class="stat-value">Private Family</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Year</span>
+                        <span class="stat-value">2024</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Location</span>
+                        <span class="stat-value">New Delhi, India</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Area</span>
+                        <span class="stat-value">3,500 sq ft</span>
+                    </div>
+                    <div class="stat-row" style="border-bottom: none;">
+                        <span class="stat-label">Scope</span>
+                        <span class="stat-value">Interior Design</span>
+                    </div>
+                </div>
+
+                <!-- Design Highlights -->
+                <div class="sidebar-box">
+                    <div class="sidebar-title">Highlights</div>
+
+                    <div class="classified-item">
+                        <div class="classified-title">Bespoke Furniture</div>
+                        <div class="classified-detail">Custom-designed seating manufactured by local artisans.</div>
+                    </div>
+
+                    <div class="classified-item">
+                        <div class="classified-title">Natural Materials</div>
+                        <div class="classified-detail">Use of unpolished travertine and reclaimed teak.</div>
+                    </div>
+
+                    <div class="classified-item">
+                        <div class="classified-title">Smart Integration</div>
+                        <div class="classified-detail">Fully automated climate and lighting control systems.</div>
+                    </div>
+                </div>
+
+                <!-- Next Project / Footer -->
+                <div class="sidebar-box classifieds" style="margin-top:auto;">
+                    <div class="sidebar-title">Next Project</div>
+
+                    <a href="work-detail-shree.html" style="text-decoration: none; color: inherit; display: block;">
+                        <div class="classified-item" style="cursor: pointer; transition: opacity 0.3s;">
+                            <div class="classified-title" style="font-size: 1.1rem;">Project Shree →</div>
+                            <div class="classified-detail">Minimalist Residential / Mumbai</div>
+                        </div>
+                    </a>
+
+                    <div
+                        style="text-align: center; margin-top: 2rem; font-size: 0.7rem; font-family: var(--font-mono); opacity: 0.6;">
+                        &copy; 2024 Kala Design Co.<br>All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Animation Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+            const tl = gsap.timeline();
+
+            // Reveal Paper
+            tl.to(".paper-container", {
+                duration: 1.5,
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                ease: "power3.out"
+            })
+                // Reveal Masthead Text
+                .from(".masthead h1, .masthead-meta, .top-folks", {
+                    duration: 1,
+                    y: 20,
+                    opacity: 0,
+                    stagger: 0.1,
+                    ease: "power2.out"
+                }, "-=1")
+                // Reveal Headline
+                .from(".main-headline, .sub-headline", {
+                    duration: 1,
+                    y: 30,
+                    opacity: 0,
+                    stagger: 0.1,
+                    ease: "power2.out"
+                }, "-=0.5")
+                // Reveal Article & Sidebar
+                .from(".main-col, .side-col > div", {
+                    duration: 0.8,
+                    y: 20,
+                    opacity: 0,
+                    stagger: 0.1,
+                    ease: "power2.out"
+                }, "-=0.5");
+
+            // Scroll Trigger for images
+            const projectImages = document.querySelectorAll(".project-img-container img");
+            projectImages.forEach(img => {
+                gsap.from(img, {
+                    scrollTrigger: {
+                        trigger: img,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    },
+                    scale: 1.05,
+                    filter: "grayscale(100%)",
+                    duration: 1.2,
+                    ease: "power2.out"
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

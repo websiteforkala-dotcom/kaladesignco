@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminPanel Class Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>AdminPanel Class Loading Test</h1>
+    <div id="results"></div>
+
+    <!-- Load scripts in correct order -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../database/supabase-config.js"></script>
+    <script src="../database/database-service.js"></script>
+    
+    <script>
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = `<strong>[${new Date().toLocaleTimeString()}]</strong> ${message}`;
+            document.getElementById('results').appendChild(div);
+        }
+
+        addResult('Starting AdminPanel class test...', 'info');
+        addResult('Loading admin-script.js...', 'info');
+    </script>
+
+    <!-- Load admin script -->
+    <script src="admin-script.js"></script>
+
+    <script>
+        // Test immediately after script load
+        setTimeout(() => {
+            addResult('Testing AdminPanel class availability...', 'info');
+            
+            if (typeof AdminPanel !== 'undefined') {
+                addResult('✅ AdminPanel class found in global scope', 'success');
+            } else {
+                addResult('❌ AdminPanel class not found in global scope', 'error');
+            }
+
+            if (window.AdminPanel) {
+                addResult('✅ AdminPanel class found on window object', 'success');
+                
+                // Test class properties
+                try {
+                    const proto = AdminPanel.prototype;
+                    const methods = Object.getOwnPropertyNames(proto).filter(name => name !== 'constructor');
+                    addResult(`✅ AdminPanel has ${methods.length} methods: ${methods.slice(0, 5).join(', ')}...`, 'success');
+                } catch (error) {
+                    addResult(`❌ Error inspecting AdminPanel: ${error.message}`, 'error');
+                }
+                
+            } else {
+                addResult('❌ AdminPanel class not found on window object', 'error');
+            }
+
+            // Check if admin panel instance exists
+            if (window.adminPanel) {
+                addResult('✅ AdminPanel instance found (window.adminPanel)', 'success');
+            } else {
+                addResult('ℹ️ AdminPanel instance not yet created (normal for test page)', 'info');
+            }
+
+            // Test script loading order
+            addResult('Checking script dependencies...', 'info');
+            
+            if (window.supabase) {
+                addResult('✅ Supabase library loaded', 'success');
+            } else {
+                addResult('❌ Supabase library not loaded', 'error');
+            }
+
+            if (window.supabaseConfig) {
+                addResult('✅ Supabase config loaded', 'success');
+            } else {
+                addResult('❌ Supabase config not loaded', 'error');
+            }
+
+            if (window.databaseService) {
+                addResult('✅ Database service loaded', 'success');
+            } else {
+                addResult('❌ Database service not loaded', 'error');
+            }
+
+        }, 100);
+
+        // Test after DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                addResult('DOM loaded, re-checking AdminPanel...', 'info');
+                
+                if (window.AdminPanel) {
+                    addResult('✅ AdminPanel still available after DOM load', 'success');
+                    
+                    // Try to create a test instance
+                    try {
+                        // Create a minimal test without full initialization
+                        const testInstance = Object.create(AdminPanel.prototype);
+                        addResult('✅ AdminPanel prototype accessible', 'success');
+                    } catch (error) {
+                        addResult(`❌ Error accessing AdminPanel prototype: ${error.message}`, 'error');
+                    }
+                    
+                } else {
+                    addResult('❌ AdminPanel not available after DOM load', 'error');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

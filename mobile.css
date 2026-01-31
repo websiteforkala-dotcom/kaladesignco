@@ -1,0 +1,593 @@
+/* Mobile-specific styles for mobile.html */
+
+.container {
+    min-height: 100vh;
+    height: auto;
+    /* Allow scrolling */
+    background-color: var(--bg-color);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav {
+    display: none;
+}
+
+/* 1. Sticky Mobile Header - HIGH CONTRAST */
+.mobile-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 1rem 1.5rem !important;
+    box-sizing: border-box !important;
+    z-index: 1000 !important;
+    background: #ffffff !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 2px solid #000000 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.mobile-header.scrolled {
+    background: #ffffff !important;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2) !important;
+    border-bottom: 2px solid #000000 !important;
+}
+
+/* Logo styling within header */
+.site-logo {
+    position: static;
+    /* Reset absolute */
+    transform: none;
+}
+
+.site-logo .logo-img {
+    height: 28px;
+    width: auto;
+}
+
+.site-logo h1 {
+    font-size: 1.5rem;
+    line-height: 1;
+    margin: 0;
+    color: var(--text-main);
+}
+
+/* Mobile Footer Logo */
+.footer-logo {
+    height: 40px;
+    width: auto;
+    margin-bottom: 1rem;
+    filter: invert(1) brightness(2);
+}
+
+/* Nav Toggle styling within header - TEXT MENU */
+.mobile-nav-toggle {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    width: auto !important;
+    height: auto !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 2px solid #000000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 8px 16px !important;
+    cursor: pointer !important;
+    z-index: 1001 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    color: #ffffff !important;
+}
+
+.mobile-nav-toggle::before {
+    content: 'MENU' !important;
+    display: block !important;
+    color: #ffffff !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    transition: all 0.3s ease !important;
+}
+
+.mobile-nav-toggle.active::before {
+    content: 'CLOSE' !important;
+    color: #ffffff !important;
+}
+
+.mobile-nav-toggle:hover {
+    background: #000000 !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+.mobile-nav-toggle:active {
+    transform: scale(0.95) !important;
+}
+
+/* Hide Toggle Bars - Use Text Instead */
+.mobile-nav-toggle span {
+    display: none !important;
+}
+
+/* Active State - Text Changes */
+.mobile-nav-toggle.active {
+    background: #ff0000 !important;
+    border-color: #ff0000 !important;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4) !important;
+}
+
+/* Full Screen Navigation Overlay - SITE COLOR SCHEME */
+.mobile-nav-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(17, 17, 17, 0.98) !important; /* var(--text-main) with transparency */
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 2rem !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    transform: scale(1.05) !important;
+}
+
+.mobile-nav-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(102, 102, 102, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(17, 17, 17, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(0, 0, 0, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.mobile-nav-overlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+}
+
+/* Navigation Items - SITE COLOR SCHEME */
+.mobile-nav-overlay .nav-item {
+    display: block !important;
+    clip-path: none !important;
+    transform: translateY(40px) rotateX(-10deg) !important;
+    opacity: 0 !important;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    position: relative !important;
+    visibility: visible !important;
+    z-index: 10000 !important;
+    perspective: 1000px !important;
+}
+
+.mobile-nav-overlay.active .nav-item {
+    transform: translateY(0) rotateX(0deg) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Staggered Animation Delays */
+.mobile-nav-overlay.active .nav-item:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.mobile-nav-overlay.active .nav-item:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.mobile-nav-overlay.active .nav-item:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.mobile-nav-overlay.active .nav-item:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.mobile-nav-overlay.active .nav-item:nth-child(5) {
+    transition-delay: 0.5s;
+}
+
+.mobile-nav-overlay.active .nav-item:nth-child(6) {
+    transition-delay: 0.6s;
+}
+
+/* Typography and Links - SITE COLOR SCHEME */
+.mobile-nav-overlay .nav-item p {
+    font-size: 2.5rem !important;
+    font-weight: 300 !important;
+    transform: none !important;
+    margin: 0 !important;
+    letter-spacing: -0.02em !important;
+    text-align: center !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.mobile-nav-overlay .nav-item a {
+    color: var(--white) !important; /* #ffffff */
+    text-decoration: none !important;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    position: relative !important;
+    display: inline-block !important;
+    padding: 0.75rem 2rem !important;
+    border-radius: 8px !important;
+    border: 1px solid transparent !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 10001 !important;
+}
+
+.mobile-nav-overlay .nav-item a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--bg-color) !important; /* #f4f4f4 */
+    transition: all 0.4s ease;
+    transform: translateX(-50%);
+}
+
+.mobile-nav-overlay .nav-item a:hover {
+    color: var(--text-main) !important; /* #111111 */
+    transform: translateY(-3px) !important;
+    text-shadow: none !important;
+    background: var(--bg-color) !important; /* #f4f4f4 */
+    border-color: rgba(244, 244, 244, 0.3) !important;
+}
+
+.mobile-nav-overlay .nav-item a:hover::after {
+    width: 80%;
+    background: var(--text-main) !important; /* #111111 */
+}
+
+.mobile-nav-overlay .nav-item a:active {
+    transform: translateY(-1px) !important;
+    background: rgba(244, 244, 244, 0.9) !important;
+}
+
+/* 2. Hero Visual (Top Half) */
+.mobile-hero-visual {
+    width: 100%;
+    height: 40vh;
+    position: relative;
+    margin-top: 56px;
+    padding: 0.75rem 1rem 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.mobile-hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    animation: heroReveal 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform-origin: center center;
+}
+
+@keyframes heroReveal {
+    0% {
+        clip-path: inset(100% 0 0 0);
+        transform: scale(1.1);
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        clip-path: inset(0 0 0 0);
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 3. Hero Content (Bottom Half) */
+.hero-content {
+    padding: 1.5rem 1rem 4rem 1rem;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.site-info {
+    position: static;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.site-info h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.site-info .row {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.site-info p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Responsive Enhancements for Mobile Menu - SITE COLOR SCHEME */
+@media (max-width: 480px) {
+    .mobile-nav-toggle {
+        width: 30px;
+        height: 22px;
+        padding: 3px;
+        background: rgba(17, 17, 17, 0.08) !important;
+        border: 1px solid rgba(17, 17, 17, 0.15) !important;
+    }
+    
+    .mobile-nav-toggle span {
+        height: 3px;
+        background: var(--text-main) !important;
+    }
+    
+    .mobile-nav-overlay .nav-item p {
+        font-size: 2rem;
+    }
+    
+    .mobile-nav-overlay .nav-item a {
+        padding: 0.8rem 1.5rem;
+        color: var(--white) !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .mobile-header {
+        padding: 0.8rem 1rem;
+        background: rgba(244, 244, 244, 0.98) !important;
+    }
+    
+    .mobile-nav-toggle {
+        width: 28px;
+        height: 20px;
+        background: rgba(17, 17, 17, 0.1) !important;
+    }
+    
+    .mobile-nav-toggle span {
+        height: 2.5px;
+        background: var(--text-main) !important;
+    }
+    
+    .mobile-nav-overlay .nav-item p {
+        font-size: 1.8rem;
+    }
+    
+    .mobile-nav-overlay {
+        gap: 1.5rem;
+        background: rgba(17, 17, 17, 0.98) !important;
+    }
+    
+    .mobile-nav-overlay .nav-item a {
+        color: var(--white) !important;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .mobile-nav-overlay {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        gap: 1rem 2rem;
+        padding: 2rem;
+    }
+    
+    .mobile-nav-overlay .nav-item p {
+        font-size: 1.5rem;
+    }
+    
+    .mobile-nav-overlay .nav-item {
+        flex: 0 0 auto;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .mobile-nav-toggle span {
+        background: #000000;
+    }
+    
+    .mobile-nav-overlay {
+        background: rgba(0, 0, 0, 0.95);
+    }
+    
+    .mobile-nav-overlay .nav-item a {
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .mobile-nav-toggle,
+    .mobile-nav-toggle span,
+    .mobile-nav-overlay,
+    .mobile-nav-overlay .nav-item,
+    .mobile-nav-overlay .nav-item a {
+        transition: none;
+        animation: none;
+    }
+    
+    .mobile-nav-overlay .nav-item {
+        transform: none;
+    }
+}
+
+/* 5. Site Footer (Mobile) */
+.site-footer {
+    background-color: #111;
+    color: #fff;
+    padding: 3rem 1.5rem;
+    padding-bottom: 6rem;
+    /* Space for bottom nav */
+}
+
+.site-footer .wrapper {
+    max-width: 100%;
+    padding: 0;
+}
+
+.site-footer .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.site-footer .footer-col {
+    width: 100%;
+}
+
+.site-footer .footer-col h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.site-footer .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.site-footer .footer-col li {
+    margin-bottom: 0.5rem;
+}
+
+.site-footer .footer-col a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.site-footer .footer-col a:hover {
+    opacity: 1;
+}
+
+.site-footer .footer-col p {
+    font-size: 0.9rem;
+    margin: 0 0 0.25rem 0;
+    opacity: 0.8;
+}
+
+.site-footer .footer-bottom {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.site-footer .footer-bottom p {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    margin: 0;
+}
+
+/* Hide desktop-only footer elements */
+.site-footer .footer-big-text {
+    display: none;
+}
+
+/* Menu Loading Animation */
+@keyframes menuItemSlideIn {
+    0% {
+        transform: translateY(40px) rotateX(-15deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) rotateX(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes hamburgerPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.mobile-nav-toggle:active {
+    animation: hamburgerPulse 0.3s ease;
+}
+
+/* Menu background animation */
+@keyframes overlayFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(1.1);
+        backdrop-filter: blur(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        backdrop-filter: blur(25px);
+    }
+}
+
+.mobile-nav-overlay.active {
+    animation: overlayFadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Cleanup unused scatter classes */
+.images,
+.img,
+.team-img,
+.revealers {
+    display: none !important;
+}
+

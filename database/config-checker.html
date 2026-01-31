@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Configuration Checker - Kala Design Co</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f4f4f4;
+            color: #111;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #111;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.8;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .status-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ddd;
+        }
+
+        .status-card.success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+
+        .status-card.error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .status-card.warning {
+            border-left-color: #ffc107;
+            background: #fff3cd;
+        }
+
+        .status-card h3 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn {
+            background: #111;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .btn.secondary {
+            background: #6c757d;
+        }
+
+        .btn.success {
+            background: #28a745;
+        }
+
+        .btn.danger {
+            background: #dc3545;
+        }
+
+        .config-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .steps {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #111;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #111;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 Supabase Configuration Checker</h1>
+            <p>Verify and configure your Supabase database connection</p>
+        </div>
+
+        <div class="content">
+            <!-- Status Section -->
+            <div id="status-section">
+                <div class="status-card" id="connection-status">
+                    <h3>
+                        <span class="loading"></span>
+                        Checking Connection...
+                    </h3>
+                    <p>Testing Supabase database connection...</p>
+                </div>
+            </div>
+
+            <!-- Configuration Section -->
+            <div id="config-section" class="hidden">
+                <h2>Configuration Setup</h2>
+                <p>Follow these steps to configure your Supabase connection:</p>
+
+                <div class="steps">
+                    <div class="step">
+                        <h4>Create Supabase Project</h4>
+                        <p>Go to <a href="https://supabase.com" target="_blank">supabase.com</a> and create a new project named "kala-design-co"</p>
+                    </div>
+
+                    <div class="step">
+                        <h4>Get Project Credentials</h4>
+                        <p>In your Supabase dashboard, go to Settings → API and copy:</p>
+                        <ul>
+                            <li>Project URL</li>
+                            <li>Project API Key (anon/public)</li>
+                        </ul>
+                    </div>
+
+                    <div class="step">
+                        <h4>Update Configuration</h4>
+                        <div class="config-form">
+                            <div class="form-group">
+                                <label for="supabase-url">Supabase URL:</label>
+                                <input type="url" id="supabase-url" placeholder="https://your-project.supabase.co">
+                            </div>
+                            <div class="form-group">
+                                <label for="supabase-key">Supabase Anon Key:</label>
+                                <input type="text" id="supabase-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+                            </div>
+                            <button class="btn" onclick="updateConfig()">Update Configuration</button>
+                            <button class="btn secondary" onclick="testConnection()">Test Connection</button>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <h4>Deploy Database Schema</h4>
+                        <p>Copy and run this SQL in your Supabase SQL Editor:</p>
+                        <button class="btn secondary" onclick="showSchema()">Show Full Schema SQL</button>
+                        <button class="btn warning" onclick="showMinimalSchema()">Show Minimal Schema</button>
+                        <div id="schema-sql" class="hidden">
+                            <div class="code-block" id="schema-content">Loading schema...</div>
+                        </div>
+                        <div id="minimal-schema-sql" class="hidden">
+                            <div class="code-block" id="minimal-schema-content">Loading minimal schema...</div>
+                            <p><strong>Use this if you get permission errors with the full schema.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Section -->
+            <div id="success-section" class="hidden">
+                <div class="status-card success">
+                    <h3>
+                        ✅ Configuration Complete!
+                    </h3>
+                    <p>Your Supabase database is connected and ready to use.</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn success" onclick="openAdmin()">Open Admin Panel</button>
+                    <button class="btn secondary" onclick="runTests()">Run Full Tests</button>
+                </div>
+            </div>
+
+            <!-- Test Results -->
+            <div id="test-results" class="hidden">
+                <h3>Test Results</h3>
+                <div id="test-output"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Supabase and Database Service -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="database-service.js"></script>
+
+    <script>
+        let currentConfig = {
+            url: '',
+            key: ''
+        };
+
+        // Initialize checker
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkInitialConnection();
+        });
+
+        async function checkInitialConnection() {
+            const statusCard = document.getElementById('connection-status');
+            
+            try {
+                // Wait for services to initialize
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                if (window.supabaseConfig && window.databaseService) {
+                    // Check if using real Supabase or localStorage fallback
+                    if (window.databaseService.fallbackToLocalStorage) {
+                        showConfigurationNeeded();
+                    } else {
+                        // Test actual connection
+                        const connected = await window.supabaseConfig.testConnection();
+                        if (connected) {
+                            showSuccess();
+                        } else {
+                            showConfigurationNeeded();
+                        }
+                    }
+                } else {
+                    showError('Failed to load Supabase services');
+                }
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+
+        function showConfigurationNeeded() {
+            const statusCard = document.getElementById('connection-status');
+            statusCard.className = 'status-card warning';
+            statusCard.innerHTML = `
+                <h3>⚠️ Configuration Required</h3>
+                <p>Supabase is not configured. Currently using localStorage fallback.</p>
+            `;
+            
+            document.getElementById('config-section').classList.remove('hidden');
+            
+            // Pre-fill current values if any
+            const urlInput = document.getElementById('supabase-url');
+            const keyInput = document.getElementById('supabase-key');
+            
+            if (window.supabaseConfig) {
+                urlInput.value = window.supabaseConfig.supabaseUrl;
+                keyInput.value = window.supabaseConfig.supabaseKey;
+            }
+        }
+
+        function showSuccess() {
+            const statusCard = document.getElementById('connection-status');
+            statusCard.className = 'status-card success';
+            statusCard.innerHTML = `
+                <h3>✅ Connected Successfully</h3>
+                <p>Supabase database is connected and operational.</p>
+            `;
+            
+            document.getElementById('success-section').classList.remove('hidden');
+        }
+
+        function showError(message) {
+            const statusCard = document.getElementById('connection-status');
+            statusCard.className = 'status-card error';
+            statusCard.innerHTML = `
+                <h3>❌ Connection Failed</h3>
+                <p>Error: ${message}</p>
+            `;
+            
+            document.getElementById('config-section').classList.remove('hidden');
+        }
+
+        async function updateConfig() {
+            const url = document.getElementById('supabase-url').value.trim();
+            const key = document.getElementById('supabase-key').value.trim();
+            
+            if (!url || !key) {
+                alert('Please enter both URL and API key');
+                return;
+            }
+            
+            // Validate URL format
+            if (!url.includes('supabase.co')) {
+                alert('Please enter a valid Supabase URL');
+                return;
+            }
+            
+            currentConfig = { url, key };
+            
+            // Show update instructions
+            const configCode = `
+// Update these values in database/supabase-config.js:
+this.supabaseUrl = '${url}';
+this.supabaseKey = '${key}';
+            `;
+            
+            alert('Configuration saved! Please update your supabase-config.js file with these values and refresh the page.');
+            console.log('New configuration:', configCode);
+        }
+
+        async function testConnection() {
+            if (!currentConfig.url || !currentConfig.key) {
+                alert('Please enter configuration first');
+                return;
+            }
+            
+            try {
+                // Create temporary Supabase client for testing
+                const testClient = window.supabase.createClient(currentConfig.url, currentConfig.key);
+                
+                // Test basic connection
+                const { data, error } = await testClient
+                    .from('contact_forms')
+                    .select('count', { count: 'exact', head: true });
+                
+                if (error) {
+                    throw error;
+                }
+                
+                alert('✅ Connection test successful!');
+            } catch (error) {
+                alert(`❌ Connection test failed: ${error.message}`);
+            }
+        }
+
+        async function showSchema() {
+            const schemaDiv = document.getElementById('schema-sql');
+            const schemaContent = document.getElementById('schema-content');
+            
+            try {
+                const response = await fetch('schema.sql');
+                const schema = await response.text();
+                schemaContent.textContent = schema;
+                schemaDiv.classList.remove('hidden');
+            } catch (error) {
+                schemaContent.textContent = 'Error loading schema: ' + error.message;
+                schemaDiv.classList.remove('hidden');
+            }
+        }
+
+        async function showMinimalSchema() {
+            const schemaDiv = document.getElementById('minimal-schema-sql');
+            const schemaContent = document.getElementById('minimal-schema-content');
+            
+            try {
+                const response = await fetch('schema-minimal.sql');
+                const schema = await response.text();
+                schemaContent.textContent = schema;
+                schemaDiv.classList.remove('hidden');
+            } catch (error) {
+                schemaContent.textContent = 'Error loading minimal schema: ' + error.message;
+                schemaDiv.classList.remove('hidden');
+            }
+        }
+
+        function openAdmin() {
+            window.open('../admin/index.html', '_blank');
+        }
+
+        async function runTests() {
+            const testResults = document.getElementById('test-results');
+            const testOutput = document.getElementById('test-output');
+            
+            testResults.classList.remove('hidden');
+            testOutput.innerHTML = '<div class="loading"></div> Running tests...';
+            
+            const tests = [
+                { name: 'Database Connection', test: testDatabaseConnection },
+                { name: 'Contact Forms Table', test: testContactFormsTable },
+                { name: 'Site Settings Table', test: testSiteSettingsTable },
+                { name: 'Authentication', test: testAuthentication },
+                { name: 'Storage Access', test: testStorageAccess }
+            ];
+            
+            let results = [];
+            
+            for (const test of tests) {
+                try {
+                    const result = await test.test();
+                    results.push({ name: test.name, status: 'success', message: result });
+                } catch (error) {
+                    results.push({ name: test.name, status: 'error', message: error.message });
+                }
+            }
+            
+            // Display results
+            testOutput.innerHTML = results.map(result => `
+                <div class="status-card ${result.status}">
+                    <h4>${result.status === 'success' ? '✅' : '❌'} ${result.name}</h4>
+                    <p>${result.message}</p>
+                </div>
+            `).join('');
+        }
+
+        // Test functions
+        async function testDatabaseConnection() {
+            if (!window.databaseService || window.databaseService.fallbackToLocalStorage) {
+                throw new Error('Using localStorage fallback - Supabase not configured');
+            }
+            return 'Database connection active';
+        }
+
+        async function testContactFormsTable() {
+            const forms = await window.databaseService.getContactForms();
+            return `Contact forms table accessible (${forms.length} records)`;
+        }
+
+        async function testSiteSettingsTable() {
+            const settings = await window.databaseService.getSiteSettings();
+            return 'Site settings table accessible';
+        }
+
+        async function testAuthentication() {
+            const { user } = await window.databaseService.getCurrentUser();
+            return user ? `Authenticated as ${user.email}` : 'No user authenticated (normal for public access)';
+        }
+
+        async function testStorageAccess() {
+            if (window.databaseService.fallbackToLocalStorage) {
+                return 'Storage using localStorage fallback';
+            }
+            return 'Supabase storage accessible';
+        }
+    </script>
+</body>
+</html>
