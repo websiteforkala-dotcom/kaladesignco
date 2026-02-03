@@ -750,6 +750,7 @@ textarea {
 }
 
 @media (max-width: 768px) {
+
   /* Hide Desktop Nav elements on mobile but keep mobile nav toggle visible */
   .nav-item {
     display: none !important;
@@ -940,7 +941,7 @@ textarea {
   background-size: cover;
   background-position: center;
   transition: opacity 0.6s ease;
-  filter: grayscale(100%) brightness(0.7);
+  /* filter removed to keep color images */
 }
 
 .manifesto-image-reveal.active {

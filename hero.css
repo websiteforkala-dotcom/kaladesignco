@@ -183,7 +183,7 @@
 }
 
 .team-img img {
-  filter: saturate(0);
+  /* filter removed to keep color images */
 }
 
 .site-info {
