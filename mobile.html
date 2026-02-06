@@ -455,7 +455,28 @@
 </body>
 
 <script>
-    // Cinematic Split Reveal Logic
+    // Mobile Navigation Toggle
+    const navToggle = document.querySelector('.mobile-nav-toggle');
+    const navOverlay = document.querySelector('.mobile-nav-overlay');
+
+    if (navToggle && navOverlay) {
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = navOverlay.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close on link click
+        navOverlay.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+
+    // Cinematic Split Reveal Logic (Existing)
     window.addEventListener('load', () => {
         const preloader = document.getElementById('preloader');
         const pct = document.querySelector('.loader-pct');
