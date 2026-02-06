@@ -19,7 +19,7 @@
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  z-index: 20;
 }
 
 .revealer {
@@ -56,17 +56,18 @@
   opacity: 1;
 }
 
-.images.stacked-container {
-  position: absolute;
-  left: 3rem;
-  top: 55%;
+.hero-left .images.stacked-container {
+  position: relative;
+  left: 0;
+  top: 0;
   width: auto;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1em;
-  transform: translateY(-50%);
+  transform: none;
+  margin-top: 2rem;
   will-change: transform;
 }
 
@@ -328,16 +329,12 @@
     margin-bottom: 0;
   }
 
-  .images.stacked-container {
-    position: relative;
-    left: 0;
-    top: 0;
-    transform: none;
+  .hero-left .images.stacked-container {
     flex-direction: row;
     justify-content: center;
     width: 100%;
+    margin-top: 1rem;
     margin-bottom: 2rem;
-    padding: 1rem 0;
   }
 
   .img.stacked {
