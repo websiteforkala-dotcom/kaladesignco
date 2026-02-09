@@ -74,94 +74,93 @@
     filter: invert(1) brightness(2);
 }
 
-/* Nav Toggle styling within header - TEXT MENU */
+/* 2. Sleek Hamburger Icon Animation */
 .mobile-nav-toggle {
     position: static !important;
-    top: auto !important;
-    right: auto !important;
-    width: auto !important;
-    height: auto !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: transparent !important;
+    border: none !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    padding: 8px 16px !important;
+    padding: 0 !important;
     cursor: pointer !important;
-    z-index: 1001 !important;
-    border-radius: 2px !important;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important; */
-    font-family: var(--font-mono) !important;
-    font-size: 0.8rem !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.1em !important;
-    color: #000000 !important;
-}
-
-.mobile-nav-toggle::before {
-    content: '[ MENU ]' !important;
-    display: block !important;
-    color: #010101 !important;
-    font-family: var(--font-mono) !important;
-    font-size: 0.8rem !important;
-    font-weight: 500 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.1em !important;
+    z-index: 10002 !important;
+    /* Always above overlay */
     transition: all 0.3s ease !important;
+    box-shadow: none !important;
 }
 
-.mobile-nav-toggle.active::before {
-    content: 'CLOSE' !important;
-    color: #f30000 !important;
-    z-index: 1002 !important;
-
-}
-
-.mobile-nav-toggle:hover {
-
-    transform: scale(1.05) !important;
-}
-
-.mobile-nav-toggle:active {
-    transform: scale(0.95) !important;
-}
-
-/* Hide Toggle Bars - Use Text Instead */
 .mobile-nav-toggle span {
+    display: block !important;
+    width: 24px;
+    height: 1px;
+    /* Ultra-thin editorial line */
+    background-color: #000;
+    margin: 3px 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Hover Effect */
+.mobile-nav-toggle:hover span:nth-child(1) {
+    transform: translateY(-1px);
+}
+
+.mobile-nav-toggle:hover span:nth-child(3) {
+    transform: translateY(1px);
+}
+
+/* Remove old text pseudo-elements */
+.mobile-nav-toggle::before,
+.mobile-nav-toggle::after {
     display: none !important;
 }
 
-/* Active State - Text Changes */
+/* Active State - Animate to X */
 .mobile-nav-toggle.active {
-    background: #ff0000 !important;
-    border-color: #ff0000 !important;
-    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4) !important;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
-/* Full Screen Navigation Overlay - SITE COLOR SCHEME */
+.mobile-nav-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+    background-color: #000;
+    /* Keep elegant black */
+}
+
+.mobile-nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.mobile-nav-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+    background-color: #000;
+}
+
+/* 3. Premium Full Screen Navigation Overlay */
 .mobile-nav-overlay {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    background: rgba(17, 17, 17, 0.98) !important;
-    /* var(--text-main) with transparency */
-    backdrop-filter: blur(25px) !important;
-    -webkit-backdrop-filter: blur(25px) !important;
-    z-index: 9999 !important;
+    background: rgba(244, 241, 234, 0.98) !important;
+    /* Premium Paper Color */
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    z-index: 10001 !important;
+    /* Below toggle, above header */
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
-    gap: 2rem !important;
+    gap: 2.5rem !important;
     opacity: 0 !important;
     visibility: hidden !important;
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    transform: scale(1.05) !important;
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1) !important;
 }
 
 .mobile-nav-overlay::before {
@@ -184,17 +183,40 @@
     transform: scale(1) !important;
 }
 
-/* Navigation Items - SITE COLOR SCHEME */
+/* Navigation Items - Premium Serif */
 .mobile-nav-overlay .nav-item {
     display: block !important;
-    clip-path: none !important;
-    transform: translateY(40px) rotateX(-10deg) !important;
     opacity: 0 !important;
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    transform: translateY(30px) !important;
+    transition: all 0.6s ease !important;
     position: relative !important;
-    visibility: visible !important;
-    z-index: 10000 !important;
-    perspective: 1000px !important;
+    z-index: 10003 !important;
+}
+
+.mobile-nav-overlay .nav-item p a {
+    font-family: var(--font-serif, "Playfair Display", serif);
+    /* Editorial Font */
+    font-size: 2.5rem !important;
+    font-weight: 500 !important;
+    color: #1a1a1a !important;
+    text-decoration: none !important;
+    position: relative;
+    letter-spacing: -0.02em;
+}
+
+.mobile-nav-overlay .nav-item p a::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #1a1a1a;
+    transition: width 0.3s ease;
+}
+
+.mobile-nav-overlay .nav-item p a:hover::after {
+    width: 100%;
 }
 
 .mobile-nav-overlay.active .nav-item {
