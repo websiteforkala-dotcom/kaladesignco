@@ -89,7 +89,7 @@
 
         <!-- Clean Mobile Hero Image -->
         <div class="mobile-hero-visual">
-            <img src="./assets/projects/nakra-2.jpg" alt="Featured Work" loading="eager" />
+            <img src="./assets/projects/shree-3.jpg" alt="Featured Work" loading="eager" />
         </div>
 
         <div class="hero-content">
@@ -454,6 +454,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>
+
+    <!-- Core Script -->
     <script src="./script.js"></script>
 
     <!-- Database Integration -->
@@ -463,58 +465,40 @@
 
     <!-- Admin Panel Integration Scripts -->
     <script src="frontend-sync.js"></script>
-</body>
 
-<script>
-    // Mobile Navigation Toggle
-    const navToggle = document.querySelector('.mobile-nav-toggle');
-    const navOverlay = document.querySelector('.mobile-nav-overlay');
+    <!-- Widget -->
+    <script src="whatsapp-widget.js" defer></script>
 
-    if (navToggle && navOverlay) {
-        navToggle.addEventListener('click', () => {
-            navToggle.classList.toggle('active');
-            navOverlay.classList.toggle('active');
-            document.body.style.overflow = navOverlay.classList.contains('active') ? 'hidden' : '';
-        });
+    <script>
+        // Cinematic Split Reveal Logic (Existing)
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            const pct = document.querySelector('.loader-pct');
 
-        // Close on link click
-        navOverlay.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navToggle.classList.remove('active');
-                navOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-    }
+            if (!preloader || !pct) return;
 
-    // Cinematic Split Reveal Logic (Existing)
-    window.addEventListener('load', () => {
-        const preloader = document.getElementById('preloader');
-        const pct = document.querySelector('.loader-pct');
+            // Simulate counting up (fast)
+            let count = 0;
+            const interval = setInterval(() => {
+                count += Math.floor(Math.random() * 10) + 5;
+                if (count > 100) count = 100;
+                pct.innerText = count + '%';
 
-        // Simulate counting up (fast)
-        let count = 0;
-        const interval = setInterval(() => {
-            count += Math.floor(Math.random() * 10) + 5;
-            if (count > 100) count = 100;
-            pct.innerText = count + '%';
-
-            if (count === 100) {
-                clearInterval(interval);
-                // Trigger Reveal
-                setTimeout(() => {
-                    preloader.classList.add('reveal');
-
-                    // Remove from DOM after animation
+                if (count === 100) {
+                    clearInterval(interval);
+                    // Trigger Reveal
                     setTimeout(() => {
-                        preloader.style.display = 'none';
-                    }, 1500);
-                }, 200);
-            }
-        }, 30);
-    });
-</script>
-<script src="whatsapp-widget.js" defer></script>
+                        preloader.classList.add('reveal');
+
+                        // Remove from DOM after animation
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                        }, 1500);
+                    }, 200);
+                }
+            }, 30);
+        });
+    </script>
 </body>
 
 </html>

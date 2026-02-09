@@ -26,7 +26,7 @@
     align-items: center !important;
     padding: 0.5rem 1.0rem !important;
     box-sizing: border-box !important;
-    z-index: 1000 !important;
+    z-index: 10000 !important;
     background: #ffffff !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;

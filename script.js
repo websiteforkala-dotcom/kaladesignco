@@ -340,11 +340,16 @@ function initMobileNav() {
   const mobileHeader = document.querySelector('.mobile-header');
 
   if (mobileToggle && mobileOverlay) {
+    // console.log('Mobile Nav Initialized'); // Debugging
+
+    // Remove any existing event listeners to be safe (by cloning and replacing, or just assuming clean state if logic allows)
+    // For now we will rely on textContent check or class check if needed, but standard addEventListener stack is fine if we removed the inline one.
+
     // Enhanced toggle functionality
     mobileToggle.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      
+
       mobileToggle.classList.toggle('active');
       mobileOverlay.classList.toggle('active');
 
@@ -390,24 +395,24 @@ function initMobileNav() {
 
     // Header scroll effect
     let lastScrollY = window.scrollY;
-    
+
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
-      
+
       if (mobileHeader) {
         if (currentScrollY > 50) {
           mobileHeader.classList.add('scrolled');
         } else {
           mobileHeader.classList.remove('scrolled');
         }
-        
+
         // Hide/show header on scroll
         if (currentScrollY > lastScrollY && currentScrollY > 100) {
           mobileHeader.style.transform = 'translateY(-100%)';
         } else {
           mobileHeader.style.transform = 'translateY(0)';
         }
-        
+
         lastScrollY = currentScrollY;
       }
     });
@@ -428,7 +433,7 @@ function initMobileNav() {
     function handleSwipe() {
       const swipeThreshold = 100;
       const swipeDistance = touchStartY - touchEndY;
-      
+
       // Swipe up to close menu
       if (swipeDistance > swipeThreshold) {
         closeMobileMenu();
@@ -517,7 +522,7 @@ initWorksScroll();
 // ===========================================
 function initTestimonialsAnimation() {
   const testimonialSection = document.querySelector('.testimonials-section');
-  
+
   if (testimonialSection) {
     // Create intersection observer for better performance
     const observerOptions = {

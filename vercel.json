@@ -1,11 +1,23 @@
 {
     "cleanUrls": true,
     "trailingSlash": false,
-    "redirects": [
+    "rewrites": [
         {
             "source": "/login",
-            "destination": "/admin/login",
-            "permanent": false
+            "destination": "/admin/login.html"
+        },
+        {
+            "source": "/admin/login",
+            "destination": "/admin/login.html"
+        },
+        {
+            "source": "/admin/dashboard",
+            "destination": "/admin/index.html"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/404.html",
+            "condition": "not-found"
         }
     ],
     "headers": [
