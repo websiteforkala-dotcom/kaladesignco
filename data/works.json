@@ -1,0 +1,121 @@
+[
+    {
+        "id": "shree",
+        "title": "Project Shree",
+        "category": "Residential",
+        "location": "Mumbai, India",
+        "year": "2024",
+        "description": "A minimalist residential project focusing on clean lines and natural light.",
+        "images": [
+            "assets/projects/shree/DSC_3633.JPG",
+            "assets/projects/shree/DSC_3664.JPG",
+            "assets/projects/shree/DSC_3690.JPG"
+        ],
+        "thumb": "assets/projects/shree/DSC_3633.JPG"
+    },
+    {
+        "id": "ganpati",
+        "title": "Ganpati Rollings",
+        "category": "Industrial",
+        "location": "New Delhi, India",
+        "year": "2023",
+        "description": "Industrial facility design optimizing workflow and spatial efficiency.",
+        "images": [
+            "assets/projects/ganpati/A1.jpg",
+            "assets/projects/ganpati/A2.jpg",
+            "assets/ganpati/A3.jpg"
+        ],
+        "thumb": "assets/projects/ganpati/A1.jpg"
+    },
+    {
+        "id": "girdhar",
+        "title": "Girdhar Roll Wrap",
+        "category": "Commercial",
+        "location": "New Delhi, India",
+        "year": "2024",
+        "description": "Innovative commercial space with a focus on brand identity.",
+        "images": [
+            "assets/projects/girdhar/599c9ae9bb25609e3ebbea424016a289.jpg"
+        ],
+        "thumb": "assets/projects/girdhar/599c9ae9bb25609e3ebbea424016a289.jpg"
+    },
+    {
+        "id": "aadhar",
+        "title": "Aadhar Office",
+        "category": "Commercial",
+        "location": "New Delhi, India",
+        "year": "2023",
+        "description": "Functional and aesthetic workspace design.",
+        "images": [
+            "assets/projects/aadhar/A1.jpg",
+            "assets/projects/aadhar/A2.jpg",
+            "assets/projects/aadhar/Enscape_2025-01-23-15-05-52_A1.jpg"
+        ],
+        "thumb": "assets/projects/aadhar/A1.jpg"
+    },
+    {
+        "id": "nakra",
+        "title": "Nakra Residence",
+        "category": "Residential",
+        "location": "New Delhi, India",
+        "year": "2024",
+        "description": "A sanctuary of warmth and modern minimalism.",
+        "images": [
+            "assets/projects/nakra/DSC_3760.JPG",
+            "assets/projects/nakra/DSC_3765.JPG",
+            "assets/projects/nakra/DSC_3771.JPG"
+        ],
+        "thumb": "assets/projects/nakra/DSC_3760.JPG"
+    },
+    {
+        "id": "vidya",
+        "title": "Vidya Metal Industries",
+        "category": "Industrial",
+        "location": "New Delhi, India",
+        "year": "2023",
+        "description": "Large scale industrial complex design.",
+        "images": [
+            "assets/projects/vidya/VIDYA METAL 5.jpg",
+            "assets/projects/vidya/VIDYA METAL 6.jpg"
+        ],
+        "thumb": "assets/projects/vidya/VIDYA METAL 5.jpg"
+    },
+    {
+        "id": "atcg",
+        "title": "ATCG",
+        "category": "Commercial",
+        "location": "New Delhi, India",
+        "year": "2024",
+        "description": "Corporate office space.",
+        "images": [
+            "assets/projects/atcg/Enscape_2025-06-23-16-27-13_A1.jpg"
+        ],
+        "thumb": "assets/projects/atcg/Enscape_2025-06-23-16-27-13_A1.jpg"
+    },
+    {
+        "id": "hemlata",
+        "title": "Hemlata Jha Residence",
+        "category": "Residential",
+        "location": "New Delhi, India",
+        "year": "2023",
+        "description": "Elegant residential design.",
+        "images": [
+            "assets/projects/hemlata/1.jpg",
+            "assets/projects/hemlata/2.jpg"
+        ],
+        "thumb": "assets/projects/hemlata/1.jpg"
+    },
+    {
+        "id": "dps",
+        "title": "DPS Sushant Lok Library",
+        "category": "Institutional",
+        "location": "Gurugram, India",
+        "year": "2024",
+        "description": "Reimagining the school library as a hub for creativity.",
+        "images": [
+            "assets/projects/dps/WhatsApp Image 2023-07-16 at 14.18.15_c7dbc326.jpg",
+            "assets/projects/dps/WhatsApp Image 2023-07-16 at 14.18.16_7edc4b5f.jpg"
+        ],
+        "thumb": "assets/projects/dps/WhatsApp Image 2023-07-16 at 14.18.15_c7dbc326.jpg"
+    }
+]

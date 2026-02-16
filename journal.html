@@ -423,13 +423,13 @@
     <!-- Masthead -->
     <header class="masthead">
       <div class="top-folks">
-        <a href="./">Home</a>
-        <a href="about">About</a>
-        <a href="services">Services</a>
-        <a href="team">Team</a>
-        <a href="work">Work</a>
-        <a href="journal" class="current-page">Journal</a>
-        <a href="contact">Contact</a>
+        <a href="./index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="team.html">Team</a>
+        <a href="work.html">Work</a>
+        <a href="journal.html" class="current-page">Journal</a>
+        <a href="contact.html">Contact</a>
       </div>
 
       <div class="masthead-meta">
@@ -456,57 +456,8 @@
     <!-- Content Grid -->
     <div class="news-grid">
       <!-- Main Column (Articles) -->
-      <div class="main-col">
-
-        <!-- Featured Article 1 -->
-        <article class="featured-article">
-          <div class="article-header">
-            <div class="article-meta">
-              <span>Jan 15, 2025</span>
-              <span>•</span>
-              <span>Sustainability</span>
-            </div>
-            <h3>The Future of Sustainable Interior Design</h3>
-          </div>
-
-          <div class="article-img-container">
-            <img src="./assets/projects/nakra-2.jpg" alt="Sustainable Design">
-          </div>
-
-          <div class="article-excerpt">
-            <p><span class="drop-cap">S</span>ustainable design is no longer a choice; it is an imperative. In this
-              in-depth exploration, we discuss how locally sourced materials, passive cooling techniques, and mindful
-              consumption are reshaping the way we build our homes. We believe that true luxury lies in longevity and
-              respect for our environment.</p>
-          </div>
-
-          <a href="#" class="read-more">Continue Reading →</a>
-        </article>
-
-        <!-- Featured Article 2 -->
-        <article class="featured-article" style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 3rem;">
-          <div class="article-header">
-            <div class="article-meta">
-              <span>Jan 10, 2025</span>
-              <span>•</span>
-              <span>Philosophy</span>
-            </div>
-            <h3>Embracing Minimalism in a Chaotic World</h3>
-          </div>
-
-          <div class="article-img-container">
-            <img src="./assets/projects/shree-2.jpg" alt="Minimalist Interior">
-          </div>
-
-          <div class="article-excerpt">
-            <p>Minimalism is often misunderstood as improved emptiness. At Kala Design Co, we see it as the intentional
-              promotion of the things we most value and the removal of everything that distracts us from them. It is a
-              tool to rid yourself of life's excess in favor of focusing on what's important.</p>
-          </div>
-
-          <a href="#" class="read-more">Continue Reading →</a>
-        </article>
-
+      <div class="main-col" id="journal-feed">
+        <div style="text-align:center; padding: 2rem;">Loading Journal...</div>
       </div>
 
       <!-- Side Column (Archive & Categories) -->
@@ -572,9 +523,59 @@
   <!-- Animation Script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Local Data Integration -->
+  <script src="data/blogs_data.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       gsap.registerPlugin(ScrollTrigger);
+
+      // Fetch Blogs
+      const container = document.getElementById('journal-feed');
+
+      // Use global BLOGS_DATA
+      if (typeof BLOGS_DATA !== 'undefined' && Array.isArray(BLOGS_DATA)) {
+        const blogs = [...BLOGS_DATA];
+
+        if (blogs.length === 0) {
+          container.innerHTML = "<div>No entries found.</div>";
+        } else {
+          container.innerHTML = "";
+          blogs.forEach((blog, index) => {
+            const article = document.createElement('article');
+            article.className = 'featured-article';
+            if (index > 0) {
+              article.style.borderTop = "1px solid rgba(0,0,0,0.1)";
+              article.style.paddingTop = "3rem";
+            }
+
+            article.innerHTML = `
+    <div class="article-header">
+      <div class="article-meta">
+        <span>${blog.date}</span>
+        <span>•</span>
+        <span>${blog.category}</span>
+      </div>
+      <h3>${blog.title}</h3>
+    </div>
+
+    <div class="article-img-container">
+      <img src="${blog.image}" alt="${blog.title}">
+    </div>
+
+    <div class="article-excerpt">
+      <p>${blog.excerpt}</p>
+    </div>
+
+    <a href="journal-post.html?id=${blog.id}" class="read-more">Continue Reading →</a>
+                  `;
+            container.appendChild(article);
+          });
+        }
+      } else {
+        console.error("BLOGS_DATA not defined");
+        container.innerHTML = "Error loading journal entries.";
+      }
+
       const tl = gsap.timeline();
 
       // Reveal Paper
@@ -601,8 +602,8 @@
           stagger: 0.1,
           ease: "power2.out"
         }, "-=0.5")
-        // Reveal Articles & Sidebar
-        .from(".featured-article, .side-col > div", {
+        // Reveal Article & Sidebar
+        .from(".main-col, .side-col > div", {
           duration: 0.8,
           y: 20,
           opacity: 0,

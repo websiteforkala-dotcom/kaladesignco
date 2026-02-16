@@ -240,13 +240,13 @@
         <header class="masthead">
             <div class="top-folks">
                 <div class="top-folks">
-                    <a href="./">Home</a>
-                    <a href="about">About</a>
-                    <a href="services">Services</a>
-                    <a href="team">Team</a>
-                    <a href="work" class="current-page">Work</a>
-                    <a href="journal">Journal</a>
-                    <a href="contact">Contact</a>
+                    <a href="./index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="team.html">Team</a>
+                    <a href="work.html" class="current-page">Work</a>
+                    <a href="journal.html">Journal</a>
+                    <a href="contact.html">Contact</a>
                 </div>
             </div>
 
@@ -301,44 +301,33 @@
         });
     </script>
 
-    <!-- Database Integration -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="database/supabase-config.js"></script>
+    <!-- Local Data Integration -->
+    <script src="data/works_data.js"></script>
     <script>
         // Fetch Projects
-        document.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('project-list');
-            try {
-                // Initialize Supabase
-                const supabaseConfig = new SupabaseConfig();
-                await supabaseConfig.init();
-                const _supabase = supabaseConfig.getClient();
 
-                if (!_supabase) {
-                    throw new Error("Supabase client not initialized");
-                }
-
-                // Fetch works
-                const { data: works, error } = await _supabase
-                    .from('works')
-                    .select('*')
-                    .order('year', { ascending: false });
-
-                if (error) throw error;
+            // Use global WORKS_DATA
+            if (typeof WORKS_DATA !== 'undefined' && Array.isArray(WORKS_DATA)) {
+                let works = [...WORKS_DATA]; // Clone to sort
 
                 if (!works || works.length === 0) {
                     container.innerHTML = '<div class="loading">No records found in archives.</div>';
                     return;
                 }
 
+                // Sort by year descending if not already sorted
+                works.sort((a, b) => b.year - a.year);
+
                 // Render List
                 container.innerHTML = works.map(work => `
-                    <a href="work-detail?id=${work.id}" class="project-card">
+                    <a href="work-detail.html?id=${work.id}" class="project-card">
                         <div class="project-meta-top">
                             <span>${work.category}</span>
                             <span>${work.year}</span>
                         </div>
-                        <img src="${work.image_url}" alt="${work.title}" class="project-image" loading="lazy">
+                        <img src="${work.thumb || work.images[0]}" alt="${work.title}" class="project-image" loading="lazy">
                         <h2 class="project-title">${work.title}</h2>
                         <div class="project-desc">${work.description}</div>
                     </a>
@@ -356,8 +345,8 @@
                     }
                 });
 
-            } catch (err) {
-                console.error('Error loading projects:', err);
+            } else {
+                console.error('WORKS_DATA not defined');
                 container.innerHTML = '<div class="loading">Error retrieving archives.</div>';
             }
         });

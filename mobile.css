@@ -9,41 +9,87 @@
 
     display: flex;
     flex-direction: column;
+    overflow: visible;
+}
+
+/* Hide the hero-header inside hero-content (mobile-header takes over) */
+/* Unhide the hero-header to show LOGO, but keep nav hidden via .nav display:none */
+.hero-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 0.5rem 0 !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* Hero content mobile adjustments */
+.hero-content {
+    padding: 1.5rem !important;
+    padding-top: 1rem !important;
+    /* Reduced padding since no sticky header */
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
+    position: relative !important;
+}
+
+/* Mobile hero layout - stack vertically */
+.hero-main-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+    gap: 1.5rem !important;
+    margin: 1.5rem 0 !important;
+}
+
+.hero-col {
+    width: 100% !important;
+    height: auto !important;
+    text-align: center !important;
+    align-items: center !important;
+}
+
+.hero-right {
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.team-img {
+    max-height: 40vh;
+    clip-path: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.site-info h2 {
+    font-size: clamp(24px, 4vw, 42px) !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+    max-width: 90% !important;
+    text-align: center !important;
+    margin: 0 auto 1.5rem auto !important;
+    /* Centering */
+}
+
+.hero-footer-info {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+    text-align: center !important;
+    margin-top: 2rem !important;
+    padding-bottom: 2rem;
+}
+
+.footer-col.contact {
+    align-items: center !important;
 }
 
 .nav {
     display: none;
 }
 
-/* 1. Sticky Mobile Header - HIGH CONTRAST */
-.mobile-header {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 0.5rem 1.0rem !important;
-    box-sizing: border-box !important;
-    z-index: 10000 !important;
-    background: #ffffff !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border-bottom: 2px solid #000000 !important;
-    transition: all 0.3s ease !important;
-    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important; */
-    visibility: visible !important;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    opacity: 0.9 !important;
-}
-
-.mobile-header.scrolled {
-    background: #ffffff !important;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2) !important;
-    border-bottom: 2px solid #000000 !important;
-}
+/* 1. Sticky Mobile Header REMOVED */
 
 /* Logo styling within header */
 .site-logo {
@@ -53,9 +99,9 @@
 }
 
 .site-logo .logo-img {
-    height: 60px;
-    margin-top: 10px;
-    margin-bottom: -10px;
+    height: 74px;
+    margin-top: 0;
+    margin-bottom: 0;
     width: auto;
 }
 
@@ -76,7 +122,9 @@
 
 /* 2. Sleek Hamburger Icon Animation */
 .mobile-nav-toggle {
-    position: static !important;
+    position: absolute !important;
+    top: 2rem !important;
+    right: 1.5rem !important;
     width: 40px !important;
     height: 40px !important;
     background: transparent !important;
@@ -141,175 +189,159 @@
 }
 
 /* 3. Premium Full Screen Navigation Overlay */
+/* 3. Premium Full Screen Navigation Overlay (Redesigned) */
 .mobile-nav-overlay {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    background: rgba(244, 241, 234, 0.98) !important;
-    /* Premium Paper Color */
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
+    background: #0f0f0f !important;
+    /* Deep Black */
     z-index: 10001 !important;
-    /* Below toggle, above header */
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 2.5rem !important;
+    justify-content: space-between !important;
+    /* Footer at bottom */
+    padding: 7rem 2rem 3rem 2rem !important;
+    /* Top padding for toggle */
     opacity: 0 !important;
     visibility: hidden !important;
-    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1) !important;
-}
-
-.mobile-nav-overlay::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(102, 102, 102, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(17, 17, 17, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 60%, rgba(0, 0, 0, 0.05) 0%, transparent 50%);
-    pointer-events: none;
+    transition: opacity 0.4s ease, visibility 0.4s ease !important;
+    box-sizing: border-box !important;
 }
 
 .mobile-nav-overlay.active {
     opacity: 1 !important;
     visibility: visible !important;
-    transform: scale(1) !important;
 }
 
-/* Navigation Items - Premium Serif */
-.mobile-nav-overlay .nav-item {
-    display: block !important;
-    opacity: 0 !important;
-    transform: translateY(30px) !important;
-    transition: all 0.6s ease !important;
-    position: relative !important;
-    z-index: 10003 !important;
-}
-
-.mobile-nav-overlay .nav-item p a {
-    font-family: var(--font-serif, "Playfair Display", serif);
-    /* Editorial Font */
-    font-size: 2.5rem !important;
-    font-weight: 500 !important;
-    color: #1a1a1a !important;
-    text-decoration: none !important;
-    position: relative;
-    letter-spacing: -0.02em;
-}
-
-.mobile-nav-overlay .nav-item p a::after {
-    content: '';
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #1a1a1a;
-    transition: width 0.3s ease;
-}
-
-.mobile-nav-overlay .nav-item p a:hover::after {
+/* Nav Content Container */
+.nav-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 
-.mobile-nav-overlay.active .nav-item {
-    transform: translateY(0) rotateX(0deg) !important;
-    opacity: 1 !important;
-    visibility: visible !important;
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    width: 100%;
 }
 
-/* Staggered Animation Delays */
+.nav-item {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease;
+}
+
+.nav-item a {
+    font-family: var(--font-serif, "Playfair Display", serif) !important;
+    font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    display: block;
+    line-height: 1.1;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-nav-overlay.active .nav-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover Effect */
+.nav-item a:hover {
+    color: #888 !important;
+    transform: skewX(-10deg);
+}
+
+/* Footer Section */
+.nav-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease 0.4s;
+    /* Delayed */
+    text-align: center;
+    width: 100%;
+}
+
+.mobile-nav-overlay.active .nav-footer {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-contact p {
+    color: #666;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin: 0.3rem 0 !important;
+    letter-spacing: 0.5px;
+}
+
+.nav-socials {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav-socials a {
+    color: #fff !important;
+    font-family: var(--font-mono);
+    font-size: 0.8rem !important;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    letter-spacing: 1px;
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.nav-socials a:hover {
+    background: #fff;
+    color: #000 !important;
+}
+
+/* Stagger Delays */
 .mobile-nav-overlay.active .nav-item:nth-child(1) {
     transition-delay: 0.1s;
 }
 
 .mobile-nav-overlay.active .nav-item:nth-child(2) {
-    transition-delay: 0.2s;
+    transition-delay: 0.15s;
 }
 
 .mobile-nav-overlay.active .nav-item:nth-child(3) {
-    transition-delay: 0.3s;
+    transition-delay: 0.2s;
 }
 
 .mobile-nav-overlay.active .nav-item:nth-child(4) {
-    transition-delay: 0.4s;
+    transition-delay: 0.25s;
 }
 
 .mobile-nav-overlay.active .nav-item:nth-child(5) {
-    transition-delay: 0.5s;
+    transition-delay: 0.3s;
 }
 
 .mobile-nav-overlay.active .nav-item:nth-child(6) {
-    transition-delay: 0.6s;
+    transition-delay: 0.35s;
 }
 
-/* Typography and Links - SITE COLOR SCHEME */
-.mobile-nav-overlay .nav-item p {
-    font-size: 2.5rem !important;
-    font-weight: 300 !important;
-    transform: none !important;
-    margin: 0 !important;
-    letter-spacing: -0.02em !important;
-    text-align: center !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
-.mobile-nav-overlay .nav-item a {
-    color: var(--white) !important;
-    /* #ffffff */
-    text-decoration: none !important;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    position: relative !important;
-    display: inline-block !important;
-    padding: 0.75rem 2rem !important;
-    border-radius: 8px !important;
-    border: 1px solid transparent !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    z-index: 10001 !important;
-}
-
-.mobile-nav-overlay .nav-item a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--bg-color) !important;
-    /* #f4f4f4 */
-    transition: all 0.4s ease;
-    transform: translateX(-50%);
-}
-
-.mobile-nav-overlay .nav-item a:hover {
-    color: var(--text-main) !important;
-    /* #111111 */
-    transform: translateY(-3px) !important;
-    text-shadow: none !important;
-    background: var(--bg-color) !important;
-    /* #f4f4f4 */
-    border-color: rgba(244, 244, 244, 0.3) !important;
-}
-
-.mobile-nav-overlay .nav-item a:hover::after {
-    width: 80%;
-    background: var(--text-main) !important;
-    /* #111111 */
-}
-
-.mobile-nav-overlay .nav-item a:active {
-    transform: translateY(-1px) !important;
-    background: rgba(244, 244, 244, 0.9) !important;
+/* Invert Toggle Color on Active */
+.mobile-nav-toggle.active span {
+    background-color: #ffffff !important;
 }
 
 /* 2. Hero Visual (Top Half) */
@@ -573,10 +605,17 @@
 /* Hide desktop-only footer elements */
 .site-footer .footer-big-text {
     display: block;
-    font-size: 15vw;
+    font-family: 'Playfair Display', serif;
+    font-size: 10vw;
+    line-height: 0.8;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
     opacity: 0.05;
     white-space: nowrap;
-    margin-top: 2rem;
+    pointer-events: none;
+    font-weight: 400;
+    margin-top: -2rem;
 }
 
 /* Menu Loading Animation */
@@ -627,96 +666,43 @@
     animation: overlayFadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-/* Cleanup unused scatter classes removed to restore Desktop Hero Layout */
-.images,
-.img,
-.team-img,
-.revealers {
-    display: none !important;
+/* Hero Image Shadow - User Request */
+.hero-left .images img,
+.hero-left .img.main img {
+    box-shadow: rgba(0, 0, 0, 0.3) 5px 5px 10px 0px;
 }
 
-/* =========================================
-   CINEMATIC SPLIT REVEAL PRELOADER
-   ========================================= */
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99999;
-    pointer-events: none;
-    /* Allows interaction after reveal */
+/* About Section Padding */
+#about {
+    padding: 140px 0px !important;
 }
 
-/* The two halves */
-.shutter-top,
-.shutter-bottom {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background-color: #ffffff;
-    z-index: 1;
-    transition: transform 1.4s cubic-bezier(0.8, 0, 0.2, 1);
-    /* Luxury "Heavy" Easing */
-    will-change: transform;
-    pointer-events: auto;
-    /* Blocks clicks initially */
-}
-
-.shutter-top {
-    top: 0;
-    transform-origin: top;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    /* Subtle seam */
-}
-
-.shutter-bottom {
-    bottom: 0;
-    transform-origin: bottom;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-/* Content (Logo + Pct) sits on top */
-.loader-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    transition: opacity 0.4s ease;
-}
-
-.loader-logo {
-    font-family: var(--font-main);
-    font-size: 1.8rem;
-    font-weight: 500;
-    color: #000;
-    letter-spacing: -0.03em;
+/* Testimonials "Read All" Button */
+.read-all-revs {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    margin: 0px !important;
+    padding: 20px 10px !important;
+    border-radius: 9px !important;
+    display: inline-block;
+    text-decoration: none !important;
     text-transform: uppercase;
-}
-
-.loader-pct {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: #444;
+    transition: all 0.3s ease;
 }
 
-/* REVEAL STATE (Triggered by JS) */
-#preloader.reveal .shutter-top {
-    transform: translateY(-100%);
+.read-all-revs:hover {
+    opacity: 0.8;
 }
 
-#preloader.reveal .shutter-bottom {
-    transform: translateY(100%);
-}
+/* Cleanup unused scatter classes removed to restore Desktop Hero Layout */
 
-#preloader.reveal .loader-content {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.95);
+/* End of mobile specific styles */
+
+/* User Request: Make footer info black */
+.hero-footer-info .footer-col p,
+.hero-footer-info .footer-col a {
+    color: #000000 !important;
+    opacity: 1 !important;
 }

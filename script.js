@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
       duration: revealDuration,
       ease: "hop",
+      force3D: true
     })
     .to(
       ".r-2",
@@ -69,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
         duration: revealDuration,
         ease: "hop",
+        force3D: true
       },
       "<"
     );
@@ -77,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scale: 1,
     duration: scaleDuration,
     ease: "power4.inOut",
+    force3D: true
   });
 
   const images = document.querySelectorAll(".img:not(:first-child)");
@@ -89,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         scale: 1,
         duration: isMobile ? 1 : 1.25,
         ease: "power3.out",
+        force3D: true
       },
       ">-0.95"
     );
@@ -448,15 +452,53 @@ initMobileNav();
 
 
 // ===========================================
-// Horizontal Scroll Gallery Controls
+// Horizontal Scroll Gallery Controls (with Dynamic Fetch)
 // ===========================================
 function initWorksScroll() {
   const scrollWrapper = document.getElementById('worksScroll');
+
+  if (!scrollWrapper) return;
+
+  // Clean container
+  const track = scrollWrapper.querySelector('.horizontal-scroll-track');
+  if (track) {
+    track.innerHTML = ''; // Clear existing content
+
+    // Use global WORKS_DATA if available
+    if (typeof WORKS_DATA !== 'undefined' && Array.isArray(WORKS_DATA)) {
+      // Limit to first 6 projects for homepage
+      const displayProjects = WORKS_DATA.slice(0, 6);
+
+      displayProjects.forEach((project, index) => {
+        const indexStr = String(index + 1).padStart(2, '0');
+
+        // Create card element
+        const card = document.createElement('a');
+        card.href = `work-detail.html?id=${project.id}`;
+        card.className = 'scroll-card';
+        card.innerHTML = `
+          <div class="scroll-card-img">
+            <img src="${project.thumb}" alt="${project.title}" loading="lazy">
+          </div>
+          <div class="scroll-card-info">
+            <span class="scroll-card-num">${indexStr}</span>
+            <h3>${project.title}</h3>
+            <span class="scroll-card-cat">${project.category}</span>
+          </div>
+        `;
+
+        track.appendChild(card);
+      });
+    } else {
+      // Fallback or empty state if JS file not loaded
+      console.warn('WORKS_DATA not found. Ensure data/works_data.js is included.');
+      track.innerHTML = '<p style="padding: 2rem;">Loading projects...</p>';
+    }
+  }
+
   const prevBtn = document.querySelector('.scroll-prev');
   const nextBtn = document.querySelector('.scroll-next');
   const progressBar = document.querySelector('.scroll-progress');
-
-  if (!scrollWrapper) return;
 
   const scrollAmount = 420; // Approximate card width + gap
 
@@ -515,7 +557,7 @@ function initWorksScroll() {
 }
 
 // Initialize works scroll
-initWorksScroll();
+document.addEventListener('DOMContentLoaded', initWorksScroll);
 
 // ===========================================
 // Testimonials Animation (Simplified)
@@ -552,4 +594,16 @@ function initTestimonialsAnimation() {
 }
 
 // Initialize testimonials animation
+// Initialize testimonials animation
 initTestimonialsAnimation();
+
+// ===========================================
+// Logo Resize on Scroll (Index Page)
+// ===========================================
+document.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    document.body.classList.add('scrolled');
+  } else {
+    document.body.classList.remove('scrolled');
+  }
+});

@@ -20,15 +20,9 @@
     <script>
         // Redirect to desktop site if screen is large
         // if (window.innerWidth > 768) {
-        //     window.location.href = "./";
+        //   window.location.href = "./";
         // }
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"
-        rel="stylesheet">
-
     <link rel="stylesheet" href="hero.css" />
     <link rel="stylesheet" href="styles.css" />
     <!-- Mobile Specific Styles -->
@@ -36,122 +30,141 @@
 </head>
 
 <body>
-    <!-- Preloader -->
-    <!-- Preloader with Split Shutters -->
-    <div id="preloader">
-        <div class="shutter-top"></div>
-        <div class="shutter-bottom"></div>
-        <div class="loader-content">
-            <div class="loader-logo">Kala Design Co.</div>
-            <div class="loader-pct">0%</div>
-        </div>
-    </div>
-
     <div class="container">
-        <!-- Sticky Mobile Header -->
-        <header class="mobile-header">
-            <div class="site-logo">
-                <a href="./">
-                    <img src="./assets/kdc-new-logo.png" alt="Kala Design Co" class="logo-img">
-                </a>
-            </div>
-
-            <button class="mobile-nav-toggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </header>
-
-        <!-- Mobile Navigation Overlay (Global) -->
-        <div class="mobile-nav-overlay">
-            <div class="nav-item">
-                <p><a href="./">Home</a></p>
-            </div>
-            <div class="nav-item">
-                <p><a href="about">About</a></p>
-            </div>
-            <div class="nav-item">
-                <p><a href="services">Services</a></p>
-            </div>
-            <div class="nav-item">
-                <p><a href="team">Team</a></p>
-            </div>
-            <div class="nav-item">
-                <p><a href="work">Work</a></p>
-            </div>
-            <div class="nav-item">
-                <p><a href="journal">Journal</a></p>
-            </div>
-            <div class="nav-item">
-                <p><a href="contact">Contact</a></p>
-            </div>
-        </div>
-
         <div class="revealers">
             <div class="revealer r-1"></div>
             <div class="revealer r-2"></div>
         </div>
 
-        <!-- Clean Mobile Hero Image -->
-        <div class="mobile-hero-visual">
-            <img src="./assets/projects/shree-3.jpg" alt="Featured Work" loading="eager" />
-        </div>
+        <!-- Images moved inside hero-content for proper stacking -->
 
         <div class="hero-content">
-            <!-- Logo and Toggle moved to header -->
-            <div class="nav">
-                <!-- Desktop nav items hidden on mobile -->
+            <div class="hero-header">
+                <div class="site-logo">
+                    <a href="./">
+                        <img src="./assets/kdc-new-logo.png" alt="Kala Design Co" class="logo-img">
+                    </a>
+                </div>
+
+                <div class="nav">
+                    <div class="nav-item">
+                        <p><a href="about">About</a></p>
+                    </div>
+                    <div class="nav-item">
+                        <p><a href="services">Services</a></p>
+                    </div>
+                    <div class="nav-item">
+                        <p><a href="team">Team</a></p>
+                    </div>
+                    <div class="nav-item">
+                        <p><a href="work">Work</a></p>
+                    </div>
+                    <div class="nav-item">
+                        <p><a href="journal">Journal</a></p>
+                    </div>
+                    <div class="nav-item">
+                        <p><a href="contact">Contact</a></p>
+                    </div>
+                </div>
             </div>
 
-            <div class="team-img">
-                <img src="./assets/projects/media-facade-1.jpg" alt="Media Facade Project" />
+            <!-- Mobile Navigation Toggle -->
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="mobile-nav-overlay">
+                <div class="nav-content">
+                    <div class="nav-links">
+                        <div class="nav-item"><a href="index.html">Home</a></div>
+                        <div class="nav-item"><a href="about.html">About</a></div>
+                        <div class="nav-item"><a href="services.html">Services</a></div>
+                        <div class="nav-item"><a href="work.html">Work</a></div>
+                        <div class="nav-item"><a href="journal.html">Journal</a></div>
+                        <div class="nav-item"><a href="contact.html">Contact</a></div>
+                    </div>
+                </div>
+
+                <div class="nav-footer">
+                    <div class="nav-contact">
+                        <p>admin@kaladesignco.com</p>
+                        <p>+91 861 947 5935</p>
+                    </div>
+                    <div class="nav-socials">
+                        <a href="#">Instagram</a>
+                        <a href="#">LinkedIn</a>
+                    </div>
+                </div>
             </div>
 
-            <div class="site-info">
-                <div class="row">
-                    <div class="col">
+            <div class="hero-main-layout">
+                <div class="hero-col hero-right">
+                    <div class="team-img">
+                        <img src="./assets/hero-new/gaur-residence.jpg" alt="Gaur Residence Project" />
+                    </div>
+                </div>
+
+
+                <div class="hero-col hero-center">
+                    <div class="site-info">
+                        <h1>
+                            Kala Design Co is a contemporary interior design agency creating
+                            beautiful spaces with timeless elegance and innovative aesthetics.
+                        </h1>
+                    </div>
+                </div>
+                <div class="hero-col hero-left">
+                    <div class="featured-label">
                         <div class="line">
                             <p>Featured Works</p>
                         </div>
                     </div>
-                    <div class="col">
-                        <h2>
-                            Kala Design Co is a contemporary interior design agency creating
-                            beautiful spaces with timeless elegance and innovative aesthetics.
-                        </h2>
+
+                    <div class="images">
+                        <div class="img"><img src="./assets/hero-new/nakra.jpg" alt="Nakra Residence" /></div>
+                        <div class="img"><img src="./assets/hero-new/shree.jpg" alt="Project Shree" /></div>
+                        <div class="img"><img src="./assets/hero-new/gaur-residence.jpg" alt="Gaur Residence" /></div>
+                        <div class="img"><img src="./assets/hero-new/chauhan-residence.jpg" alt="Chauhan Residence" />
+                        </div>
+                        <div class="img"><img src="./assets/hero-new/bumdums.jpg" alt="Bumdums Project" /></div>
+                        <div class="img main"><img src="./assets/hero-new/jd-industries.jpg" alt="JD Industries" />
+                        </div>
+                        <div class="img main"><img src="./assets/hero-new/jvi.jpg" alt="JVI Project" /></div>
+                        <div class="img main"><img src="./assets/hero-new/nakra.jpg" alt="Nakra Residence Detail" />
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col"></div>
-                    <div class="col">
-                        <div class="address">
-                            <div class="line">
-                                <p>Kala Design Co Studio</p>
-                            </div>
-                            <div class="line">
-                                <p>Riverstone Building</p>
-                            </div>
-                            <div class="line">
-                                <p>- 28 Orchard Lane</p>
-                            </div>
-                            <div class="line">
-                                <p>N1 4DX</p>
-                            </div>
-                        </div>
 
-                        <div class="socials">
-                            <div class="line">
-                                <p>SayHi@KalaDesignCo.com</p>
-                            </div>
-                            <br />
-                            <div class="line">
-                                <p>Instagram</p>
-                            </div>
-                            <div class="line">
-                                <p>LinkedIn</p>
-                            </div>
+
+
+            </div>
+
+            <div class="hero-footer-info">
+                <div class="footer-col address">
+                    <div class="line">
+                        <p>Kala Design Co Studio</p>
+                    </div>
+                    <div class="line">
+                        <p>Riverstone Building</p>
+                    </div>
+                    <div class="line">
+                        <p>- 28 Orchard Lane</p>
+                    </div>
+                    <div class="line">
+                        <p>N1 4DX</p>
+                    </div>
+                </div>
+
+                <div class="footer-col contact">
+                    <div class="line">
+                        <p>admin@kaladesignco.com</p>
+                    </div>
+                    <div class="social-links">
+                        <div class="line">
+                            <p><a href="#">Instagram</a> / <a href="#">LinkedIn</a></p>
                         </div>
                     </div>
                 </div>
@@ -172,30 +185,43 @@
                 <h2 class="about-big-title">The<br>Vision</h2>
             </div>
 
-            <!-- Content Grid (Mobile Stack) -->
+            <!-- Content Grid -->
             <div class="about-grid-editorial">
-                <!-- Col 2: Image First on Mobile -->
-                <div class="about-col-img-tall">
-                    <img src="./assets/projects/nakra-1.jpg" class="about-img-tall" loading="lazy" alt="Atmosphere">
-                </div>
-
                 <!-- Col 1: Text -->
                 <div class="about-col-text">
-                    <p class="about-lead">We craft atmospheres that linger in the memory.</p>
+                    <p class="about-lead">We craft atmospheres that linger in the memory—where silence speaks and every
+                        detail
+                        tells a story.</p>
                     <div class="about-body">
                         <p>Kala Design Co. is a multidisciplinary studio bridging the gap between architecture,
-                            interiors, and emotion. We don't just fill spaces; we curate feelings.</p>
+                            interiors, and
+                            emotion. We don't just fill spaces; we curate feelings. Our approach is rooted in the belief
+                            that design
+                            should be felt, not just seen.</p>
+                        <br>
+                        <p>From residential sanctuaries to commercial landmarks, we bring a timeless, minimal aesthetic
+                            to every
+                            project.</p>
                     </div>
+                </div>
+
+                <!-- Col 2: Tall Image -->
+                <div class="about-col-img-tall">
+                    <img src="./assets/projects/nakra-1.jpg" class="about-img-tall" loading="lazy" alt="Atmosphere">
                 </div>
 
                 <!-- Col 3: Stats -->
                 <div class="about-col-stats">
                     <div class="stat-item">
-                        <span class="stat-num">45+</span>
-                        <span class="stat-label">Projects</span>
+                        <span class="stat-num">6</span>
+                        <span class="stat-label">YEARS IN PRACTICE</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-num">125+</span>
+                        <span class="stat-num">1.5M+</span>
+                        <span class="stat-label">SQ.FT BUILD</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">135+</span>
                         <span class="stat-label">Client Served</span>
                     </div>
                 </div>
@@ -212,9 +238,23 @@
                 <h2>Selected Works</h2>
             </div>
             <div class="works-header-right">
+                <div class="scroll-controls">
+                    <button class="scroll-btn scroll-prev" aria-label="Previous">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button class="scroll-btn scroll-next" aria-label="Next">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
                 <a href="work.html" class="view-all-link">
                     View All
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                 </a>
@@ -270,6 +310,26 @@
                         <span class="scroll-card-cat">Residential</span>
                     </div>
                 </a>
+
+                <!-- Project 5 -->
+                <a href="work.html" class="scroll-card">
+                    <div class="scroll-card-img">
+                        <img src="./assets/projects/mridul-1.jpg" alt="Mridul Residence" loading="lazy">
+                    </div>
+                    <div class="scroll-card-info">
+                        <span class="scroll-card-num">05</span>
+                        <h3>Mridul Residence</h3>
+                        <span class="scroll-card-cat">Interior Design</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll</span>
+            <div class="scroll-line">
+                <div class="scroll-progress"></div>
             </div>
         </div>
     </section>
@@ -285,17 +345,20 @@
                 <div class="service-item">
                     <h3>01 / Architecture</h3>
                     <p>We design buildings that harmonize with their environment, focusing on sustainable structures and
-                        timeless aesthetics.</p>
+                        timeless
+                        aesthetics.</p>
                 </div>
                 <div class="service-item">
                     <h3>02 / Interior Design</h3>
                     <p>Creating immersive interiors that reflect personality and purpose, from material selection to
-                        bespoke furniture.</p>
+                        bespoke
+                        furniture.</p>
                 </div>
                 <div class="service-item">
                     <h3>03 / Turnkey Execution</h3>
                     <p>From concept to completion, we handle every detail of the construction and interior fit-out
-                        process, ensuring a seamless delivery.</p>
+                        process,
+                        ensuring a seamless delivery.</p>
                 </div>
             </div>
         </div>
@@ -304,58 +367,142 @@
     <!-- 4. TESTIMONIALS -->
     <section class="testimonials-section" id="testimonials">
         <div class="wrapper">
-            <div class="testimonials-header">
-                <p class="section-label">Client Stories</p>
-                <h2>What Our Clients Say</h2>
+            <div class="testimonials-header" style="text-align: center; margin-bottom: 3rem;">
+                <p class="section-label">Google Reviews</p>
+                <h2>Client Love</h2>
+                <div class="google-stats"
+                    style="margin-top: 1rem; color: black; font-family: var(--font-mono); font-size: 0.9rem; border: 1px solid rgba(0,0,0,0.1); display: inline-block; padding: 0.5rem 1.5rem; border-radius: 50px;">
+                    <span style="font-weight: bold;">4.8/5 STARS</span> • <span style="opacity: 0.7;">BASED ON 170+
+                        REVIEWS</span>
+                </div>
             </div>
 
             <div class="testimonials-grid">
-                <!-- Testimonial 1 -->
+                <!-- Sejal Singla -->
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p class="testimonial-text">"Kala Design Co transformed our space beyond our wildest dreams.
-                            Their attention to detail and understanding of our vision was exceptional."</p>
+                        <h3 class="testimonial-title">Incredible Work</h3>
+                        <div class="testimonial-rating">★★★★★</div>
+                        <p class="testimonial-text">"The work done by Kala design was incredible. They created our new
+                            work space.
+                            Proper 3D visualisation was done. There is a proper team in Kala design. The design made by
+                            them are
+                            unique and good. I really like their work."</p>
                         <div class="testimonial-author">
                             <div class="author-info">
-                                <h4>Devesh Nakra</h4>
-                                <span>Nakra Residence</span>
-                            </div>
-                            <div class="testimonial-rating">
-                                <span>★★★★★</span>
+                                <h4>Sejal Singla</h4>
+                                <span>3 years ago</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Testimonial 2 -->
+                <!-- Rajesh Verma -->
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p class="testimonial-text">"Working with Kala was seamless. They brought innovation and
-                            elegance to our commercial space, creating an environment that reflects our brand."</p>
+                        <h3 class="testimonial-title">Professional Service</h3>
+                        <div class="testimonial-rating">★★★★★</div>
+                        <p class="testimonial-text">"I hired Kala Design Co. for my Farm House property to develop like
+                            a resort at
+                            Chopanki, Bhiwadi. The Kala team addressed my need and designed accordingly. They are very
+                            professional
+                            and are sticked to timeline."</p>
                         <div class="testimonial-author">
                             <div class="author-info">
-                                <h4>ATCG India</h4>
-                                <span>Corporate Office</span>
-                            </div>
-                            <div class="testimonial-rating">
-                                <span>★★★★★</span>
+                                <h4>Rajesh Verma</h4>
+                                <span>Local Guide</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Testimonial 3 -->
+                <!-- G L EXTRUDERS -->
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p class="testimonial-text">"The team's ability to blend functionality with aesthetic beauty is
-                            remarkable. Our office has become a source of inspiration."</p>
+                        <h3 class="testimonial-title">Innovative Interiors</h3>
+                        <div class="testimonial-rating">★★★★★</div>
+                        <p class="testimonial-text">"I absolutely loved working with Kala Design CO. for the interiors
+                            of my home!
+                            They were so helpful and innovative throughout the process. I felt like they really
+                            understood my style
+                            and preferences."</p>
                         <div class="testimonial-author">
                             <div class="author-info">
-                                <h4>Gaur Industrial</h4>
-                                <span>Industrial Complex</span>
+                                <h4>G L Extruders</h4>
+                                <span>2 years ago</span>
                             </div>
-                            <div class="testimonial-rating">
-                                <span>★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anjali Bhardwaj -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <h3 class="testimonial-title">Creative and Amazing!</h3>
+                        <div class="testimonial-rating">★★★★★</div>
+                        <p class="testimonial-text">"Creative and amazing! I was surprised how patient and responsive
+                            they’ve been
+                            throughout the process! Kala designs are simply stunning and fulfilled all my needs."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Anjali Bhardwaj</h4>
+                                <span>4 years ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hemlata Jha -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <h3 class="testimonial-title">Amazing Work & Team</h3>
+                        <div class="testimonial-rating">★★★★★</div>
+                        <p class="testimonial-text">"Kala Design Co. has recently designed the interiors of my house,
+                            and they have
+                            done a work to which I could not say no to, in any aspect. Amazing work, and an amazing
+                            team."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Hemlata Jha</h4>
+                                <span>2 years ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Udit Yadav -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <h3 class="testimonial-title">Professional & Timely</h3>
+                        <div class="testimonial-rating">★★★★★</div>
+                        <p class="testimonial-text">"They are very professional! They understand the brief well and
+                            believe in
+                            closing the jobs before time. I had a great experience with them, so I would highly
+                            recommend them, it's
+                            one place for all your design needs."</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Udit Yadav</h4>
+                                <span>5 years ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shaheen Khan -->
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <h3 class="testimonial-title">Professional & Punctual</h3>
+                        <div class="testimonial-rating">★★★★★</div>
+                        <p class="testimonial-text">"We have recently taken their services to renovate our residence,
+                            they did a
+                            wonderful job the thing that I liked the most was their professionalism, punctuality and
+                            their attention
+                            to even the most minute details, this makes them a perfect choice!"</p>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <h4>Shaheen Khan</h4>
+                                <span>2 years ago</span>
                             </div>
                         </div>
                     </div>
@@ -363,16 +510,15 @@
             </div>
 
             <!-- View More Link -->
-            <div style="text-align: center; margin-top: 2rem; margin-bottom: 2rem;">
-                <a href="https://www.google.com/search?q=Kala+Design+Co" target="_blank"
-                    style="font-family: var(--font-mono); text-transform: uppercase; font-size: 0.8rem; text-decoration: underline; color: #4285F4;">Read
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://www.google.com/search?q=Kala+Design+Co" target="_blank" class="read-all-revs">Read
                     All 170+ Reviews on Google</a>
             </div>
 
-            <!-- Client Logos -->
-            <div class="client-logos">
-                <p class="section-label" style="text-align: center; margin-bottom: 2rem; opacity: 0.7;">Clients Served
-                </p>
+            <!-- Client Logos (Preserved) -->
+            <div class="client-logos"
+                style="margin-top: 4rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 3rem;">
+                <p class="section-label" style="text-align: center; margin-bottom: 2rem;">Clients Served</p>
                 <div class="logos-track">
                     <img src="./assets/clients/agrawal-metal.webp" alt="Agrawal Metal" class="client-logo"
                         loading="lazy">
@@ -403,7 +549,6 @@
     </section>
 
 
-
     <!-- 5. SIMPLE CTA -->
     <section class="simple-cta" id="contact">
         <div class="wrapper">
@@ -413,7 +558,6 @@
                 class="btn btn-primary">Start a Conversation</a>
         </div>
     </section>
-    <!-- Site Footer -->
     <footer class="site-footer">
         <div class="wrapper">
             <div class="footer-content">
@@ -433,7 +577,7 @@
                     <ul>
                         <li><a href="https://www.instagram.com/kaladesignco/" target="_blank">Instagram</a></li>
                         <li><a href="https://www.youtube.com/@kaladesignco" target="_blank">YouTube</a></li>
-                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="https://www.linkedin.com/company/kala-design-co/">LinkedIn</a></li>
                         <li><a href="#">Pinterest</a></li>
                     </ul>
                 </div>
@@ -443,13 +587,13 @@
                     <p>Neelam Chowk, Bhiwadi</p>
                     <p>Rajasthan 301019</p>
                     <br>
-                    <p>78914 44244 , +91 861 947 5935</p>
-                    <a href="mailto:SayHi@KalaDesignCo.com">SayHi@KalaDesignCo.com</a>
+                    <p>+91 78914 44244 , +91 861 947 5935</p>
+                    <a href="mailto:admin@kaladesignco.com">admin@kaladesignco.com</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Kala Design Co.</p>
-                <p>Designed by Kala</p>
+                <p>&copy; 2026 Kala Design Co.</p>
+                <p>Designed by KAWAKI STUDOS</p>
             </div>
             <div class="footer-big-text">Kala Design Co</div>
         </div>
@@ -460,51 +604,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
     <script src="https://unpkg.com/split-type"></script>
-
-    <!-- Core Script -->
+    <script src="data/works_data.js"></script>
     <script src="./script.js"></script>
 
-    <!-- Database Integration -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Database Integration (Removed for Local Version) -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="database/supabase-config.js"></script>
-    <script src="database/database-service.js"></script>
+    <script src="database/database-service.js"></script> -->
 
-    <!-- Admin Panel Integration Scripts -->
-    <script src="frontend-sync.js"></script>
-
-    <!-- Widget -->
+    <!-- Admin Panel Integration Scripts (Removed for Local Version) -->
+    <!-- <script src="contact-form-handler.js"></script>
+    <script src="analytics-integration.js"></script>
+    <script src="seo-manager.js"></script>
+    <script src="frontend-sync.js"></script> -->
     <script src="whatsapp-widget.js" defer></script>
-
-    <script>
-        // Cinematic Split Reveal Logic (Existing)
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            const pct = document.querySelector('.loader-pct');
-
-            if (!preloader || !pct) return;
-
-            // Simulate counting up (fast)
-            let count = 0;
-            const interval = setInterval(() => {
-                count += Math.floor(Math.random() * 10) + 5;
-                if (count > 100) count = 100;
-                pct.innerText = count + '%';
-
-                if (count === 100) {
-                    clearInterval(interval);
-                    // Trigger Reveal
-                    setTimeout(() => {
-                        preloader.classList.add('reveal');
-
-                        // Remove from DOM after animation
-                        setTimeout(() => {
-                            preloader.style.display = 'none';
-                        }, 1500);
-                    }, 200);
-                }
-            }, 30);
-        });
-    </script>
 </body>
 
 </html>

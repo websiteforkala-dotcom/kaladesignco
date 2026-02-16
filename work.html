@@ -18,22 +18,10 @@
   <link rel="canonical" href="https://kaladesignco.com/work">
   <link rel="icon" type="image/png" href="./assets/kdc-new-logo.png">
 
-  <!-- Mobile Redirect -->
-  <script>
-    function checkRedirect() {
-      if (window.innerWidth <= 900) {
-        window.location.replace('work-mobile');
-      }
-    }
-    // Run immediately
-    checkRedirect();
-    // Run on resize
-    window.addEventListener('resize', checkRedirect);
-  </script>
+  <!-- Desktop Style CSS -->
+  <link rel="stylesheet" href="work-desktop.css">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
-
     body,
     html {
       margin: 0;
@@ -42,7 +30,7 @@
       height: 100%;
       overflow: hidden;
       background-color: #f7f7f5;
-      font-family: 'Lato', sans-serif;
+      font-family: 'PP Neue Montreal', sans-serif;
       color: #111;
     }
 
@@ -69,12 +57,22 @@
       position: fixed;
       top: 40px;
       left: 50px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'PP Neue Montreal', sans-serif;
       font-weight: 700;
       letter-spacing: 2px;
       font-size: 1rem;
       text-transform: uppercase;
       z-index: 10;
+    }
+
+    .logo img {
+      height: 120px;
+      width: auto;
+      transition: height 0.4s ease;
+    }
+
+    body.scrolled .logo img {
+      height: 60px;
     }
 
     .slide-content {
@@ -95,9 +93,9 @@
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'PP Neue Montreal', sans-serif;
       font-weight: 400;
-      font-style: italic;
+      font-style: normal;
       font-size: 4rem;
       margin: 0 0 1.5rem 0;
       line-height: 1;
@@ -141,7 +139,7 @@
     }
 
     .meta-value {
-      font-family: 'Playfair Display', serif;
+      font-family: 'PP Neue Montreal', sans-serif;
       font-size: 1.1rem;
       font-style: italic;
       color: #222;
@@ -186,7 +184,7 @@
     .nav a {
       text-decoration: none;
       color: #111;
-      font-family: 'Lato', sans-serif;
+      font-family: 'PP Neue Montreal', sans-serif;
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -202,15 +200,17 @@
 
 <body>
 
-  <div class="logo">Kala Design Co.</div>
+  <a href="./" class="logo">
+    <img src="./assets/kdc-new-logo.png" alt="Kala Design Co." style="height: 50px; width: auto;">
+  </a>
 
   <div class="nav">
-    <a href="about">About</a>
-    <a href="services">Services</a>
-    <a href="team">Team</a>
-    <a href="work" style="border-bottom: 1px solid #111; padding-bottom: 3px;">Work</a>
-    <a href="journal">Journal</a>
-    <a href="contact">Contact</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="team.html">Team</a>
+    <a href="work.html" style="border-bottom: 1px solid #111; padding-bottom: 3px;">Work</a>
+    <a href="journal.html">Journal</a>
+    <a href="contact.html">Contact</a>
   </div>
 
   <div id="canvas-container"></div>
@@ -226,8 +226,7 @@
   <div class="scroll-hint">Scroll to explore</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="database/supabase-config.js"></script>
+  <script src="data/works_data.js"></script>
 
   <script>
     const CONFIG = {
@@ -278,22 +277,14 @@
     let mouse = { x: 0, y: 0 };
 
     // Main Initialize Function
-    async function initGallery() {
+    function initGallery() {
       try {
-        // Supabase Init
-        const supabaseConfig = new SupabaseConfig();
-        await supabaseConfig.init();
-        const _supabase = supabaseConfig.getClient();
+        // Use Global WORKS_DATA
+        if (typeof WORKS_DATA === 'undefined' || !Array.isArray(WORKS_DATA)) {
+          throw new Error("WORKS_DATA not found");
+        }
 
-        if (!_supabase) throw new Error("Supabase client failed");
-
-        // Fetch Data
-        const { data: works, error } = await _supabase
-          .from('works')
-          .select('*')
-          .order('id', { ascending: true });
-
-        if (error) throw error;
+        const works = WORKS_DATA;
 
         const uiLayer = document.getElementById('ui-layer');
         if (!works || works.length === 0) {
@@ -327,7 +318,9 @@
           uiLayer.appendChild(slide);
 
           // 2. Create 3D Object
-          createPainting(work.image_url, i);
+          // Use work.thumb if available, else first image, else fallback
+          const imgUrl = work.thumb || (work.images && work.images.length ? work.images[0] : 'assets/placeholder.jpg');
+          createPainting(imgUrl, i);
         });
 
         // Start Animation
@@ -358,10 +351,6 @@
         group.add(mesh);
       });
 
-      // Frame/Outline
-      /* const edges = new THREE.EdgesGeometry(planeGeo);
-      const outline = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x222222 })); */
-
       // Shadow
       const shadowGeo = new THREE.PlaneGeometry(CONFIG.pWidth, CONFIG.pHeight);
       const shadowMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.15 });
@@ -378,7 +367,6 @@
       const lines = new THREE.LineSegments(lineGeo, new THREE.LineBasicMaterial({ color: 0xdddddd }));
 
       group.add(shadow);
-      // group.add(outline); // Removed outline to match clean look or simple image
       group.add(lines);
 
       galleryGroup.add(group);
@@ -386,6 +374,45 @@
     }
 
     function setupInputs() {
+      // Raycaster for clicks
+      const raycaster = new THREE.Raycaster();
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+
+      window.addEventListener('mousedown', (e) => {
+        isDragging = false;
+        startX = e.clientX;
+        startY = e.clientY;
+      });
+
+      window.addEventListener('mouseup', (e) => {
+        const dist = Math.sqrt(Math.pow(e.clientX - startX, 2) + Math.pow(e.clientY - startY, 2));
+        if (dist < 5) {
+          // It's a click
+          const mouseVec = new THREE.Vector2();
+          mouseVec.x = (e.clientX / window.innerWidth) * 2 - 1;
+          mouseVec.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+          raycaster.setFromCamera(mouseVec, camera);
+          const intersects = raycaster.intersectObjects(galleryGroup.children, true);
+
+          if (intersects.length > 0) {
+            // Find the root group (paintingGroups item)
+            let obj = intersects[0].object;
+            // Traverse up until we find a group in paintingGroups
+            while (obj.parent && paintingGroups.indexOf(obj.parent) === -1) {
+              obj = obj.parent;
+            }
+
+            const groupIndex = paintingGroups.indexOf(obj.parent);
+            if (groupIndex !== -1 && WORKS_DATA[groupIndex]) {
+              window.location.href = `work-detail.html?id=${WORKS_DATA[groupIndex].id}`;
+            }
+          }
+        }
+      });
+
       window.addEventListener('wheel', (e) => {
         targetScroll += e.deltaY * 0.1;
         if (snapTimer) clearTimeout(snapTimer);
@@ -442,6 +469,14 @@
     function animate() {
       requestAnimationFrame(animate);
       currentScroll += (targetScroll - currentScroll) * CONFIG.lerpSpeed;
+
+      // Scroll Class Logic
+      if (Math.abs(currentScroll) > 50) {
+        document.body.classList.add('scrolled');
+      } else {
+        document.body.classList.remove('scrolled');
+      }
+
       const xMove = currentScroll * Math.cos(CONFIG.wallAngleY);
       const zMove = currentScroll * Math.sin(CONFIG.wallAngleY);
       camera.position.x = xMove;

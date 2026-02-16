@@ -1,0 +1,83 @@
+const BLOGS_DATA = [
+    {
+        "id": "minimalism-shree",
+        "title": "Project Shree: Redefining Minimalism in Mumbai",
+        "date": "Jan 15, 2025",
+        "category": "Interiors",
+        "image": "assets/projects/shree/DSC_3633.JPG",
+        "excerpt": "Exploring the balance between warmth and clean lines in our latest residential project.",
+        "content": "Full story coming soon..."
+    },
+    {
+        "id": "ganpati-industrial",
+        "title": "Industrial Efficiency: Ganpati Rollings",
+        "date": "Dec 20, 2024",
+        "category": "Architecture",
+        "image": "assets/projects/ganpati/A1.jpg",
+        "excerpt": "How industrial design can improve workflow and employee well-being.",
+        "content": "Full story coming soon..."
+    },
+    {
+        "id": "vidya-metal-scale",
+        "title": "Scaling Up: Vidya Metal Industries",
+        "date": "Nov 10, 2024",
+        "category": "Industrial",
+        "image": "assets/projects/vidya/VIDYA%20METAL%205.jpg",
+        "excerpt": "Designing large-scale infrastructure with a focus on sustainability.",
+        "content": "Full story coming soon..."
+    },
+    {
+        "id": "girdhar-branding",
+        "title": "Brand Identity in Space: Girdhar Roll Wrap",
+        "date": "Oct 05, 2024",
+        "category": "Commercial",
+        "image": "assets/projects/girdhar/599c9ae9bb25609e3ebbea424016a289.jpg",
+        "excerpt": "Translating brand values into physical environments.",
+        "content": "Full story coming soon..."
+    },
+    {
+        "id": "aadhar-workspace",
+        "title": "The Future of Work: Aadhar Office",
+        "date": "Sep 22, 2024",
+        "category": "Commercial",
+        "image": "assets/projects/aadhar/A1.jpg",
+        "excerpt": "Creating a collaborative workspace for the modern workforce.",
+        "content": "Full story coming soon..."
+    },
+    {
+        "id": "nakra-sanctuary",
+        "title": "Urban Sanctuary: Nakra Residence",
+        "date": "Aug 15, 2024",
+        "category": "Residential",
+        "image": "assets/projects/nakra/DSC_3760.JPG",
+        "excerpt": "A peaceful retreat in the heart of New Delhi.",
+        "content": "Full story coming soon..."
+    },
+    {
+        "id": "atcg-corporate",
+        "title": "Corporate Evolution: ATCG",
+        "date": "Jul 30, 2024",
+        "category": "Commercial",
+        "image": "assets/projects/atcg/Enscape_2025-06-23-16-27-13_A1.jpg",
+        "excerpt": "Designing for growth and flexibility in corporate offices.",
+        "content": "Full story coming soon..."
+    },
+    {
+        "id": "hemlata-elegance",
+        "title": "Timeless Elegance: Hemlata Jha Residence",
+        "date": "Jun 12, 2024",
+        "category": "Residential",
+        "image": "assets/projects/hemlata/1.jpg",
+        "excerpt": "Blending traditional elements with modern comfort.",
+        "content": "Full story coming soon..."
+    },
+    {
+        "id": "dps-learning",
+        "title": "Spaces for Learning: DPS Sushant Lok",
+        "date": "May 05, 2024",
+        "category": "Institutional",
+        "image": "assets/projects/dps/1.jpg",
+        "excerpt": "Reimagining the school library as a hub for creativity.",
+        "content": "Full story coming soon..."
+    }
+];

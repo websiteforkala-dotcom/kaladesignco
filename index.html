@@ -20,7 +20,7 @@
   <script>
     // Redirect to mobile site if screen is small
     if (window.innerWidth <= 768) {
-      window.location.href = "mobile";
+      window.location.href = "mobile.html";
     }
   </script>
   <link rel="stylesheet" href="hero.css" />
@@ -34,65 +34,52 @@
       <div class="revealer r-2"></div>
     </div>
 
+    <!-- Unified Header (Fixed Position) -->
+    <a href="./" class="logo">
+      <img src="./assets/kdc-new-logo.png" alt="Kala Design Co." class="logo-img">
+    </a>
+
+    <div class="global-nav">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="team.html">Team</a>
+      <a href="work.html">Work</a>
+      <a href="journal.html">Journal</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Mobile Navigation Toggle -->
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="mobile-nav-overlay">
+      <div class="nav-item">
+        <p><a href="about.html">About</a></p>
+      </div>
+      <div class="nav-item">
+        <p><a href="services.html">Services</a></p>
+      </div>
+      <div class="nav-item">
+        <p><a href="team.html">Team</a></p>
+      </div>
+      <div class="nav-item">
+        <p><a href="work.html">Work</a></p>
+      </div>
+      <div class="nav-item">
+        <p><a href="journal.html">Journal</a></p>
+      </div>
+      <div class="nav-item">
+        <p><a href="contact.html">Contact</a></p>
+      </div>
+    </div>
+
     <!-- Images moved inside hero-content for proper stacking -->
 
     <div class="hero-content">
-      <div class="hero-header">
-        <div class="site-logo">
-          <a href="./">
-            <img src="./assets/kdc-new-logo.png" alt="Kala Design Co" class="logo-img">
-          </a>
-        </div>
-
-        <div class="nav">
-          <div class="nav-item">
-            <p><a href="about">About</a></p>
-          </div>
-          <div class="nav-item">
-            <p><a href="services">Services</a></p>
-          </div>
-          <div class="nav-item">
-            <p><a href="team">Team</a></p>
-          </div>
-          <div class="nav-item">
-            <p><a href="work">Work</a></p>
-          </div>
-          <div class="nav-item">
-            <p><a href="journal">Journal</a></p>
-          </div>
-          <div class="nav-item">
-            <p><a href="contact">Contact</a></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile Navigation Toggle -->
-      <button class="mobile-nav-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <div class="mobile-nav-overlay">
-        <div class="nav-item">
-          <p><a href="about.html">About</a></p>
-        </div>
-        <div class="nav-item">
-          <p><a href="services.html">Services</a></p>
-        </div>
-        <div class="nav-item">
-          <p><a href="team.html">Team</a></p>
-        </div>
-        <div class="nav-item">
-          <p><a href="work.html">Work</a></p>
-        </div>
-        <div class="nav-item">
-          <p><a href="journal.html">Journal</a></p>
-        </div>
-        <div class="nav-item">
-          <p><a href="contact.html">Contact</a></p>
-        </div>
-      </div>
+      <!-- Old Header Removed -->
 
       <div class="hero-main-layout">
         <div class="hero-col hero-left">
@@ -103,14 +90,14 @@
           </div>
 
           <div class="images">
-            <div class="img"><img src="./assets/projects/nakra-1.jpg" alt="Nakra Residence" /></div>
-            <div class="img"><img src="./assets/projects/shree-1.jpg" alt="Project Shree" /></div>
-            <div class="img"><img src="./assets/projects/atcg-1.jpg" alt="ATCG Office" /></div>
-            <div class="img"><img src="./assets/projects/baxy-1.jpg" alt="Baxy Residence" /></div>
-            <div class="img"><img src="./assets/projects/guar-2.jpg" alt="Gaur Industrial" /></div>
-            <div class="img main"><img src="./assets/projects/nakra-2.jpg" alt="Nakra Residence" /></div>
-            <div class="img main"><img src="./assets/projects/shree-2.jpg" alt="Project Shree" /></div>
-            <div class="img main"><img src="./assets/projects/mridul-1.jpg" alt="Mridul Patel Residence" /></div>
+            <div class="img"><img src="./assets/hero-new/nakra.jpg" alt="Nakra Residence" /></div>
+            <div class="img"><img src="./assets/hero-new/shree.jpg" alt="Project Shree" /></div>
+            <div class="img"><img src="./assets/hero-new/gaur-residence.jpg" alt="Gaur Residence" /></div>
+            <div class="img"><img src="./assets/hero-new/chauhan-residence.jpg" alt="Chauhan Residence" /></div>
+            <div class="img"><img src="./assets/hero-new/bumdums.jpg" alt="Bumdums Project" /></div>
+            <div class="img main"><img src="./assets/hero-new/jd-industries.jpg" alt="JD Industries" /></div>
+            <div class="img main"><img src="./assets/hero-new/jvi.jpg" alt="JVI Project" /></div>
+            <div class="img main"><img src="./assets/hero-new/nakra.jpg" alt="Nakra Residence Detail" /></div>
           </div>
         </div>
 
@@ -125,7 +112,7 @@
 
         <div class="hero-col hero-right">
           <div class="team-img">
-            <img src="./assets/projects/media-facade-1.jpg" alt="Media Facade Project" />
+            <img src="./assets/hero-new/gaur-residence.jpg" alt="Gaur Residence Project" />
           </div>
         </div>
       </div>
@@ -148,7 +135,7 @@
 
         <div class="footer-col contact">
           <div class="line">
-            <p>SayHi@KalaDesignCo.com</p>
+            <p>admin@kaladesignco.com</p>
           </div>
           <div class="social-links">
             <div class="line">
@@ -197,15 +184,15 @@
         <!-- Col 3: Stats -->
         <div class="about-col-stats">
           <div class="stat-item">
-            <span class="stat-num">45+</span>
-            <span class="stat-label">Projects Completed</span>
+            <span class="stat-num">6</span>
+            <span class="stat-label">YEARS IN PRACTICE</span>
           </div>
           <div class="stat-item">
-            <span class="stat-num">08</span>
-            <span class="stat-label">Design Awards</span>
+            <span class="stat-num">1.5M+</span>
+            <span class="stat-label">SQ.FT BUILD</span>
           </div>
           <div class="stat-item">
-            <span class="stat-num">125+</span>
+            <span class="stat-num">135+</span>
             <span class="stat-label">Client Served</span>
           </div>
         </div>
@@ -246,7 +233,8 @@
     <div class="horizontal-scroll-wrapper" id="worksScroll">
       <div class="horizontal-scroll-track">
         <!-- Project 1 -->
-        <a href="work-detail.html" class="scroll-card">
+        <!-- Project 1 -->
+        <a href="work-detail.html?id=nakra-sanctuary" class="scroll-card">
           <div class="scroll-card-img">
             <img src="./assets/projects/nakra-4.jpg" alt="Nakra Residence" loading="lazy">
           </div>
@@ -258,7 +246,7 @@
         </a>
 
         <!-- Project 2 -->
-        <a href="work.html" class="scroll-card">
+        <a href="work-detail.html?id=minimalism-shree" class="scroll-card">
           <div class="scroll-card-img">
             <img src="./assets/projects/shree-4.jpg" alt="Project Shree" loading="lazy">
           </div>
@@ -270,7 +258,7 @@
         </a>
 
         <!-- Project 3 -->
-        <a href="work.html" class="scroll-card">
+        <a href="work-detail.html?id=atcg-corporate" class="scroll-card">
           <div class="scroll-card-img">
             <img src="./assets/projects/atcg-2.jpg" alt="ATCG Office" loading="lazy">
           </div>
@@ -282,19 +270,19 @@
         </a>
 
         <!-- Project 4 -->
-        <a href="work.html" class="scroll-card">
+        <a href="work-detail.html?id=hemlata-elegance" class="scroll-card">
           <div class="scroll-card-img">
             <img src="./assets/projects/baxy-2.jpg" alt="Baxy House" loading="lazy">
           </div>
           <div class="scroll-card-info">
             <span class="scroll-card-num">04</span>
-            <h3>Baxy House</h3>
+            <h3>Hemlata Residence</h3>
             <span class="scroll-card-cat">Residential</span>
           </div>
         </a>
 
         <!-- Project 5 -->
-        <a href="work.html" class="scroll-card">
+        <a href="work-detail.html?id=minimalism-shree" class="scroll-card">
           <div class="scroll-card-img">
             <img src="./assets/projects/mridul-1.jpg" alt="Mridul Residence" loading="lazy">
           </div>
@@ -549,7 +537,7 @@
           <p>Rajasthan 301019</p>
           <br>
           <p>78914 44244 , +91 861 947 5935</p>
-          <a href="mailto:SayHi@KalaDesignCo.com">SayHi@KalaDesignCo.com</a>
+          <a href="mailto:admin@kaladesignco.com">admin@kaladesignco.com</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -565,12 +553,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
   <script src="https://unpkg.com/split-type"></script>
-  <script src="./script.js"></script>
+  <!-- Local Data Integration -->
+  <script src="data/works_data.js"></script>
+  <script src="database/local-data-config.js"></script>
 
-  <!-- Database Integration -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="database/supabase-config.js"></script>
-  <script src="database/database-service.js"></script>
+  <!-- Main Script -->
+  <script src="./script.js"></script>
 
   <!-- Admin Panel Integration Scripts -->
   <script src="contact-form-handler.js"></script>

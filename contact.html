@@ -367,13 +367,13 @@
     <!-- Masthead -->
     <header class="masthead">
       <div class="top-folks">
-        <a href="./">Home</a>
-        <a href="about">About</a>
-        <a href="services">Services</a>
-        <a href="team">Team</a>
-        <a href="work">Work</a>
-        <a href="journal">Journal</a>
-        <a href="contact" class="current-page">Contact</a>
+        <a href="./index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="team.html">Team</a>
+        <a href="work.html">Work</a>
+        <a href="journal.html">Journal</a>
+        <a href="contact.html" class="current-page">Contact</a>
       </div>
 
       <div class="masthead-meta">
@@ -451,10 +451,14 @@
         <div class="sidebar-box">
           <div class="sidebar-title">Studio Location</div>
 
-          <!-- Map Image Placeholder -->
-          <div
-            style="width: 100%; height: 200px; background-color: #eee; border: 1px solid rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
-            <span style="font-family: var(--font-mono); font-size: 0.7rem; color: #999;">[MAP VISUALIZATION]</span>
+          <!-- Google Maps Embed -->
+          <div style="width: 100%; height: 200px; margin-bottom: 1.5rem; border: 1px solid rgba(0,0,0,0.1);">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.1198650606516!2d76.84479437548976!3d28.21253370302923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d37f317142dd9%3A0xc707d5c613b76237!2sAgarwal%20Arcade!5e1!3m2!1sen!2sin!4v1771011068451!5m2!1sen!2sin"
+              width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Kala Design Co Studio Location - Agarwal Arcade, Bhiwadi">
+            </iframe>
           </div>
 
           <div class="classified-item">
@@ -478,7 +482,7 @@
 
           <div class="classified-item">
             <div class="classified-title">Email</div>
-            <div class="classified-detail"><a href="mailto:SayHi@KalaDesignCo.com">SayHi@KalaDesignCo.com</a></div>
+            <div class="classified-detail"><a href="mailto:admin@kaladesignco.com">admin@kaladesignco.com</a></div>
           </div>
 
           <div class="classified-item">
@@ -544,10 +548,8 @@
     });
   </script>
 
-  <!-- Database Integration -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="database/supabase-config.js"></script>
-  <script src="database/database-service.js"></script>
+  <!-- Google Sheets Integration -->
+  <script src="contact-form-gsheets.js"></script>
 
   <!-- Admin Panel Integration Scripts -->
   <script src="contact-form-handler.js"></script>
