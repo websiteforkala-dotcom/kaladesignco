@@ -84,12 +84,13 @@
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease-out;
-      pointer-events: auto;
+      pointer-events: none;
     }
 
     .slide-content.active {
       opacity: 1;
       transform: translateY(0);
+      pointer-events: auto;
     }
 
     h1 {
