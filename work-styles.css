@@ -69,6 +69,9 @@
   position: relative;
   cursor: pointer;
   transition: transform 0.4s ease;
+  background-color: #d6d7cc;
+  padding: 20px 40px;
+  border-radius: 9px;
 }
 
 .project-card:hover {
