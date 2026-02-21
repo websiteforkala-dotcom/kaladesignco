@@ -325,6 +325,12 @@
       const group = new THREE.Group();
       group.position.set(i * CONFIG.spacingX, 0, 0);
 
+      // Shadow
+      const shadowGeo = new THREE.PlaneGeometry(CONFIG.pWidth, CONFIG.pHeight);
+      const shadowMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.15 });
+      const shadow = new THREE.Mesh(shadowGeo, shadowMat);
+      shadow.position.set(0.8, -0.8, -0.5);
+
       // Load Texture
       textureLoader.load(url, (tex) => {
         const mat = new THREE.MeshBasicMaterial({ map: tex });
@@ -337,9 +343,11 @@
         if (aspect > targetAspect) {
           // Image is wider than container - fit to width
           mesh.scale.y = targetAspect / aspect;
+          shadow.scale.y = targetAspect / aspect;
         } else {
           // Image is taller than container - fit to height
           mesh.scale.x = aspect / targetAspect;
+          shadow.scale.x = aspect / targetAspect;
         }
 
         group.add(mesh);
@@ -353,12 +361,6 @@
       // Frame/Outline
       /* const edges = new THREE.EdgesGeometry(planeGeo);
       const outline = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x222222 })); */
-
-      // Shadow
-      const shadowGeo = new THREE.PlaneGeometry(CONFIG.pWidth, CONFIG.pHeight);
-      const shadowMat = new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.15 });
-      const shadow = new THREE.Mesh(shadowGeo, shadowMat);
-      shadow.position.set(0.8, -0.8, -0.5);
 
       // Decorative Lines (from new template)
       const lineZ = -1;
