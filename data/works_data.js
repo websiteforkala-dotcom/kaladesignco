@@ -72,28 +72,28 @@ const WORKS_DATA = [
         "thumb": "assets/projects/girdhar/599c9ae9bb25609e3ebbea424016a289.jpg"
     },
     {
-        "id": "aadhar",
-        "title": "Aadhar Office",
+        "id": "aabhar",
+        "title": "Aabhar Office",
         "category": "Commercial",
         "location": "New Delhi, India",
         "year": "2023",
         "description": "A modern workspace that fosters collaboration and productivity. The design integrates flexible layouts with ergonomic solutions to support a diverse range of work styles.",
         "images": [
-            "assets/projects/aadhar/A1.jpg",
-            "assets/projects/aadhar/A2.jpg",
-            "assets/projects/aadhar/A3.jpg",
-            "assets/projects/aadhar/A4.jpg",
-            "assets/projects/aadhar/A5.jpg",
-            "assets/projects/aadhar/A6.jpg",
-            "assets/projects/aadhar/A7.jpg",
-            "assets/projects/aadhar/A8.jpg",
-            "assets/projects/aadhar/A9.jpg",
-            "assets/projects/aadhar/Enscape_2025-01-23-15-05-52_A1.jpg",
-            "assets/projects/aadhar/Enscape_2025-01-23-15-05-52_A3.jpg",
-            "assets/projects/aadhar/Enscape_2025-01-23-15-05-52_A4.jpg",
-            "assets/projects/aadhar/Enscape_2025-01-23-15-05-52_A5.jpg"
+            "assets/projects/aabhar/A1.jpg",
+            "assets/projects/aabhar/A2.jpg",
+            "assets/projects/aabhar/A3.jpg",
+            "assets/projects/aabhar/A4.jpg",
+            "assets/projects/aabhar/A5.jpg",
+            "assets/projects/aabhar/A6.jpg",
+            "assets/projects/aabhar/A7.jpg",
+            "assets/projects/aabhar/A8.jpg",
+            "assets/projects/aabhar/A9.jpg",
+            "assets/projects/aabhar/Enscape_2025-01-23-15-05-52_A1.jpg",
+            "assets/projects/aabhar/Enscape_2025-01-23-15-05-52_A3.jpg",
+            "assets/projects/aabhar/Enscape_2025-01-23-15-05-52_A4.jpg",
+            "assets/projects/aabhar/Enscape_2025-01-23-15-05-52_A5.jpg"
         ],
-        "thumb": "assets/projects/aadhar/A1.jpg"
+        "thumb": "assets/projects/aabhar/A1.jpg"
     },
     {
         "id": "nakra",

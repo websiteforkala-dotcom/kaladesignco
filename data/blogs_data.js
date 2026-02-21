@@ -36,11 +36,11 @@ const BLOGS_DATA = [
         "content": "Full story coming soon..."
     },
     {
-        "id": "aadhar-workspace",
-        "title": "The Future of Work: Aadhar Office",
+        "id": "aabhar-workspace",
+        "title": "The Future of Work: Aabhar Office",
         "date": "Sep 22, 2024",
         "category": "Commercial",
-        "image": "assets/projects/aadhar/A1.jpg",
+        "image": "assets/projects/aabhar/A1.jpg",
         "excerpt": "Creating a collaborative workspace for the modern workforce.",
         "content": "Full story coming soon..."
     },

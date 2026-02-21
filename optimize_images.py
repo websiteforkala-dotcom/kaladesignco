@@ -83,7 +83,13 @@ if __name__ == "__main__":
     if os.path.exists(projects_dir):
         optimize_images(projects_dir, max_width=1600, quality=80)
         
-    # Optimize Clients folder (Logos - keep usually small but check)
-    clients_dir = os.path.join(assets_dir, "clients")
-    if os.path.exists(clients_dir):
-        optimize_images(clients_dir, max_width=800, quality=85)
+    # Optimize Hero folder
+    hero_dir = os.path.join(assets_dir, "hero-new")
+    if os.path.exists(hero_dir):
+        optimize_images(hero_dir, max_width=1920, quality=82)
+
+    # Optimize Team folder
+    # Assuming team photos are in assets directly or in a team folder
+    # Looking at HTML, they are in ./assets/team-amit.jpg
+    if os.path.exists(assets_dir):
+        optimize_images(assets_dir, max_width=1200, quality=85)

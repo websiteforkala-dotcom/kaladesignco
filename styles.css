@@ -477,3 +477,31 @@ section {
     margin-top: 0;
   }
 }
+
+/* Decorative Footer Text */
+.footer-big-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 10vw;
+  line-height: 0.8;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.05;
+  white-space: nowrap;
+  pointer-events: none;
+  font-weight: 400;
+  margin-top: -2rem;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .footer-big-text {
+    font-size: 15vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-big-text {
+    font-size: 20vw;
+  }
+}

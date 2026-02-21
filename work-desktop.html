@@ -220,10 +220,10 @@
   <script>
     const CONFIG = {
       slideCount: 0, // Dynamic
-      spacingX: 45,
+      spacingX: 55,
 
-      pWidth: 14,
-      pHeight: 18,
+      pWidth: 16.5,
+      pHeight: 21,
 
       camZ: 30,
       wallAngleY: -0.25,
@@ -329,6 +329,19 @@
       textureLoader.load(url, (tex) => {
         const mat = new THREE.MeshBasicMaterial({ map: tex });
         const mesh = new THREE.Mesh(planeGeo, mat);
+
+        // Fix Stretching: Adjust aspect ratio based on texture
+        const aspect = tex.image.width / tex.image.height;
+        const targetAspect = CONFIG.pWidth / CONFIG.pHeight;
+
+        if (aspect > targetAspect) {
+          // Image is wider than container - fit to width
+          mesh.scale.y = targetAspect / aspect;
+        } else {
+          // Image is taller than container - fit to height
+          mesh.scale.x = aspect / targetAspect;
+        }
+
         group.add(mesh);
       }, undefined, (err) => {
         console.warn("Image fail:", url);

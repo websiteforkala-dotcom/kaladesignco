@@ -40,18 +40,18 @@
         "thumb": "assets/projects/girdhar/599c9ae9bb25609e3ebbea424016a289.jpg"
     },
     {
-        "id": "aadhar",
-        "title": "Aadhar Office",
+        "id": "aabhar",
+        "title": "Aabhar Office",
         "category": "Commercial",
         "location": "New Delhi, India",
         "year": "2023",
         "description": "Functional and aesthetic workspace design.",
         "images": [
-            "assets/projects/aadhar/A1.jpg",
-            "assets/projects/aadhar/A2.jpg",
-            "assets/projects/aadhar/Enscape_2025-01-23-15-05-52_A1.jpg"
+            "assets/projects/aabhar/A1.jpg",
+            "assets/projects/aabhar/A2.jpg",
+            "assets/projects/aabhar/Enscape_2025-01-23-15-05-52_A1.jpg"
         ],
-        "thumb": "assets/projects/aadhar/A1.jpg"
+        "thumb": "assets/projects/aabhar/A1.jpg"
     },
     {
         "id": "nakra",
