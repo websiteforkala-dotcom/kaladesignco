@@ -103,6 +103,7 @@ const WORKS_DATA = [
         "year": "2024",
         "description": "A sanctuary of warmth and modern minimalism. This residence employs a palette of natural materials and subtle textures to create a calming, sophisticated retreat from the city.",
         "images": [
+            "assets/projects/nakra/DSC_3760_rot.jpg",
             "assets/projects/nakra/DSC_3760.JPG",
             "assets/projects/nakra/DSC_3765.JPG",
             "assets/projects/nakra/DSC_3771.JPG",
@@ -119,7 +120,7 @@ const WORKS_DATA = [
             "assets/projects/nakra/DSC_3818.JPG",
             "assets/projects/nakra/DSC_3821.JPG"
         ],
-        "thumb": "assets/projects/nakra/DSC_3760.JPG"
+        "thumb": "assets/projects/nakra/DSC_3760_rot.jpg"
     },
     {
         "id": "vidya",
