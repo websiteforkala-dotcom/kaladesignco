@@ -7,7 +7,7 @@ class ContactFormHandler {
     init() {
         // Find all contact forms on the page
         const contactForms = document.querySelectorAll('form[data-contact-form], .contact-form form, #contact-form');
-        
+
         contactForms.forEach(form => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -16,10 +16,10 @@ class ContactFormHandler {
         });
 
         // Also handle any existing contact form by ID or class
-        const mainContactForm = document.querySelector('.contact-form form') || 
-                               document.querySelector('#contact-form') ||
-                               document.querySelector('form');
-        
+        const mainContactForm = document.querySelector('.contact-form form') ||
+            document.querySelector('#contact-form') ||
+            document.querySelector('form');
+
         if (mainContactForm && !mainContactForm.hasAttribute('data-handled')) {
             mainContactForm.setAttribute('data-handled', 'true');
             mainContactForm.addEventListener('submit', (e) => {
@@ -33,7 +33,7 @@ class ContactFormHandler {
         // Get form data
         const formData = new FormData(form);
         const data = {};
-        
+
         // Convert FormData to object
         for (let [key, value] of formData.entries()) {
             data[key] = value;
@@ -54,19 +54,22 @@ class ContactFormHandler {
         try {
             // Save to database
             await this.saveToDatabase(data);
-            
-            // Send email (in real implementation, this would be a server-side operation)
+
+            // Send Email (Mocked)
             this.sendEmail(data);
-            
+
+            // Send to Google Sheets
+            await this.sendToGoogleSheets(form, data);
+
             // Reset form
             form.reset();
-            
+
             // Show success message
             this.showMessage('Thank you! Your message has been sent successfully.', 'success');
-            
+
             // Track analytics event
             this.trackFormSubmission();
-            
+
         } catch (error) {
             console.error('Error submitting form:', error);
             this.showMessage('Sorry, there was an error sending your message. Please try again.', 'error');
@@ -80,7 +83,7 @@ class ContactFormHandler {
     validateForm(data) {
         // Check for required fields
         const requiredFields = ['name', 'email', 'message'];
-        
+
         for (let field of requiredFields) {
             if (!data[field] || data[field].trim() === '') {
                 return false;
@@ -117,7 +120,7 @@ class ContactFormHandler {
 
     saveToLocalStorage(data) {
         const contactForms = JSON.parse(localStorage.getItem('kala_contact_forms') || '[]');
-        
+
         const submission = {
             id: Date.now(),
             name: data.name,
@@ -142,7 +145,7 @@ class ContactFormHandler {
     saveToAdmin(data) {
         // Save to localStorage for admin panel
         const contactForms = JSON.parse(localStorage.getItem('kala_contact_forms') || '[]');
-        
+
         const submission = {
             name: data.name,
             email: data.email,
@@ -166,9 +169,9 @@ class ContactFormHandler {
     sendEmail(data) {
         // In a real implementation, this would send data to your backend
         // which would then send an email using a service like SendGrid, Mailgun, etc.
-        
+
         console.log('Email would be sent with data:', data);
-        
+
         // For demonstration, we'll just log the email content
         const emailContent = `
 New Contact Form Submission:
@@ -183,8 +186,30 @@ ${data.message}
 
 Submitted: ${new Date().toLocaleString()}
         `;
-        
+
         console.log('Email content:', emailContent);
+    }
+
+    async sendToGoogleSheets(form, data) {
+        // REPLACE this with the Web App URL after creating the Google Apps Script
+        const SCRIPT_URL = 'REPLACE_WITH_YOUR_GOOGLE_APPS_SCRIPT_URL';
+
+        if (SCRIPT_URL === 'REPLACE_WITH_YOUR_GOOGLE_APPS_SCRIPT_URL') {
+            console.log('Google Sheets: Integration not yet configured. Web App URL is missing.');
+            return; // Skip if not configured
+        }
+
+        try {
+            const formData = new FormData(form);
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            });
+            console.log('Google Sheets: Form data sent successfully.');
+        } catch (error) {
+            console.error('Google Sheets: Submission Error:', error);
+        }
     }
 
     trackFormSubmission() {
@@ -221,7 +246,7 @@ Submitted: ${new Date().toLocaleString()}
         const messageEl = document.createElement('div');
         messageEl.className = `form-message form-message-${type}`;
         messageEl.textContent = message;
-        
+
         // Style the message
         messageEl.style.cssText = `
             padding: 1rem 1.5rem;
@@ -230,8 +255,8 @@ Submitted: ${new Date().toLocaleString()}
             font-weight: 500;
             text-align: center;
             animation: slideDown 0.3s ease;
-            ${type === 'success' ? 
-                'background-color: #d1fae5; color: #065f46; border: 1px solid #a7f3d0;' : 
+            ${type === 'success' ?
+                'background-color: #d1fae5; color: #065f46; border: 1px solid #a7f3d0;' :
                 'background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;'
             }
         `;
@@ -256,10 +281,10 @@ Submitted: ${new Date().toLocaleString()}
         }
 
         // Find the best place to insert the message
-        const form = document.querySelector('.contact-form form') || 
-                    document.querySelector('#contact-form') ||
-                    document.querySelector('form');
-        
+        const form = document.querySelector('.contact-form form') ||
+            document.querySelector('#contact-form') ||
+            document.querySelector('form');
+
         if (form) {
             form.parentNode.insertBefore(messageEl, form.nextSibling);
         } else {
