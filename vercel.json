@@ -13,10 +13,6 @@
         {
             "source": "/admin/dashboard",
             "destination": "/admin/index.html"
-        },
-        {
-            "source": "/(.*)",
-            "destination": "/404.html"
         }
     ],
     "headers": [
