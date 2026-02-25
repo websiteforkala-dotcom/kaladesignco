@@ -3,6 +3,14 @@
     "trailingSlash": false,
     "rewrites": [
         {
+            "source": "/admin",
+            "destination": "/admin/index.html"
+        },
+        {
+            "source": "/admin/",
+            "destination": "/admin/index.html"
+        },
+        {
             "source": "/login",
             "destination": "/admin/login.html"
         },
