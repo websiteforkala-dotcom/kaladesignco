@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,7 @@
             margin: 0 auto;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
@@ -187,8 +188,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .hidden {
@@ -196,6 +202,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -223,7 +230,8 @@
                 <div class="steps">
                     <div class="step">
                         <h4>Create Supabase Project</h4>
-                        <p>Go to <a href="https://supabase.com" target="_blank">supabase.com</a> and create a new project named "kala-design-co"</p>
+                        <p>Go to <a href="https://supabase.com" target="_blank">supabase.com</a> and create a new
+                            project named "kala-design-co"</p>
                     </div>
 
                     <div class="step">
@@ -244,7 +252,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="supabase-key">Supabase Anon Key:</label>
-                                <input type="text" id="supabase-key" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+                                <input type="text" id="supabase-key"
+                                    placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
                             </div>
                             <button class="btn" onclick="updateConfig()">Update Configuration</button>
                             <button class="btn secondary" onclick="testConnection()">Test Connection</button>
@@ -308,11 +317,11 @@
 
         async function checkInitialConnection() {
             const statusCard = document.getElementById('connection-status');
-            
+
             try {
                 // Wait for services to initialize
                 await new Promise(resolve => setTimeout(resolve, 2000));
-                
+
                 if (window.supabaseConfig && window.databaseService) {
                     // Check if using real Supabase or localStorage fallback
                     if (window.databaseService.fallbackToLocalStorage) {
@@ -341,13 +350,13 @@
                 <h3>⚠️ Configuration Required</h3>
                 <p>Supabase is not configured. Currently using localStorage fallback.</p>
             `;
-            
+
             document.getElementById('config-section').classList.remove('hidden');
-            
+
             // Pre-fill current values if any
             const urlInput = document.getElementById('supabase-url');
             const keyInput = document.getElementById('supabase-key');
-            
+
             if (window.supabaseConfig) {
                 urlInput.value = window.supabaseConfig.supabaseUrl;
                 keyInput.value = window.supabaseConfig.supabaseKey;
@@ -361,7 +370,7 @@
                 <h3>✅ Connected Successfully</h3>
                 <p>Supabase database is connected and operational.</p>
             `;
-            
+
             document.getElementById('success-section').classList.remove('hidden');
         }
 
@@ -372,34 +381,34 @@
                 <h3>❌ Connection Failed</h3>
                 <p>Error: ${message}</p>
             `;
-            
+
             document.getElementById('config-section').classList.remove('hidden');
         }
 
         async function updateConfig() {
             const url = document.getElementById('supabase-url').value.trim();
             const key = document.getElementById('supabase-key').value.trim();
-            
+
             if (!url || !key) {
                 alert('Please enter both URL and API key');
                 return;
             }
-            
+
             // Validate URL format
             if (!url.includes('supabase.co')) {
                 alert('Please enter a valid Supabase URL');
                 return;
             }
-            
+
             currentConfig = { url, key };
-            
+
             // Show update instructions
             const configCode = `
 // Update these values in database/supabase-config.js:
 this.supabaseUrl = '${url}';
 this.supabaseKey = '${key}';
             `;
-            
+
             alert('Configuration saved! Please update your supabase-config.js file with these values and refresh the page.');
             console.log('New configuration:', configCode);
         }
@@ -409,20 +418,20 @@ this.supabaseKey = '${key}';
                 alert('Please enter configuration first');
                 return;
             }
-            
+
             try {
                 // Create temporary Supabase client for testing
                 const testClient = window.supabase.createClient(currentConfig.url, currentConfig.key);
-                
+
                 // Test basic connection
                 const { data, error } = await testClient
                     .from('contact_forms')
                     .select('count', { count: 'exact', head: true });
-                
+
                 if (error) {
                     throw error;
                 }
-                
+
                 alert('✅ Connection test successful!');
             } catch (error) {
                 alert(`❌ Connection test failed: ${error.message}`);
@@ -432,7 +441,7 @@ this.supabaseKey = '${key}';
         async function showSchema() {
             const schemaDiv = document.getElementById('schema-sql');
             const schemaContent = document.getElementById('schema-content');
-            
+
             try {
                 const response = await fetch('schema.sql');
                 const schema = await response.text();
@@ -447,7 +456,7 @@ this.supabaseKey = '${key}';
         async function showMinimalSchema() {
             const schemaDiv = document.getElementById('minimal-schema-sql');
             const schemaContent = document.getElementById('minimal-schema-content');
-            
+
             try {
                 const response = await fetch('schema-minimal.sql');
                 const schema = await response.text();
@@ -460,16 +469,16 @@ this.supabaseKey = '${key}';
         }
 
         function openAdmin() {
-            window.open('../admin/index.html', '_blank');
+            window.open('../kdc-admin/index.html', '_blank');
         }
 
         async function runTests() {
             const testResults = document.getElementById('test-results');
             const testOutput = document.getElementById('test-output');
-            
+
             testResults.classList.remove('hidden');
             testOutput.innerHTML = '<div class="loading"></div> Running tests...';
-            
+
             const tests = [
                 { name: 'Database Connection', test: testDatabaseConnection },
                 { name: 'Contact Forms Table', test: testContactFormsTable },
@@ -477,9 +486,9 @@ this.supabaseKey = '${key}';
                 { name: 'Authentication', test: testAuthentication },
                 { name: 'Storage Access', test: testStorageAccess }
             ];
-            
+
             let results = [];
-            
+
             for (const test of tests) {
                 try {
                     const result = await test.test();
@@ -488,7 +497,7 @@ this.supabaseKey = '${key}';
                     results.push({ name: test.name, status: 'error', message: error.message });
                 }
             }
-            
+
             // Display results
             testOutput.innerHTML = results.map(result => `
                 <div class="status-card ${result.status}">
@@ -529,4 +538,5 @@ this.supabaseKey = '${key}';
         }
     </script>
 </body>
+
 </html>

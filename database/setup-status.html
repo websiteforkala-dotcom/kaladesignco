@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,14 +53,14 @@
             background: white;
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             border-left: 4px solid #ddd;
             transition: all 0.3s ease;
         }
 
         .status-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
         }
 
         .status-card.success {
@@ -160,7 +161,7 @@
             background: white;
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
@@ -186,8 +187,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .hidden {
@@ -209,17 +215,18 @@
             .header h1 {
                 font-size: 2rem;
             }
-            
+
             .status-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .action-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -308,7 +315,7 @@
             <h3>🛠️ Quick Actions</h3>
             <div class="action-grid">
                 <a href="config-checker.html" class="btn">🔧 Configuration Checker</a>
-                <a href="../admin/index.html" class="btn">👤 Open Admin Panel</a>
+                <a href="../kdc-admin/index.html" class="btn">👤 Open Admin Panel</a>
                 <a href="../index.html" class="btn">🏠 View Website</a>
                 <button class="btn secondary" onclick="runFullTest()">🧪 Run Full Test</button>
                 <button class="btn warning" onclick="showSetupGuide()">📚 Setup Guide</button>
@@ -317,19 +324,21 @@
         </div>
 
         <!-- Setup Guide Modal -->
-        <div id="setup-guide" class="hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: flex; align-items: center; justify-content: center;">
-            <div style="background: white; padding: 30px; border-radius: 12px; max-width: 600px; max-height: 80vh; overflow-y: auto;">
+        <div id="setup-guide" class="hidden"
+            style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; display: flex; align-items: center; justify-content: center;">
+            <div
+                style="background: white; padding: 30px; border-radius: 12px; max-width: 600px; max-height: 80vh; overflow-y: auto;">
                 <h3>📚 Quick Setup Guide</h3>
                 <div id="guide-content">
                     <p><strong>Step 1:</strong> Get your Supabase project info</p>
                     <div class="code-snippet">node scripts/get-project-info.js list</div>
-                    
+
                     <p><strong>Step 2:</strong> Update configuration</p>
                     <div class="code-snippet">Edit database/supabase-config.js with your project URL and anon key</div>
-                    
+
                     <p><strong>Step 3:</strong> Deploy database schema</p>
                     <div class="code-snippet">Copy database/schema.sql to Supabase SQL Editor and run</div>
-                    
+
                     <p><strong>Step 4:</strong> Test everything</p>
                     <div class="code-snippet">Open database/config-checker.html and verify all tests pass</div>
                 </div>
@@ -365,20 +374,20 @@
                 checkFormsStatus(),
                 checkAnalyticsStatus()
             ]);
-            
+
             updateOverallProgress();
         }
 
         async function checkSupabaseStatus() {
             const card = document.getElementById('supabase-status');
             const actions = document.getElementById('supabase-actions');
-            
+
             try {
                 await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for init
-                
+
                 if (window.supabaseConfig) {
                     const status = window.supabaseConfig.getStatus();
-                    
+
                     if (status.status === 'configured') {
                         updateStatusCard(card, 'success', '✅ Configured and Connected', status.message);
                         actions.innerHTML = `
@@ -403,7 +412,7 @@
         async function checkDatabaseStatus() {
             const card = document.getElementById('database-status');
             const actions = document.getElementById('database-actions');
-            
+
             try {
                 if (window.databaseService) {
                     if (window.databaseService.fallbackToLocalStorage) {
@@ -434,15 +443,15 @@
         async function checkAdminStatus() {
             const card = document.getElementById('admin-status');
             const actions = document.getElementById('admin-actions');
-            
+
             try {
                 // Check if admin files exist by trying to fetch
-                const response = await fetch('../admin/index.html', { method: 'HEAD' });
+                const response = await fetch('../kdc-admin/index.html', { method: 'HEAD' });
                 if (response.ok) {
                     updateStatusCard(card, 'success', '✅ Available', 'Admin panel is accessible');
                     actions.innerHTML = `
-                        <a href="../admin/index.html" class="btn small">Open Admin</a>
-                        <a href="../admin/login.html" class="btn small secondary">Login Page</a>
+                        <a href="../kdc-admin/index.html" class="btn small">Open Admin</a>
+                        <a href="../kdc-admin/login.html" class="btn small secondary">Login Page</a>
                     `;
                     statusChecks.admin = true;
                 } else {
@@ -456,7 +465,7 @@
         async function checkFormsStatus() {
             const card = document.getElementById('forms-status');
             const actions = document.getElementById('forms-actions');
-            
+
             try {
                 // Check if contact form handler exists
                 const response = await fetch('../contact-form-handler.js', { method: 'HEAD' });
@@ -477,7 +486,7 @@
         async function checkAnalyticsStatus() {
             const card = document.getElementById('analytics-status');
             const actions = document.getElementById('analytics-actions');
-            
+
             try {
                 // Check if analytics integration exists
                 const response = await fetch('../analytics-integration.js', { method: 'HEAD' });
@@ -499,7 +508,7 @@
             card.className = `status-card ${type}`;
             const titleElement = card.querySelector('.status-title');
             const descElement = card.querySelector('.status-description');
-            
+
             titleElement.textContent = title;
             descElement.textContent = description;
         }
@@ -508,7 +517,7 @@
             const completed = Object.values(statusChecks).filter(Boolean).length;
             const total = Object.keys(statusChecks).length;
             const percentage = Math.round((completed / total) * 100);
-            
+
             document.getElementById('overall-progress').style.width = `${percentage}%`;
             document.getElementById('progress-text').textContent = `${percentage}% Complete (${completed}/${total})`;
         }
@@ -571,15 +580,16 @@
         async function refreshStatus() {
             // Reset all status checks
             Object.keys(statusChecks).forEach(key => statusChecks[key] = false);
-            
+
             // Show loading state
             document.querySelectorAll('.status-card .status-description').forEach(desc => {
                 desc.innerHTML = '<span class="loading"></span> Checking...';
             });
-            
+
             // Re-run all checks
             await checkAllStatus();
         }
     </script>
 </body>
+
 </html>

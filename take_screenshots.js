@@ -10,8 +10,8 @@ async function capture() {
     const page = await browser.newPage();
 
     const basePath = __dirname;
-    const loginUrl = url.pathToFileURL(path.join(basePath, 'admin', 'login.html')).href;
-    const adminUrl = url.pathToFileURL(path.join(basePath, 'admin', 'index.html')).href;
+    const loginUrl = url.pathToFileURL(path.join(basePath, 'kdc-admin', 'login.html')).href;
+    const adminUrl = url.pathToFileURL(path.join(basePath, 'kdc-admin', 'index.html')).href;
 
     const artifactDir = 'C:\\Users\\ks209\\.gemini\\antigravity\\brain\\dab78f2a-3439-44be-a64c-2c2dbb6eede0';
 
