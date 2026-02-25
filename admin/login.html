@@ -204,6 +204,8 @@
             async checkSession() {
                 const { data: { session } } = await this.supabase.auth.getSession();
                 if (session) {
+                    localStorage.setItem('kala_admin_logged_in', 'true');
+                    localStorage.setItem('kala_admin_login_time', Date.now().toString());
                     window.location.href = 'index.html';
                 }
             }
