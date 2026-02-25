@@ -3,24 +3,24 @@
     "trailingSlash": false,
     "rewrites": [
         {
-            "source": "/admin",
-            "destination": "/admin/index.html"
+            "source": "/kdc-admin",
+            "destination": "/kdc-admin/index.html"
         },
         {
-            "source": "/admin/",
-            "destination": "/admin/index.html"
+            "source": "/kdc-admin/",
+            "destination": "/kdc-admin/index.html"
         },
         {
             "source": "/login",
-            "destination": "/admin/login.html"
+            "destination": "/kdc-admin/login.html"
         },
         {
-            "source": "/admin/login",
-            "destination": "/admin/login.html"
+            "source": "/kdc-admin/login",
+            "destination": "/kdc-admin/login.html"
         },
         {
-            "source": "/admin/dashboard",
-            "destination": "/admin/index.html"
+            "source": "/kdc-admin/dashboard",
+            "destination": "/kdc-admin/index.html"
         }
     ],
     "headers": [

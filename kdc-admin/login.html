@@ -206,7 +206,7 @@
                 if (session) {
                     localStorage.setItem('kala_admin_logged_in', 'true');
                     localStorage.setItem('kala_admin_login_time', Date.now().toString());
-                    window.location.href = '/admin/';
+                    window.location.href = '/kdc-admin/';
                 }
             }
 
@@ -231,7 +231,7 @@
                         // Success - set local storage for index.html checkAuth
                         localStorage.setItem('kala_admin_logged_in', 'true');
                         localStorage.setItem('kala_admin_login_time', Date.now().toString());
-                        window.location.href = '/admin/';
+                        window.location.href = '/kdc-admin/';
                     }
                 } catch (error) {
                     this.showError(error.message || 'Invalid login details');
