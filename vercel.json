@@ -1,26 +1,21 @@
 {
     "cleanUrls": true,
     "trailingSlash": false,
-    "rewrites": [
+    "redirects": [
         {
-            "source": "/kdc-admin",
-            "destination": "/kdc-admin/index.html"
+            "source": "/admin",
+            "destination": "/kdc-admin",
+            "permanent": true
         },
         {
-            "source": "/kdc-admin/",
-            "destination": "/kdc-admin/index.html"
+            "source": "/admin/:match*",
+            "destination": "/kdc-admin/:match*",
+            "permanent": true
         },
         {
             "source": "/login",
-            "destination": "/kdc-admin/login.html"
-        },
-        {
-            "source": "/kdc-admin/login",
-            "destination": "/kdc-admin/login.html"
-        },
-        {
-            "source": "/kdc-admin/dashboard",
-            "destination": "/kdc-admin/index.html"
+            "destination": "/kdc-admin/login",
+            "permanent": true
         }
     ],
     "headers": [
