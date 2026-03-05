@@ -670,6 +670,8 @@
 .hero-left .images img,
 .hero-left .img.main img {
     box-shadow: rgba(0, 0, 0, 0.3) 5px 5px 10px 0px;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 /* About Section Padding */

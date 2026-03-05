@@ -25,7 +25,15 @@
   flex: 1;
   width: 100%;
   background-color: #fff;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  will-change: transform;
+}
+
+.r-1 {
+  transform-origin: top;
+}
+
+.r-2 {
+  transform-origin: bottom;
 }
 
 .images {
@@ -37,6 +45,7 @@
   height: 100%;
   transform-origin: center center;
   will-change: transform;
+  z-index: 25;
 }
 
 .img {
@@ -221,6 +230,8 @@ body.scrolled .logo-img {
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
+  position: relative;
+  z-index: 10;
 }
 
 .footer-col {

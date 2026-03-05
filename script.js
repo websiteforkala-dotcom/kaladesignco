@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   revealerTl
     .to(".r-1", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+      scaleY: 0,
       duration: revealDuration,
       ease: "hop",
       force3D: true
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .to(
       ".r-2",
       {
-        clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+        scaleY: 0,
         duration: revealDuration,
         ease: "hop",
         force3D: true
